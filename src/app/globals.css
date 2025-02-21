@@ -1,7 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Satisfy&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .animate-scroll {
+    animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+  }
+}
+
+*{
+  
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -18,4 +29,56 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.satisfy-regular {
+  font-family: "Satisfy", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.urbanist {
+
+}
+*{
+  font-family: "Urbanist", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.montserrat {
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h1{
+  font-size: xx-large;
+}
+h2{
+  font-size: x-large;
+}
+h3{
+  font-size: large;
+}
+
+p{
+  font-size: 14px;
+}
+
+
+@media only screen and (min-width: 200px) and (max-width: 640px) {
+  h1{
+    font-size: x-large;
+  }
+  h2{
+    font-size: large;
+  }
+  h3{
+    font-size: medium;
+  }
+  
+  p{
+    font-size: 11px;
+  }
 }

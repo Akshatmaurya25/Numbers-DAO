@@ -11,6 +11,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        whi: "#F9FAFD",
+        gre:"#B3B1B0",
+        gre2:"#6A6A6A"
       },
     },
   },
