@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Satisfy&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Jacquard+12&family=Special+Elite&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,6 +13,17 @@
     transform: translateX(-50%);
   }
 }
+.jacquard-12-regular {
+  font-family: "Jacquard 12", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.special-elite-regular {
+  font-family: "Special Elite", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 
 @layer utilities {
   .animate-scroll {
