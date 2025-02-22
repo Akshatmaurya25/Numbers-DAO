@@ -7,6 +7,9 @@ import { Navbar } from "@/components/sections/Navbar";
 import PixelatedPoster from "@/components/sections/pixelatedposter";
 
 // import Image from "next/image";
+import Image from "next/image";
+import NumbersSection from "@/components/sections/NumbersSection";
+import TrustSection from "@/components/sections/TrustSection";
 
 export default function Home() {
   return (
@@ -17,6 +20,8 @@ export default function Home() {
       <CardHero/>
       <ApostrophyQuote />
       <PixelatedPoster/>
+      <NumbersSection />
+      <TrustSection />
       <Footer />
     </>
   );

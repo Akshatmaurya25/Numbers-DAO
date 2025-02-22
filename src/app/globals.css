@@ -31,9 +31,9 @@
   }
 }
 
-*{
+/* *{
   
-}
+} */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -58,9 +58,9 @@ body {
   font-style: normal;
 }
 
-.urbanist {
+/* .urbanist {
 
-}
+} */
 *{
   font-family: "Urbanist", serif;
   font-optical-sizing: auto;
