@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* scroll used in the infinite carousel */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @layer utilities {
   .animate-scroll {
     animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
