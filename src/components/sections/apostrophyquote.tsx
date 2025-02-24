@@ -4,7 +4,7 @@ export default function ApostrophyQuote() {
     return (
         <div className='flex justify-center mb-10'>
             <section className="container w-[80%] py-6 lg:py-10 relative px-4 lg:px-0 text-black ">
-                <div className="lg:mx-[100px] py-8 lg:py-12 text-center bg-[#FEFDFD] border border-[#E7E7E7] rounded-2xl relative">
+                <div className="lg:mx-[100px] py-8 lg:py-12 text-center bg-[#FEFDFD] border border-[#E7E7E7] rounded-2xl relative shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
                     {/* Opening quote mark */}
                     <div className="absolute top-[-20px] md:top-[-30px] left-[40px] font-serif text-gray-200">
                         <Image
