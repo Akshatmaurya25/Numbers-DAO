@@ -1,7 +1,11 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { PrivyProvider } from "@privy-io/react-auth";
+import { config } from "dotenv";
 
+config();
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

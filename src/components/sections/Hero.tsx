@@ -1,8 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Vortex } from "../ui/vortex";
-
+import { usePrivy } from "@privy-io/react-auth";
 export const Hero = () => {
+ 
+  const { ready, authenticated, login, user, logout } = usePrivy();
+  if(authenticated){
+    console.log(user)
+  }
+  // Disable login when Privy is not ready or the user is already authenticated
+  const disableLogin = !ready || (ready && authenticated);
   return (
     <div className=" relative p-4 lg:p-8">
       <div className="h-[75vh] overflow-hidden w-full justify-center items-center flex flex-col  bg-black p-4 rounded-2xl">
@@ -17,6 +24,12 @@ export const Hero = () => {
             <h1>It all comes down to</h1>
           </div>
           <AnimatedNumberText />
+          <button disabled={disableLogin} onClick={login}>
+            Log in
+          </button>
+          <button disabled={!disableLogin} onClick={logout}>
+            Log out
+          </button>
         </Vortex>
       </div>
     </div>

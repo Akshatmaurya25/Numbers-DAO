@@ -9,12 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@privy-io/react-auth": "^2.4.5",
     "@radix-ui/react-slot": "^1.1.2",
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.0.4",
     "@types/swiper": "^5.4.3",
     "animated-backgrounds": "^1.1.0",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
     "lucide-react": "^0.475.0",
+    "mongoose": "^8.10.1",
     "motion": "^12.4.7",
     "next": "15.1.7",
     "react": "^19.0.0",
@@ -24,8 +30,6 @@
     "swiper": "^11.2.4",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
-    "@react-three/drei": "^10.0.0",
-    "@react-three/fiber": "^9.0.4",
     "three": "^0.173.0"
   },
   "devDependencies": {

@@ -1,3 +1,4 @@
+'use client'
 import ApostrophyQuote from "@/components/sections/apostrophyquote";
 import CardHero from "@/components/sections/cardsHero";
 import Footer from "@/components/sections/Footer";
@@ -10,12 +11,14 @@ import PixelatedPoster from "@/components/sections/pixelatedposter";
 // import Image from "next/image";
 import NumbersSection from "@/components/sections/NumbersSection";
 import TrustSection from "@/components/sections/TrustSection";
+import { PrivyProvider } from "@privy-io/react-auth";
 import DeveloperSection from "@/components/sections/developer-section";
 import TeamSection from "@/components/sections/team-section";
 
 export default function Home() {
   return (
     <>
+<<<<<<< HEAD
       <Navbar />
       <Hero />
       <InfiniteCarousel />
@@ -28,6 +31,33 @@ export default function Home() {
     
       <TrustSection />
       <Footer />
+=======
+      <PrivyProvider
+        appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? ""}
+        config={{
+          // Customize Privy's appearance in your app
+          appearance: {
+            theme: "light",
+            accentColor: "#676FFF",
+            logo: "https://your-logo-url",
+          },
+          // Create embedded wallets for users who don't have a wallet
+          embeddedWallets: {
+            createOnLogin: "users-without-wallets",
+          },
+        }}
+      >
+        <Navbar />
+        <Hero />
+        <InfiniteCarousel />
+        <CardHero />
+        <ApostrophyQuote />
+        <PixelatedPoster />
+        <NumbersSection />
+        <TrustSection />
+        <Footer />
+      </PrivyProvider>
+>>>>>>> 21647d56bca06eab563a9c7927e8c3a417fccb65
     </>
   );
 }
