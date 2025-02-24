@@ -26,6 +26,7 @@ export async function POST(req:Request, res:Response){
 
 
         try {
+          await dbConnect();
             const user = req.body
             console.log(user)
             await User.create(user)
