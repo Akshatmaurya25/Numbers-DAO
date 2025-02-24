@@ -18,7 +18,6 @@ import TeamSection from "@/components/sections/team-section";
 export default function Home() {
   return (
     <>
-<<<<<<< HEAD
       <Navbar />
       <Hero />
       <InfiniteCarousel />
@@ -31,7 +30,6 @@ export default function Home() {
     
       <TrustSection />
       <Footer />
-=======
       <PrivyProvider
         appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? ""}
         config={{
@@ -57,7 +55,6 @@ export default function Home() {
         <TrustSection />
         <Footer />
       </PrivyProvider>
->>>>>>> 21647d56bca06eab563a9c7927e8c3a417fccb65
     </>
   );
 }
