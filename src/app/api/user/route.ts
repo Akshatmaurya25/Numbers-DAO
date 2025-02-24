@@ -22,26 +22,25 @@ export async function GET() {
 }
 
 
-export async function POST(req:Request, res:Response){
-
-
-        try {
-          await dbConnect();
-            const user = req.body
-            console.log(user)
-            await User.create(user)
-            return NextResponse.json({
-
-                msg:"User created successfully",
-                success: true,
-                status:200
-            });
-        } catch (error) {
-            return NextResponse.json(
-                { error: 'Failed to fetch users \n' },
-                { status: 500 }
-              );
-            
-        }
-
+export async function POST(req: Request) {
+  try {
+    await dbConnect();
+    
+    // In App Router, you need to extract the body with await req.json()
+    const user = await req.json();
+    console.log(user);
+    
+    await User.create(user);
+    
+    return NextResponse.json({
+      msg: "User created successfully",
+      success: true,
+      status: 200
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to create user' }, // Fixed error message to match the POST operation
+      { status: 500 }
+    );
+  }
 }
