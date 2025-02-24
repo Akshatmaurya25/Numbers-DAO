@@ -3,14 +3,16 @@ import Link from "next/link"
 
 export default function DeveloperSection() {
   return (
-    <section className="relative overflow-hidden px-4 py-24">
+    <section className="relative overflow-hidden px-4 py-24 bg-gradient-to-b from-white to-slate-50">
       <div className="container mx-auto max-w-6xl">
         <div className="grid gap-16 md:grid-cols-2 md:gap-24">
-          <div>
-            <h2 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl">
+          <div className="space-y-4">
+            <h2 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-5xl transition-all duration-300 hover:scale-105">
               Built for
               <br />
-              Developers
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600">
+                Developers
+              </span>
             </h2>
           </div>
 
@@ -21,14 +23,14 @@ export default function DeveloperSection() {
             </p>
 
             <div className="space-y-6">
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1">
                 <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E5F6F6]">
                   <LinkIcon className="h-3.5 w-3.5 text-[#00A2A2]" />
                 </div>
                 <span className="text-base text-slate-600">Cross-chain synchronous composability today</span>
               </div>
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1">
                 <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F5F3FF]">
                   <svg
                     width="14"
@@ -73,7 +75,7 @@ export default function DeveloperSection() {
                 </span>
               </div>
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 p-4 rounded-lg transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1">
                 <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FFF7ED]">
                   <Sparkles className="h-3.5 w-3.5 text-[#FB923C]" />
                 </div>
@@ -81,10 +83,10 @@ export default function DeveloperSection() {
               </div>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-8">
               <Link
                 href="#"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-6 py-3 text-sm font-medium text-slate-900 transition-colors hover:bg-slate-50"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-8 py-4 text-sm font-medium text-slate-900 transition-all duration-300 hover:bg-slate-900 hover:text-white hover:border-slate-900 hover:scale-105"
               >
                 Work with us
                 <ArrowRight className="h-4 w-4" />

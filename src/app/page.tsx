@@ -24,6 +24,7 @@ export default function Home() {
       <PixelatedPoster/>
       <NumbersSection />
       <DeveloperSection />
+      <TeamSection></TeamSection>
     
       <TrustSection />
       <Footer />
