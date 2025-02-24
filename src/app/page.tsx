@@ -23,8 +23,8 @@ export default function Home() {
       <ApostrophyQuote />
       <PixelatedPoster/>
       <NumbersSection />
-
-      <TeamSection></TeamSection>
+      <DeveloperSection />
+    
       <TrustSection />
       <Footer />
     </>
