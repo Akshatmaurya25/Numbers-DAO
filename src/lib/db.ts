@@ -30,7 +30,7 @@ async function DbConnect():Promise<void>{
     } catch (error) {
         
         console.log("Failed to connect DB", error)
-        process.exit(1)
+        throw error;
     }
 }
 export default DbConnect

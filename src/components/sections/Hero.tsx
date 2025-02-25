@@ -11,7 +11,7 @@ export const Hero = () => {
   // Disable login when Privy is not ready or the user is already authenticated
   const disableLogin = !ready || (ready && authenticated);
   return (
-    <div className=" relative p-4 lg:p-8">
+    <div className=" relative p-4 lg:p-8 mt-16">
       <div className="h-[75vh] overflow-hidden w-full justify-center items-center flex flex-col  bg-black p-4 rounded-2xl">
         <Vortex
           backgroundColor="black"
