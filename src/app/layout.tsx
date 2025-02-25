@@ -2,8 +2,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { PrivyProvider } from "@privy-io/react-auth";
 import { config } from "dotenv";
+import { ModalProvider } from "@/context/ModalContext";
+import Modal from "@/components/ui/Modal"
 
 config();
 const geistSans = Geist({
@@ -31,7 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-whi`}
       >
-        {children}
+        <ModalProvider>
+          <Modal />
+          {children}
+        </ModalProvider>
       </body>
     </html>
   );
