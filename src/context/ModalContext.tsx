@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext, useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -9,21 +11,23 @@ const ModalContext = createContext({
 });
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState("");
 
   useEffect(() => {
     const modalParam = searchParams.get("modal");
     const contentParam = searchParams.get("content");
+
     if (modalParam === "true") {
       setIsOpen(true);
       setContent(contentParam || "random text bla bla bla");
     } else {
       setIsOpen(false);
+      setContent("");
     }
-  }, [searchParams]);
+  }, [searchParams.toString()]);
 
   const openModal = (newContent: string) => {
     router.push(`?modal=true&content=${encodeURIComponent(newContent)}`);

@@ -1,3 +1,5 @@
+"use client";
+
 import { useModal } from "@/context/ModalContext";
 import { X } from "lucide-react";
 
@@ -14,7 +16,7 @@ const Modal = () => {
           <X size={20} />
         </button>
 
-        <h2 className="text-xl font-bold mb-2">Basic Modal</h2>
+        <h2 className="text-xl font-bold mb-2 text-black">Modalaaa</h2>
         <p className="text-zinc-600">{content}</p>
 
         <div className="mt-4 flex justify-end space-x-2">
