@@ -25,11 +25,13 @@ export default function Navbar() {
   }, [])
 
   return (
-    <header className="fixed top-0 z-50 w-full">
+    <header className="fixed top-0 z-50 w-full px-4 sm:px-6 lg:px-8">
       <div
         className={cn(
-          "mx-auto flex h-16 max-w-7xl items-center justify-between px-4 transition-all duration-300 md:px-6",
-          scrolled ? "rounded-full bg-[#FFF1EC] shadow-sm md:mx-6 md:my-4 md:h-14" : "",
+          "mx-auto flex h-16 max-w-7xl items-center justify-between transition-all duration-300",
+          scrolled 
+            ? "my-4 h-14 rounded-full bg-[#FFF1EC] px-6 shadow-sm" 
+            : "px-0"
         )}
       >
         <Link href="/" className="flex items-center gap-2">
