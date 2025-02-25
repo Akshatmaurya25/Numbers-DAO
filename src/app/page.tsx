@@ -14,6 +14,7 @@ import TrustSection from "@/components/sections/TrustSection";
 import { PrivyProvider } from "@privy-io/react-auth";
 import DeveloperSection from "@/components/sections/developer-section";
 import TeamSection from "@/components/sections/team-section";
+import PartnerCarousel from "@/components/sections/partner-carousel";
 
 export default function Home() {
   return (
@@ -26,7 +27,8 @@ export default function Home() {
       <PixelatedPoster/>
       <NumbersSection />
       <DeveloperSection />
-      <TeamSection></TeamSection>
+      <PartnerCarousel></PartnerCarousel>
+      
     
       <TrustSection />
       <Footer />
