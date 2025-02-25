@@ -14,14 +14,18 @@ export async function GET() {
         status:200
     });
   } catch (error) {
+
     return NextResponse.json(
-      { error: 'Failed to fetch users' },
+      
+      { error: `Failed to fetch users ${error} ` },
       { status: 500 }
     );
   }
 }
 
-
+type errorType={
+  errorResponse: object
+}
 export async function POST(req: Request) {
   try {
     await dbConnect();
@@ -37,7 +41,19 @@ export async function POST(req: Request) {
       success: true,
       status: 200
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message.includes('E11000')) {
+
+      const mongoError = error as any;
+      console.log(mongoError.keyValue);
+      return NextResponse.json(
+        { error: `Duplicate Key found ${Object.keys(mongoError.keyValue)[0]}`,
+         duplicate : Object.keys(mongoError.keyValue)[0] }, 
+        { status: 409 }
+      );
+    } else {
+      console.log('An unknown error occurred');
+    }
     return NextResponse.json(
       { error: 'Failed to create user' }, // Fixed error message to match the POST operation
       { status: 500 }

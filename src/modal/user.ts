@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
-  name: { type: String, required: true },
+  name: { type: String, },
   joined: { type: Date, default: Date.now },
   authId: { type: String, required: true, unique: true },
   bio: { type: String },
@@ -12,7 +12,9 @@ const UserSchema = new Schema({
     linkedin: String,
     telegram: String,
     x: String,
-    discord: String
+    discord: String,
+    medium: String,
+    hashNode: String,
   },
   status: { 
     type: String, 
@@ -36,6 +38,7 @@ const UserSchema = new Schema({
     }
   ],
   domains: [String],
+  authData:[],
   workExperience: [
     {
       tag: String,

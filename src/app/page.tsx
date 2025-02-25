@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import ApostrophyQuote from "@/components/sections/apostrophyquote";
 import CardHero from "@/components/sections/cardsHero";
 import Footer from "@/components/sections/Footer";
@@ -19,19 +19,7 @@ import PartnerCarousel from "@/components/sections/partner-carousel";
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <Hero />
-      <InfiniteCarousel />
-      <CardHero/>
-      <ApostrophyQuote />
-      <PixelatedPoster/>
-      <NumbersSection />
-      <DeveloperSection />
-      <PartnerCarousel></PartnerCarousel>
-      
-    
-      <TrustSection />
-      <Footer />
+      {" "}
       <PrivyProvider
         appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? ""}
         config={{
@@ -47,8 +35,18 @@ export default function Home() {
           },
         }}
       >
-        {/* Add your children components here */}
-        <div>Your content here</div>
+        <Navbar />
+        <Hero />
+        <InfiniteCarousel />
+        <CardHero />
+        <ApostrophyQuote />
+        <PixelatedPoster />
+        <NumbersSection />
+        <DeveloperSection />
+        <TeamSection></TeamSection>
+
+        <TrustSection />
+        <Footer />
       </PrivyProvider>
     </>
   );
