@@ -45,15 +45,8 @@ export default function Home() {
           },
         }}
       >
-        <Navbar />
-        <Hero />
-        <InfiniteCarousel />
-        <CardHero />
-        <ApostrophyQuote />
-        <PixelatedPoster />
-        <NumbersSection />
-        <TrustSection />
-        <Footer />
+        {/* Add your children components here */}
+        <div>Your content here</div>
       </PrivyProvider>
     </>
   );
