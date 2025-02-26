@@ -17,7 +17,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
-export default function Dashboard() {
+export default function Dashboard(props: any) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const projects = [
