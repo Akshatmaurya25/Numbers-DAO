@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react"; // Added Loader2 for the spinner
-
+import { useRouter } from "next/navigation";
 interface User {
   wallet?: {
     address?: string;
@@ -22,7 +22,7 @@ const AuthButton: React.FC<AuthButtonProps> = ({
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false); // Added loading state
-
+  const router = useRouter();
   const walletAddress = user?.wallet?.address;
   const displayAddress = walletAddress
     ? `${walletAddress.slice(0, 4)}...${walletAddress.slice(-4)}`
@@ -98,8 +98,9 @@ const AuthButton: React.FC<AuthButtonProps> = ({
               <div className="py-1">
                 <button
                   onClick={() => {
-                    // Add dashboard navigation logic here
                     setIsDropdownOpen(false);
+                    router.push("/dashboard");
+                    // Navigate to dashboard
                   }}
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >

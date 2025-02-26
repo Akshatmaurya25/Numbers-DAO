@@ -2,6 +2,7 @@
 // import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 // import { usePrivy } from "@privy-io/react-auth";
 // import axios from "axios";
+// import { Context } from "vm";
 
 // interface User {
 //   privyData: any; 
@@ -17,8 +18,8 @@
 //   children: ReactNode;
 // }
 
-// const UserContext = createContext<UserContextType | undefined>(undefined);
 
+// const UserContext = createContext<UserContextType | undefined>(undefined);
 // export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 //   const { authenticated, user: privyUser } = usePrivy();
 //   const [user, setUser] = useState<User | null>(null);
@@ -57,15 +58,18 @@
 
 
 //   const contextValue: UserContextType = { user, loading, error };
-
+//   const Context = UserContext.Provider;
 //   return (
-//     <UserContext.Provider value={contextValue}>
+//     // <UserContext.Provider value={contextValue}>
+//     //   {children}
+//     // </UserContext.UserProvider>
+//     <Context.Provider value={contextValue}>
 //       {children}
-//     </UserContext.Provider>
+//     </Context.Provider>
 //   );
 // };
 
-// export const useUser = (): UserContextType => {
+// export const useUser = (): UserContextType => {``
 //   const context = useContext(UserContext);
 //   if (context === undefined) {
 //     throw new Error("useUser must be used within a UserProvider");
