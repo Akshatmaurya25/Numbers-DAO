@@ -1,9 +1,11 @@
-'use client'
+"use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { config } from "dotenv";
 import { User } from "lucide-react";
+import Navbar from "@/components/sections/Navbar";
+import Footer from "@/components/sections/Footer";
 // import { UserProvider } from "@/lib/contexts/useUser";
 
 config();
@@ -32,26 +34,30 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-whi`}
       >
-      <PrivyProvider
-        appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? ""}
-        config={{
-          // Customize Privy's appearance in your app
-          appearance: {
-            theme: "light",
-            accentColor: "#676FFF",
-            logo: "https://your-logo-url",
-          },
-          // Create embedded wallets for users who don't have a wallet
-          embeddedWallets: {
-            createOnLogin: "users-without-wallets",
-          },
-        }}
-      >
-        {/* <UserProvider> */}
+        <PrivyProvider
+          appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? ""}
+          config={{
+            // Customize Privy's appearance in your app
+            appearance: {
+              theme: "light",
+              accentColor: "#676FFF",
+              logo: "https://your-logo-url",
+            },
+            // Create embedded wallets for users who don't have a wallet
+            embeddedWallets: {
+              createOnLogin: "users-without-wallets",
+            },
+          }}
+        >
+          {/* <UserProvider> */}
+          <>
+            <Navbar />
             {children}
-        {/* </UserProvider> */}
-      </PrivyProvider>
-          </body>
+            <Footer />
+          </> 
+          {/* </UserProvider> */}
+        </PrivyProvider>
+      </body>
     </html>
   );
 }
