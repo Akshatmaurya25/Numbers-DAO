@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Dashboard from "./dashboard";
+import Dashboard from "../[username]/dashboard";
 import { usePrivy } from "@privy-io/react-auth";
 import axios, { AxiosRequestConfig } from "axios";
 import { get } from "http";

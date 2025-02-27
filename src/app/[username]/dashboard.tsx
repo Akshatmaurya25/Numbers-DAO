@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+// import User from '@/modal/user';
 
 export default function Dashboard(props: any) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -51,11 +52,11 @@ export default function Dashboard(props: any) {
               <Card className="bg-zinc-900/50 border-zinc-800 p-4">
                 <div className="space-y-4">
                   <h1 className="text-red-500 text-2xl font-bold">
-                    {props.username}
+                    {props.username || "Anonymous User"}
                   </h1>
                   <div className="flex items-start gap-4">
                     <Image
-                      src="/placeholder.svg"
+                      src={props.profileImage || "/placeholder.svg"}
                       alt="Profile"
                       width={40}
                       height={40}
@@ -68,11 +69,7 @@ export default function Dashboard(props: any) {
                           {props.status}
                         </span>
                       </div>
-                      <p className="text-zinc-300 text-sm">
-                        Welcome to BhopalDAO! We&apos;re a web3 community
-                        focused on empowering digital future through blockchain
-                        technology.
-                      </p>
+                      <p className="text-zinc-300 text-sm">{props.bio}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -130,22 +127,26 @@ export default function Dashboard(props: any) {
                 <div className="space-y-4">
                   <div>
                     <h2 className="text-xl font-bold text-purple-500">
-                      Governance Milestones
+                      Personal Milestones
                     </h2>
-                    <p className="text-zinc-400 text-xs mt-1">
-                      Key achievements in our governance journey
+                    <p className="text-zinc-400 text-xsny mt-1">
+                      Celebrating growth and achievement
                     </p>
                   </div>
                   <div className="space-y-4">
-                    <div className="p-3 rounded-lg bg-zinc-800/50">
-                      <h3 className="text-lg font-semibold text-white mb-1">
-                        First DAO Proposal
-                      </h3>
-                      <p className="text-zinc-400 text-xs">
-                        Successfully implemented our first community-driven
-                        initiative through transparent voting
-                      </p>
-                    </div>
+                    {props.milestones.map((milestone: any, index: number) => (
+                      <div
+                        key={index}
+                        className="p-3 rounded-lg bg-zinc-800/50"
+                      >
+                        <h3 className="text-lg font-semibold text-white mb-1">
+                          {milestone.title}
+                        </h3>
+                        <p className="text-zinc-400 text-xs">
+                          {milestone.description}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </Card>

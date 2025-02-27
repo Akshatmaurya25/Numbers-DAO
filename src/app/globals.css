@@ -1,39 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Satisfy&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jacquard+12&family=Special+Elite&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* scroll used in the infinite carousel */
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-.jacquard-12-regular {
-  font-family: "Jacquard 12", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-.special-elite-regular {
-  font-family: "Special Elite", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-
-@layer utilities {
-  .animate-scroll {
-    animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
-  }
-}
-
-/* *{
-  
-} */
+/* Base styles */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -49,7 +22,19 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Font classes */
+.jacquard-12-regular {
+  font-family: "Jacquard 12", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.special-elite-regular {
+  font-family: "Special Elite", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .satisfy-regular {
@@ -58,52 +43,71 @@ body {
   font-style: normal;
 }
 
-/* .urbanist {
-
-} */
-*{
-  font-family: "Urbanist", serif;
+/* Default font */
+* {
+  font-family: "Urbanist", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
 
 .montserrat {
-  font-family: "Montserrat", serif;
+  font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
 
-h1{
-  font-size: xx-large;
-}
-h2{
-  font-size: x-large;
-}
-h3{
-  font-size: large;
+/* Typography scale */
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.17rem; }
+p { font-size: 1rem; }
+
+@media (max-width: 640px) {
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.1rem; }
+  p { font-size: 0.875rem; }
 }
 
-p{
-  font-size: 14px;
+/* Animations */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-
-@media only screen and (min-width: 200px) and (max-width: 640px) {
-  h1{
-    font-size: x-large;
-  }
-  h2{
-    font-size: large;
-  }
-  h3{
-    font-size: medium;
-  }
-  
-  p{
-    font-size: 11px;
+@layer utilities {
+  .animate-scroll {
+    animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
   }
 }
 
+/* Hide scrollbar utilities */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Component specific styles */
+.team-card {
+  transition: all 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Theme variables */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -132,6 +136,7 @@ p{
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -167,34 +172,4 @@ p{
   body {
     @apply bg-background text-foreground;
   }
-}
-
-/* Hide scrollbar */
-.hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
-}
-
-/* Keyframes for subtle animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Team card hover effect */
-.team-card {
-  transition: all 0.3s ease;
-}
-
-.team-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }

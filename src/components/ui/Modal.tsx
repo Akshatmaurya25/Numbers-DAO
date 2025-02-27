@@ -16,13 +16,7 @@ const Modal = () => {
           <X size={20} />
         </button>
 
-        <h2 className="text-xl font-bold mb-2 text-black">Modalaaa</h2>
-        <p className="text-zinc-600">{content}</p>
-
-        <div className="mt-4 flex justify-end space-x-2">
-          <button className="px-4 py-2 bg-gray-300 rounded" onClick={closeModal}>Cancel</button>
-          <button className="px-4 py-2 bg-black text-white rounded" onClick={closeModal}>OK</button>
-        </div>
+        <div>{content}</div>
       </div>
     </div>
   );
