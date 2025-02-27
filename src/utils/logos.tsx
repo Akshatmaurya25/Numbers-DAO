@@ -28,7 +28,8 @@ import { FaWhatsapp } from "react-icons/fa";
     instagram : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/640px-Instagram_icon.png",
     whatsapp : "https://static-00.iconduck.com/assets.00/whatsapp-icon-1020x1024-iykox85t.png",
     discord : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8aMugg7LWDXqkWc-9JlApM4MLPXhi-EPDYA&s",
-    
+    notion : ""
+
     
 
 };
