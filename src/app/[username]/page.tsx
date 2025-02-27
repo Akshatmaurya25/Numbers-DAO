@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Dashboard from "../dashboard/dashboard";
+import Dashboard from "./dashboard";
 import { usePrivy } from "@privy-io/react-auth";
 import axios from "axios";
 import { useParams } from "next/navigation";
@@ -41,7 +41,7 @@ const Page = () => {
 
   return (
     <div>
-      <Dashboard/>
+      <Dashboard user={user} />
     </div>
   );
 };

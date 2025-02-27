@@ -16,6 +16,8 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+// import User from '@/modal/user';
+;
 
 export default function Dashboard(props: any) {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -48,16 +50,16 @@ export default function Dashboard(props: any) {
               {/* Header Section */}
               <Card className="bg-zinc-900/50 border-zinc-800 p-4">
                 <div className="space-y-4">
-                  <h1 className="text-red-500 text-2xl font-bold">NumbersDAO Community</h1>
+                    <h1 className="text-red-500 text-2xl font-bold">{props.username || 'Anonymous User'}</h1>
                   <div className="flex items-start gap-4">
-                    <Image src="/placeholder.svg" alt="Profile" width={40} height={40} className="rounded-full" />
+                    <Image src={props.profileImage || '/placeholder.svg'} alt="Profile" width={40} height={40} className="rounded-full" />
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <Circle className="w-2 h-2 fill-green-500 text-green-500" />
                         <span className="text-zinc-400 text-sm">Available for projects{props.status}</span>
                       </div>
                       <p className="text-zinc-300 text-sm">
-                        Welcome to BhopalDAO! We&apos;re a web3 community focused on empowering digital future through blockchain technology.
+                        {props.bio}
                       </p>
                     </div>
                   </div>
@@ -104,19 +106,21 @@ export default function Dashboard(props: any) {
               <Card className="bg-zinc-900/50 border-zinc-800 p-4 h-full">
                 <div className="space-y-4">
                   <div>
-                    <h2 className="text-xl font-bold text-purple-500">Governance Milestones</h2>
-                    <p className="text-zinc-400 text-xs mt-1">
-                      Key achievements in our governance journey
+                    <h2 className="text-xl font-bold text-purple-500">Personal Milestones</h2>
+                    <p className="text-zinc-400 text-xsny mt-1">
+                      Celebrating growth and achievement
                     </p>
                   </div>
-                  <div className="space-y-4">
-                    <div className="p-3 rounded-lg bg-zinc-800/50">
-                      <h3 className="text-lg font-semibold text-white mb-1">First DAO Proposal</h3>
+                    <div className="space-y-4">
+                    {props.milestones.map((milestone : any, index) => (
+                      <div key={index} className="p-3 rounded-lg bg-zinc-800/50">
+                      <h3 className="text-lg font-semibold text-white mb-1">{milestone.title}</h3>
                       <p className="text-zinc-400 text-xs">
-                        Successfully implemented our first community-driven initiative through transparent voting
+                        {milestone.description}
                       </p>
+                      </div>
+                    ))}
                     </div>
-                  </div>
                 </div>
               </Card>
             </div>
