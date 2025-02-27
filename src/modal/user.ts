@@ -3,6 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 const UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
   name: { type: String, },
+  profileImage: { type: String, },
   joined: { type: Date, default: Date.now },
   authId: { type: String, required: true, unique: true },
   bio: { type: String },

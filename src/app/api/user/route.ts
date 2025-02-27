@@ -60,3 +60,38 @@ export async function POST(req: Request) {
     );
   }
 }
+
+
+export async function PATCH(req: Request) {
+
+  try {
+    await dbConnect();
+    const { authId, ...updatedData } = await req.json();
+
+    console.log(`Updating user ${authId} with data:`, updatedData);
+
+    const user = await User.findOneAndUpdate({authId}, updatedData, {
+      new: true,
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        { error: 'User not found' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      msg: 'User updated successfully',
+      success: true,
+      status: 200,
+      result: user,
+    });
+  } catch (error) {
+    console.log('Failed to update user:', error);
+    return NextResponse.json(
+      { error: 'Failed to update user' },
+      { status: 500 }
+    );
+  }
+}

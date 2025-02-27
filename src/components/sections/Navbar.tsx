@@ -1,36 +1,39 @@
-"use client"
+"use client";
 
-import { ArrowRight } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/util"
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { usePrivy } from "@privy-io/react-auth";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/util";
+import AuthButton from "../navbar/NavbarButton";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setScrolled(true)
+        setScrolled(true);
       } else {
-        setScrolled(false)
+        setScrolled(false);
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
+  const { ready, authenticated, login, user, logout } = usePrivy();
+  useEffect(() => {}, []);
   return (
     <header className="fixed top-0 z-50 w-full px-4 sm:px-6 lg:px-8">
       <div
         className={cn(
           "mx-auto flex h-16 max-w-7xl items-center justify-between transition-all duration-300",
-          scrolled 
-            ? "my-4 h-14 rounded-full bg-[#FFF1EC] px-6 shadow-sm" 
+          scrolled
+            ? "my-4 h-14 rounded-full bg-[#FFF1EC] px-6 shadow-sm"
             : "px-0"
         )}
       >
@@ -45,7 +48,10 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
-          <Link href="/" className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70">
+          <Link
+            href="/"
+            className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+          >
             Home
           </Link>
           <Link
@@ -54,17 +60,16 @@ export default function Navbar() {
           >
             Developers
           </Link>
-          <Link href="/blog" className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70">
+          <Link
+            href="/blog"
+            className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+          >
             Blog
           </Link>
         </nav>
 
-        <Button className="hidden rounded-full bg-black px-6 text-white hover:bg-black/90 md:inline-flex">
-          Start Building
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-
-        <Button variant="outline" size="icon" className="md:hidden">
+      <AuthButton authenticated={authenticated} login={login} logout={logout} user={user} />
+        {/* <Button variant="outline" size="icon" className="md:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -82,9 +87,8 @@ export default function Navbar() {
             <line x1="4" x2="20" y1="18" y2="18" />
           </svg>
           <span className="sr-only">Toggle menu</span>
-        </Button>
+        </Button> */}
       </div>
     </header>
-  )
+  );
 }
-

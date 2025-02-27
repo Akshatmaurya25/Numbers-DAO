@@ -20,6 +20,7 @@ export default function Home() {
   return (
     <>
       {" "}
+<<<<<<< HEAD
       <PrivyProvider
         appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? ""}
         config={{
@@ -49,6 +50,17 @@ export default function Home() {
         <TrustSection />
         <Footer />
       </PrivyProvider>
+=======
+      <Hero />
+      <InfiniteCarousel />
+      <CardHero />
+      <ApostrophyQuote />
+      <PixelatedPoster />
+      <NumbersSection />
+      <DeveloperSection />
+      <TeamSection></TeamSection>
+      <TrustSection />
+>>>>>>> 99cd1cba03746fc6b92787a05bc98490d9eb9c98
     </>
   );
 }
