@@ -54,7 +54,7 @@ export default function Dashboard(props: any) {
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <Circle className="w-2 h-2 fill-green-500 text-green-500" />
-                        <span className="text-zinc-400 text-sm">Available for projects</span>
+                        <span className="text-zinc-400 text-sm">Available for projects{props.status}</span>
                       </div>
                       <p className="text-zinc-300 text-sm">
                         Welcome to BhopalDAO! We&apos;re a web3 community focused on empowering digital future through blockchain technology.

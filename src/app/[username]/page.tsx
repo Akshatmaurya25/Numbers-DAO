@@ -41,7 +41,7 @@ const Page = () => {
 
   return (
     <div>
-      <Dashboard />
+      <Dashboard/>
     </div>
   );
 };
