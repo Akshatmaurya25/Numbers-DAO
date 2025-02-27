@@ -7,6 +7,8 @@ import { User } from "lucide-react";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 // import { UserProvider } from "@/lib/contexts/useUser";
+import { ModalProvider } from "@/context/ModalContext";
+import Modal from "@/components/ui/Modal"
 
 config();
 const geistSans = Geist({
@@ -51,9 +53,12 @@ export default function RootLayout({
         >
           {/* <UserProvider> */}
           <>
+        <ModalProvider>
+          <Modal />
             <Navbar />
             {children}
             <Footer />
+        </ModalProvider>
           </> 
           {/* </UserProvider> */}
         </PrivyProvider>
