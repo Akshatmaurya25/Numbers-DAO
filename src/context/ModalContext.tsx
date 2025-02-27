@@ -1,40 +1,33 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { createContext, useContext, useState } from "react";
 
-const ModalContext = createContext({
+type ModalContextType = {
+  isOpen: boolean;
+  content: React.ReactNode;
+  openModal: (content: React.ReactNode) => void;
+  closeModal: () => void;
+};
+
+const ModalContext = createContext<ModalContextType>({
   isOpen: false,
-  content: "",
-  openModal: (content: string) => {},
+  content: null,
+  openModal: () => {},
   closeModal: () => {},
 });
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState<React.ReactNode>(null);
 
-  useEffect(() => {
-    const modalParam = searchParams.get("modal");
-    const contentParam = searchParams.get("content");
-
-    if (modalParam === "true") {
-      setIsOpen(true);
-      setContent(contentParam || "random text bla bla bla");
-    } else {
-      setIsOpen(false);
-      setContent("");
-    }
-  }, [searchParams.toString()]);
-
-  const openModal = (newContent: string) => {
-    router.push(`?modal=true&content=${encodeURIComponent(newContent)}`);
+  const openModal = (newContent: React.ReactNode) => {
+    setContent(newContent);
+    setIsOpen(true);
   };
 
   const closeModal = () => {
-    router.push("?");
+    setContent(null);
+    setIsOpen(false);
   };
 
   return (
