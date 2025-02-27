@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Dashboard from "../[username]/dashboard";
 import { usePrivy } from "@privy-io/react-auth";
 import axios, { AxiosRequestConfig } from "axios";
@@ -12,24 +12,10 @@ const page = () => {
   const [loading, setLoading] = useState(true);
   const [User, setUser] = useState({});
   const [form, showForm] = useState(false);
-  const { closeModal, openModal } = useModal();
+
   const [username, setUsername] = useState("");
-  const createAccount = async () => {
-    if (user) {
-      const config: AxiosRequestConfig = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: {
-          authId: user.id,
-          username: username,
-        },
-      };
-      let res = await axios.post(`/api/user/`, config);
-      console.log("Creating account");
-      console.log(res.data);
-    }
-  };
+  const { closeModal, content, isOpen, openModal } = useModal();
+
   useEffect(() => {
     const getUser = async () => {
       if (user) {
@@ -45,14 +31,14 @@ const page = () => {
         try {
           const res = await axios.get(`/api/user/getUserById`, config);
           console.log("Hitting request");
-          console.log(res.data, res.status);
+   
 
           setUser(res.data);
           setLoading(false);
         } catch (error: any) {
           if (error.response?.status === 404) {
             setLoading(false);
-            showForm(true);
+            openModal(<FormUsername />);
             console.log("No account found. Creating one");
             // openModal(modal)
           } else {
@@ -64,27 +50,73 @@ const page = () => {
     getUser();
   }, [user]);
 
-  const FormUsername = () => (
-    <div className="h-screen items-center justify-center flex flex-col text-black ">
-      <label htmlFor="username">Username</label>
-      <input
-        type="text"
-        id="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <button className="bg-gray-400 " onClick={createAccount}>
-        Submit
-      </button>
-    </div>
-  );
+  const FormUsername = () => {
+    const [duplicate, setDuplicate] = useState(false);
+    const createAccount = async (data: Object) => {
+      if (user) {
+        const config: AxiosRequestConfig = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: {
+            authId: user.id,
+            ...data,
+          },
+        };
+        try {
+          let res = await axios.post(`/api/user/`, config);
+          console.log("Creating account");
+          console.log(res.data);
+          closeModal();
+          setUser(res.data);
+        } catch (error) {
+          console.error("Error creating account:", error);
+          setDuplicate(true);
+        }
+      }
+    };
+    const [data, setData] = useState({
+      username,
+    });
+    return (
+      <div className="h-fit p-6 items-center  gap-2 justify-center flex flex-col text-black ">
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          className="text-black"
+          value={data.username}
+          onChange={(e) => setData({ ...data, username: e.target.value.toLowerCase() })}
+        />
+        {duplicate && (
+          <p className="text-red-500">
+            User with that username already exists!
+          </p>
+        )}
+        <div className="flex gap-2 ">
+          <button
+            className="bg-black text-white px-8 py-2 rounded "
+            onClick={() => createAccount(data)}
+          >
+            Submit
+          </button>
+          <button
+            className="border-black border-solid border-2  text-black px-8 py-2 rounded "
+            onClick={() => closeModal}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  };
   if (loading)
     return (
       <div className="h-screen text-black items-center justify-center flex">
         Loading
       </div>
     );
-  if (form) return <FormUsername />;
+
   return (
     <>
       <Dashboard {...User} />

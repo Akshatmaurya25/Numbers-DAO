@@ -6,7 +6,7 @@ const UserSchema = new Schema({
   profileImage: { type: String, },
   joined: { type: Date, default: Date.now },
   authId: { type: String, required: true, unique: true },
-  bio: { type: String },
+  bio: { type: String, default: 'Hey there! This is my bios' },
   socials: {
     github: String,
     instagram: String,

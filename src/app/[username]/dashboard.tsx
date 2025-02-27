@@ -134,19 +134,20 @@ export default function Dashboard(props: any) {
                     </p>
                   </div>
                   <div className="space-y-4">
-                    {props.milestones.map((milestone: any, index: number) => (
-                      <div
-                        key={index}
-                        className="p-3 rounded-lg bg-zinc-800/50"
-                      >
-                        <h3 className="text-lg font-semibold text-white mb-1">
-                          {milestone.title}
-                        </h3>
-                        <p className="text-zinc-400 text-xs">
-                          {milestone.description}
-                        </p>
-                      </div>
-                    ))}
+                    {props.milestones &&
+                      props.milestones.map((milestone: any, index: number) => (
+                        <div
+                          key={index}
+                          className="p-3 rounded-lg bg-zinc-800/50"
+                        >
+                          <h3 className="text-lg font-semibold text-white mb-1">
+                            {milestone.title}
+                          </h3>
+                          <p className="text-zinc-400 text-xs">
+                            {milestone.description}
+                          </p>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </Card>

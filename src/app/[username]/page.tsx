@@ -10,12 +10,13 @@ const Page = () => {
   const [loading, setLoading] = useState(true);
   const { username } = useParams();
   const { user } = usePrivy();
-
+  const [userData, setUserdata] = useState({});
   useEffect(() => {
     const getData = async () => {
       try {
         const response = await axios.get(`/api/user/${username}`); // Relative URL
         console.log("Response:", response.data); // Log actual data
+        setUserdata(response.data); // Update state with data
         setLoading(false); // Update loading state on success
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -41,7 +42,7 @@ const Page = () => {
 
   return (
     <div>
-      <Dashboard user={user} />
+      <Dashboard {...userData} />
     </div>
   );
 };
