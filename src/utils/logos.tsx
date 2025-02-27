@@ -3,7 +3,7 @@ import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
  export const logos = {
-  figma : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedium.com%2F%40aspynlim%2Ffigma-tutorial-by-figma-4-prototyping-collaboration-c30f1bfd21a4&psig=AOvVaw1bINM3RbmVtqkWkO-5HwpH&ust=1740744154431000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNiWzrnn44sDFQAAAAAdAAAAABAK",
+  figma : "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1365px-Figma-logo.svg.png",
   metamask : "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/1200px-MetaMask_Fox.svg.png",
   phantom : "https://iq.wiki/_next/image?url=https://ipfs.everipedia.org/ipfs/Qmacpgp47AVAKPh1Q8LvEoXLM9ZNsBKqc8nYvbfUHR6K8x&w=1200&q=95",
   javascript : "https://www.datocms-assets.com/48401/1628644950-javascript.png?auto=format&fit=max&w=1200",
@@ -28,7 +28,8 @@ import { FaWhatsapp } from "react-icons/fa";
     instagram : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/640px-Instagram_icon.png",
     whatsapp : "https://static-00.iconduck.com/assets.00/whatsapp-icon-1020x1024-iykox85t.png",
     discord : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8aMugg7LWDXqkWc-9JlApM4MLPXhi-EPDYA&s",
-    notion : ""
+    notion : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2x2uHIpTqlqNR47njOeXadt-KvYt8PxH9Kg&s",
+
 
     
 
