@@ -30,11 +30,10 @@ export async function POST(req: Request) {
   try {
     await dbConnect();
     
-    // In App Router, you need to extract the body with await req.json()
     const user = await req.json();
-    console.log(user);
+    console.log("user=>",user);
     
-    await User.create(user);
+    await User.create(user.data);
     
     return NextResponse.json({
       msg: "User created successfully",
@@ -52,7 +51,7 @@ export async function POST(req: Request) {
         { status: 409 }
       );
     } else {
-      console.log('An unknown error occurred');
+      console.log('An unknown error occurred', error);
     }
     return NextResponse.json(
       { error: 'Failed to create user' }, // Fixed error message to match the POST operation

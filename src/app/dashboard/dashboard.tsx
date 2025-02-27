@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   ArrowUpRight,
   Circle,
@@ -12,22 +12,24 @@ import {
   // InstagramIcon as TiktokIcon,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Dashboard(props: any) {
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const projects = [
     {
       title: "Community Project 1",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%204-wnC1n8AlUNWcfa5kF9YuARIenYuXKN.png",
-      description: "Building a decentralized community focused on empowering Bhopal through web3 technology",
+      image:
+        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%204-wnC1n8AlUNWcfa5kF9YuARIenYuXKN.png",
+      description:
+        "Building a decentralized community focused on empowering Bhopal through web3 technology",
     },
     // Add more projects as needed
-  ]
+  ];
 
   const techStack = [
     { name: "Ethereum", icon: "/placeholder.svg" },
@@ -36,7 +38,7 @@ export default function Dashboard(props: any) {
     { name: "Web3.js", icon: "/placeholder.svg" },
     { name: "React", icon: "/placeholder.svg" },
     { name: "Next.js", icon: "/placeholder.svg" },
-  ]
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white p-4 md:p-6 font-sans">
@@ -48,16 +50,28 @@ export default function Dashboard(props: any) {
               {/* Header Section */}
               <Card className="bg-zinc-900/50 border-zinc-800 p-4">
                 <div className="space-y-4">
-                  <h1 className="text-red-500 text-2xl font-bold">NumbersDAO Community</h1>
+                  <h1 className="text-red-500 text-2xl font-bold">
+                    {props.username}
+                  </h1>
                   <div className="flex items-start gap-4">
-                    <Image src="/placeholder.svg" alt="Profile" width={40} height={40} className="rounded-full" />
+                    <Image
+                      src="/placeholder.svg"
+                      alt="Profile"
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <Circle className="w-2 h-2 fill-green-500 text-green-500" />
-                        <span className="text-zinc-400 text-sm">Available for projects{props.status}</span>
+                        <span className="text-zinc-400 text-sm">
+                          {props.status}
+                        </span>
                       </div>
                       <p className="text-zinc-300 text-sm">
-                        Welcome to BhopalDAO! We&apos;re a web3 community focused on empowering digital future through blockchain technology.
+                        Welcome to BhopalDAO! We&apos;re a web3 community
+                        focused on empowering digital future through blockchain
+                        technology.
                       </p>
                     </div>
                   </div>
@@ -68,7 +82,10 @@ export default function Dashboard(props: any) {
                     <Link href="#" className="hover:text-zinc-300">
                       <Circle className="w-4 h-4" />
                     </Link>
-                    <Button variant="secondary" className="ml-auto gap-2 text-sm py-1">
+                    <Button
+                      variant="secondary"
+                      className="ml-auto gap-2 text-sm py-1"
+                    >
                       <Send className="w-3 h-3" />
                       Let&apos;s talk!
                     </Button>
@@ -80,20 +97,28 @@ export default function Dashboard(props: any) {
               <div className="grid grid-cols-3 gap-4">
                 <Card className="bg-zinc-900/50 border-zinc-800 p-3">
                   <div className="space-y-0.5">
-                    <div className="text-zinc-500 text-xs">Community Members</div>
-                    <div className="text-2xl text-white font-semibold">1000+</div>
+                    <div className="text-zinc-500 text-xs">
+                      Community Members
+                    </div>
+                    <div className="text-2xl text-white font-semibold">
+                      1000+
+                    </div>
                   </div>
                 </Card>
                 <Card className="bg-zinc-900/50 border-zinc-800 p-3">
                   <div className="space-y-0.5">
-                    <div className="text-zinc-500 text-xs">Active Proposals</div>
+                    <div className="text-zinc-500 text-xs">
+                      Active Proposals
+                    </div>
                     <div className="text-2xl text-white font-semibold">25+</div>
                   </div>
                 </Card>
                 <Card className="bg-zinc-900/50 border-zinc-800 p-3">
                   <div className="space-y-0.5">
                     <div className="text-zinc-500 text-xs">Treasury Value</div>
-                    <div className="text-2xl text-white font-semibold">$10K+</div>
+                    <div className="text-2xl text-white font-semibold">
+                      $10K+
+                    </div>
                   </div>
                 </Card>
               </div>
@@ -104,16 +129,21 @@ export default function Dashboard(props: any) {
               <Card className="bg-zinc-900/50 border-zinc-800 p-4 h-full">
                 <div className="space-y-4">
                   <div>
-                    <h2 className="text-xl font-bold text-purple-500">Governance Milestones</h2>
+                    <h2 className="text-xl font-bold text-purple-500">
+                      Governance Milestones
+                    </h2>
                     <p className="text-zinc-400 text-xs mt-1">
                       Key achievements in our governance journey
                     </p>
                   </div>
                   <div className="space-y-4">
                     <div className="p-3 rounded-lg bg-zinc-800/50">
-                      <h3 className="text-lg font-semibold text-white mb-1">First DAO Proposal</h3>
+                      <h3 className="text-lg font-semibold text-white mb-1">
+                        First DAO Proposal
+                      </h3>
                       <p className="text-zinc-400 text-xs">
-                        Successfully implemented our first community-driven initiative through transparent voting
+                        Successfully implemented our first community-driven
+                        initiative through transparent voting
                       </p>
                     </div>
                   </div>
@@ -127,7 +157,9 @@ export default function Dashboard(props: any) {
               <Card className="bg-zinc-900/50 border-zinc-800 p-6 row-span-2 h-full">
                 <div className="space-y-6 md:flex gap-4">
                   <div className="text-center flex flex-col items-center justify-center">
-                    <h2 className="text-2xl font-bold text-orange-500">DAO Achievements</h2>
+                    <h2 className="text-2xl font-bold text-orange-500">
+                      DAO Achievements
+                    </h2>
                     <p className="text-zinc-400 text-sm mt-1">
                       Key milestones in our web3 journey
                     </p>
@@ -138,7 +170,7 @@ export default function Dashboard(props: any) {
                       "Web3 Education Workshop Series",
                       "Local Developer Meetups",
                       "Smart Contract Deployment",
-                      "Community Treasury Formation"
+                      "Community Treasury Formation",
                     ].map((achievement) => (
                       <div
                         key={achievement}
@@ -157,25 +189,38 @@ export default function Dashboard(props: any) {
               <Card className="bg-zinc-900/50 border-zinc-800 p-6">
                 <div className="space-y-4">
                   <div className="text-center">
-                    <h2 className="text-2xl font-bold text-emerald-500">Community</h2>
+                    <h2 className="text-2xl font-bold text-emerald-500">
+                      Community
+                    </h2>
                     <p className="text-zinc-400 text-sm mt-1">
-                      Launched communities for designers to exceed the threshold of their creativity
+                      Launched communities for designers to exceed the threshold
+                      of their creativity
                     </p>
                   </div>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-white">Discord Members</span>
-                      <Badge variant="secondary" className="bg-emerald-500/10 text-emerald-500">
+                      <Badge
+                        variant="secondary"
+                        className="bg-emerald-500/10 text-emerald-500"
+                      >
                         315+
                       </Badge>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-white">Governance Participants</span>
-                      <Badge variant="secondary" className="bg-emerald-500/10 text-emerald-500">
+                      <span className="text-white">
+                        Governance Participants
+                      </span>
+                      <Badge
+                        variant="secondary"
+                        className="bg-emerald-500/10 text-emerald-500"
+                      >
                         570+
                       </Badge>
                     </div>
-                    <div className="text-sm text-zinc-400 text-center">Products I made to the community 👋</div>
+                    <div className="text-sm text-zinc-400 text-center">
+                      Products I made to the community 👋
+                    </div>
                     <div className="flex justify-around gap-2">
                       <Button variant="secondary" size="sm" className="gap-2">
                         Figma
@@ -193,16 +238,18 @@ export default function Dashboard(props: any) {
           </div>
         </div>
 
-
         {/* right */}
         <div className="flex flex-col gap-4 md:w-[45%]">
           <div>
             <Card className="bg-zinc-900/50 border-zinc-800 p-6 col-span-2">
               <div className="space-y-6 text-center">
                 <div>
-                  <h2 className="text-2xl font-bold text-blue-500">Community Initiatives</h2>
+                  <h2 className="text-2xl font-bold text-blue-500">
+                    Community Initiatives
+                  </h2>
                   <p className="text-zinc-400 text-sm mt-1">
-                    Discover the projects and proposals that are shaping Bhopal&apos;s web3 future
+                    Discover the projects and proposals that are shaping
+                    Bhopal&apos;s web3 future
                   </p>
                 </div>
                 <div className="relative">
@@ -219,7 +266,10 @@ export default function Dashboard(props: any) {
                         <div className="bg-zinc-900/90 p-4 rounded-lg shadow-lg">
                           <div className="relative w-[300px] h-[200px] overflow-hidden rounded">
                             <Image
-                              src={projects[currentSlide].image || "/placeholder.svg"}
+                              src={
+                                projects[currentSlide].image ||
+                                "/placeholder.svg"
+                              }
                               alt="Desktop preview"
                               fill
                               className="object-cover"
@@ -229,7 +279,10 @@ export default function Dashboard(props: any) {
                         <div className="bg-zinc-900/90 p-4 rounded-lg shadow-lg">
                           <div className="relative w-[100px] h-[200px] overflow-hidden rounded">
                             <Image
-                              src={projects[currentSlide].image || "/placeholder.svg"}
+                              src={
+                                projects[currentSlide].image ||
+                                "/placeholder.svg"
+                              }
                               alt="Mobile preview"
                               fill
                               className="object-cover"
@@ -244,7 +297,11 @@ export default function Dashboard(props: any) {
                       variant="secondary"
                       size="icon"
                       className="rounded-full"
-                      onClick={() => setCurrentSlide((prev) => (prev > 0 ? prev - 1 : projects.length - 1))}
+                      onClick={() =>
+                        setCurrentSlide((prev) =>
+                          prev > 0 ? prev - 1 : projects.length - 1
+                        )
+                      }
                     >
                       <ChevronLeft className="h-4 w-4" />
                     </Button>
@@ -254,7 +311,11 @@ export default function Dashboard(props: any) {
                       variant="secondary"
                       size="icon"
                       className="rounded-full"
-                      onClick={() => setCurrentSlide((prev) => (prev < projects.length - 1 ? prev + 1 : 0))}
+                      onClick={() =>
+                        setCurrentSlide((prev) =>
+                          prev < projects.length - 1 ? prev + 1 : 0
+                        )
+                      }
                     >
                       <ChevronRight className="h-4 w-4" />
                     </Button>
@@ -267,7 +328,9 @@ export default function Dashboard(props: any) {
             {/* Top Tech Section */}
             <Card className="bg-zinc-900/50 border-zinc-800 p-6 col-span-2 h-full">
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-zinc-100">Top Tech of 2024</h2>
+                <h2 className="text-2xl font-bold text-zinc-100">
+                  Top Tech of 2024
+                </h2>
                 <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
                   {techStack.map((tech, index) => (
                     <div
@@ -289,8 +352,6 @@ export default function Dashboard(props: any) {
           </div>
         </div>
 
-
-
         {/* Main Grid */}
         {/* <div className="grid md:grid-cols-2 gap-4 md:gap-6">
 
@@ -308,6 +369,5 @@ export default function Dashboard(props: any) {
         </div> */}
       </div>
     </div>
-  )
+  );
 }
-
