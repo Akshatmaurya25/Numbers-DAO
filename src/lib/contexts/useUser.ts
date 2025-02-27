@@ -60,12 +60,10 @@
 //   const contextValue: UserContextType = { user, loading, error };
 //   const Context = UserContext.Provider;
 //   return (
-//     // <UserContext.Provider value={contextValue}>
-//     //   {children}
-//     // </UserContext.UserProvider>
-//     <Context.Provider value={contextValue}>
+//     <UserContext.Provider value={contextValue}>
 //       {children}
-//     </Context.Provider>
+//     </UserContext.UserProvider>
+
 //   );
 // };
 

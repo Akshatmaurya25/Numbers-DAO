@@ -17,11 +17,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 // import User from '@/modal/user';
-import { UserDocument } from "@/modal/interfacetypes"
+;
 
-export default function Dashboard({ user }: { user: UserDocument }) {
-  console.log(user);
-
+export default function Dashboard(props: any) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const projects = [
@@ -52,20 +50,16 @@ export default function Dashboard({ user }: { user: UserDocument }) {
               {/* Header Section */}
               <Card className="bg-zinc-900/50 border-zinc-800 p-4">
                 <div className="space-y-4">
-                    <h1 className="text-red-500 text-2xl font-bold">{user.username || 'Anonymous User'}</h1>
+                    <h1 className="text-red-500 text-2xl font-bold">{props.username || 'Anonymous User'}</h1>
                   <div className="flex items-start gap-4">
-                    <Image src={user.profileImage || '/placeholder.svg'} alt="Profile" width={40} height={40} className="rounded-full" />
+                    <Image src={props.profileImage || '/placeholder.svg'} alt="Profile" width={40} height={40} className="rounded-full" />
                     <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                        <Circle 
-                          className={`w-2 h-2 ${user.status === 'available' 
-                          ? 'fill-green-500 text-green-500' 
-                          : 'fill-red-500 text-red-500'}`} 
-                        />
-                        <span className="text-zinc-400 text-sm">{user.status} for projects</span>
-                        </div>
+                      <div className="flex items-center gap-2">
+                        <Circle className="w-2 h-2 fill-green-500 text-green-500" />
+                        <span className="text-zinc-400 text-sm">Available for projects{props.status}</span>
+                      </div>
                       <p className="text-zinc-300 text-sm">
-                        {user.bio}
+                        {props.bio}
                       </p>
                     </div>
                   </div>
@@ -113,12 +107,12 @@ export default function Dashboard({ user }: { user: UserDocument }) {
                 <div className="space-y-4">
                   <div>
                     <h2 className="text-xl font-bold text-purple-500">Personal Milestones</h2>
-                    <p className="text-zinc-400 text-xs mt-1">
+                    <p className="text-zinc-400 text-xsny mt-1">
                       Celebrating growth and achievement
                     </p>
                   </div>
                     <div className="space-y-4">
-                    {user.milestones.map((milestone, index) => (
+                    {props.milestones.map((milestone : any, index) => (
                       <div key={index} className="p-3 rounded-lg bg-zinc-800/50">
                       <h3 className="text-lg font-semibold text-white mb-1">{milestone.title}</h3>
                       <p className="text-zinc-400 text-xs">
