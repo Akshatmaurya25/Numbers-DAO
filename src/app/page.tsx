@@ -14,11 +14,43 @@ import TrustSection from "@/components/sections/TrustSection";
 import { PrivyProvider } from "@privy-io/react-auth";
 import DeveloperSection from "@/components/sections/developer-section";
 import TeamSection from "@/components/sections/team-section";
+import PartnerCarousel from "@/components/sections/partner-carousel";
 
 export default function Home() {
   return (
     <>
       {" "}
+<<<<<<< HEAD
+      <PrivyProvider
+        appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? ""}
+        config={{
+          // Customize Privy's appearance in your app
+          appearance: {
+            theme: "light",
+            accentColor: "#676FFF",
+            logo: "https://your-logo-url",
+          },
+          // Create embedded wallets for users who don't have a wallet
+          embeddedWallets: {
+            createOnLogin: "users-without-wallets",
+          },
+        }}
+      >
+        <Navbar />
+        <Hero />
+        <InfiniteCarousel />
+        <CardHero />
+        <ApostrophyQuote />
+        <PixelatedPoster />
+        <NumbersSection />
+        <DeveloperSection />
+        <PartnerCarousel></PartnerCarousel>
+   
+
+        <TrustSection />
+        <Footer />
+      </PrivyProvider>
+=======
       <Hero />
       <InfiniteCarousel />
       <CardHero />
@@ -28,6 +60,7 @@ export default function Home() {
       <DeveloperSection />
       <TeamSection></TeamSection>
       <TrustSection />
+>>>>>>> 99cd1cba03746fc6b92787a05bc98490d9eb9c98
     </>
   );
 }
