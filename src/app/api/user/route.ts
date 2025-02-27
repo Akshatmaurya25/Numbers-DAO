@@ -5,8 +5,13 @@ import User from '@/modal/user';
 
 export async function GET() {
   try {
+    console.log('⭐ GET Request started');
     await dbConnect();
+    console.log('📀 Database connected');
+
     const users = await User.find({});
+    console.log('👥 Users found:', users.length);
+    
     return NextResponse.json({
         result: users,
         msg: "User fetched successfully",
@@ -14,7 +19,7 @@ export async function GET() {
         status:200
     });
   } catch (error) {
-
+    console.error('❌ Error in GET request:', error);
     return NextResponse.json(
       
       { error: `Failed to fetch users ${error} ` },

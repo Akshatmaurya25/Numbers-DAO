@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@privy-io/react-auth": "^2.4.5",
+    "@privy-io/react-auth": "^2.5.0",
     "@radix-ui/react-slot": "^1.1.2",
     "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "^9.0.4",
