@@ -20,37 +20,6 @@ export default function Home() {
   return (
     <>
       {" "}
-<<<<<<< HEAD
-      <PrivyProvider
-        appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID ?? ""}
-        config={{
-          // Customize Privy's appearance in your app
-          appearance: {
-            theme: "light",
-            accentColor: "#676FFF",
-            logo: "https://your-logo-url",
-          },
-          // Create embedded wallets for users who don't have a wallet
-          embeddedWallets: {
-            createOnLogin: "users-without-wallets",
-          },
-        }}
-      >
-        <Navbar />
-        <Hero />
-        <InfiniteCarousel />
-        <CardHero />
-        <ApostrophyQuote />
-        <PixelatedPoster />
-        <NumbersSection />
-        <DeveloperSection />
-        <PartnerCarousel></PartnerCarousel>
-   
-
-        <TrustSection />
-        <Footer />
-      </PrivyProvider>
-=======
       <Hero />
       <InfiniteCarousel />
       <CardHero />
@@ -58,9 +27,9 @@ export default function Home() {
       <PixelatedPoster />
       <NumbersSection />
       <DeveloperSection />
-      <TeamSection></TeamSection>
+    
+      <PartnerCarousel />
       <TrustSection />
->>>>>>> 99cd1cba03746fc6b92787a05bc98490d9eb9c98
     </>
   );
 }

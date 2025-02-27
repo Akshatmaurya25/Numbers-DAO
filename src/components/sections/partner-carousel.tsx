@@ -29,7 +29,7 @@ const partners = [
     name: "Sumitsemcool",
     role: "All Stack Developer",
     image:
-      "https://file.notion.so/f/f/f3a1d5c4-f94d-46cd-87ce-93542ce1bb11/74b935e6-9012-418c-8d3f-479ec897a9a4/image.png?table=block&id=143ac84c-b66e-80c9-bd7f-d373075e71c9&spaceId=f3a1d5c4-f94d-46cd-87ce-93542ce1bb11&expirationTimestamp=1740528000000&signature=afNF0-Yuw3GLve9u0OBhT5TtbQu06QMfOb8Px7nPLi4&downloadName=image.png",
+      "",
     description: "Leading expert in mergers & acquisitions and corporate finance advisory.",
   },
 ]
