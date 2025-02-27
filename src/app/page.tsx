@@ -43,7 +43,8 @@ export default function Home() {
         <PixelatedPoster />
         <NumbersSection />
         <DeveloperSection />
-        <TeamSection></TeamSection>
+        <PartnerCarousel></PartnerCarousel>
+   
 
         <TrustSection />
         <Footer />
