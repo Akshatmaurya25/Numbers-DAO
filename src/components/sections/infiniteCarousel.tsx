@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import AirDAO from "@/assests/AirDAO.svg";
-import PushChain from "@/assests/pushChain.png";
+
 import ETH from "@/assests/ETH.png";
 import push from "@/assests/Push.svg";
 import scroll from "@/assests/scroll.svg";
@@ -111,6 +111,6 @@ const logos: {
   {
     src: scroll,
     alt: "Scroll",
-  height: "45",
+    height: "45",
   },
 ];
