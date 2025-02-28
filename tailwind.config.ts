@@ -66,7 +66,7 @@ export default {
       },
       animation: {
         'slide-left-infinite': 'slide-left 8s linear infinite',
-        marquee: "marquee 40s linear infinite",
+        marquee: "marquee 40s linear infinite ",
         scroll: "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
       keyframes: {

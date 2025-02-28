@@ -177,3 +177,38 @@ p { font-size: 1rem; }
     @apply bg-background text-foreground;
   }
 }
+.hoverShadow{
+  box-shadow: none  ;
+  transition: all .25s;
+
+}
+.hoverShadow:hover{
+  box-shadow: rgba(48, 48, 48, 0.58) 12px 10px 24px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+
+
+.hover-shadow-box-animation {
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  transition-duration: 0.3s;
+  transition-property: box-shadow, transform;
+}
+.hover-shadow-box-animation-white {
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px white;
+  transition-duration: 0.3s;
+  transition-property: box-shadow, transform;
+}
+
+.hover-shadow-box-animation:hover,
+.hover-shadow-box-animation:focus,
+.hover-shadow-box-animation:active {
+  box-shadow: 1px 10px 10px -10px rgba(0, 0, 24, 0.5);
+  transform: scale(1.05);
+}
+.hover-shadow-box-animation-white:focus,
+.hover-shadow-box-animation-white:hover,
+.hover-shadow-box-animation-white:active {
+  box-shadow:5px 15px 15px -10px rgba(255, 255, 255, 0.53);
+  transform: scale(1.05);
+}
