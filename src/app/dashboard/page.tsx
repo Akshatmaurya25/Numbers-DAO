@@ -31,7 +31,6 @@ const page = () => {
         try {
           const res = await axios.get(`/api/user/getUserById`, config);
           console.log("Hitting request");
-   
 
           setUser(res.data);
           setLoading(false);
@@ -60,6 +59,7 @@ const page = () => {
           },
           data: {
             authId: user.id,
+            autData: user.wallet,
             ...data,
           },
         };
@@ -86,7 +86,9 @@ const page = () => {
           id="username"
           className="text-black"
           value={data.username}
-          onChange={(e) => setData({ ...data, username: e.target.value.toLowerCase() })}
+          onChange={(e) =>
+            setData({ ...data, username: e.target.value.toLowerCase() })
+          }
         />
         {duplicate && (
           <p className="text-red-500">
