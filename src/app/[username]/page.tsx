@@ -14,7 +14,7 @@ const Page = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`/api/user/${username}`); // Relative URL
+        const response = await axios.get(`/api/username?query=${username}`); // Relative URL
         console.log("Response:", response.data); // Log actual data
         setUserdata(response.data); // Update state with data
         setLoading(false); // Update loading state on success

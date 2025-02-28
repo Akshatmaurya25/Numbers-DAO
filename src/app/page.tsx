@@ -21,7 +21,7 @@ export default function Home() {
     <>
       {" "}
       <Hero />
-      <InfiniteCarousel />
+      {/* <InfiniteCarousel /> */}
       <CardHero />
       <ApostrophyQuote />
       <PixelatedPoster />

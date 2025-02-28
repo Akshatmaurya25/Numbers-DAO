@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Vortex } from "../ui/vortex";
 import { usePrivy } from "@privy-io/react-auth";
+import InfiniteCarousel from "./infiniteCarousel";
 
 export const Hero = () => {
   const { ready, authenticated, login, user, logout } = usePrivy();
@@ -11,7 +12,7 @@ export const Hero = () => {
   // Disable login when Privy is not ready or the user is already authenticated
   const disableLogin = !ready || (ready && authenticated);
   return (
-    <div className=" relative p-4 lg:p-8 mt-16">
+    <div className=" relative mt-16 mb-10">
       {/* <div className="h-[75vh] overflow-hidden w-full justify-center items-center flex flex-col  bg-black p-4 rounded-2xl">
         <Vortex
           backgroundColor="black"
@@ -27,6 +28,7 @@ export const Hero = () => {
         </Vortex>
       </div> */}
       <div className="relative w-full h-full">
+        {/* <div className="w-full h-full absolute bg-black opacity-40"></div> */}
         <video
           width="1920"
           height="1080"
@@ -34,17 +36,20 @@ export const Hero = () => {
           autoPlay
           loop
           muted
-          className="w-full h-full object-cover"
+          className="w-full h-full  object-cover"
         >
-          <source src="Air.mp4" type="video/mp4" />
+          <source src="particle.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
         {/* Overlay Content */}
         <div className="absolute gap-4 inset-0 flex flex-col items-center justify-center text-white montserrat">
-          <h1 className="text-4xl font-bold ">We bring the Numbers</h1>
+          <h1 className="text-4xl font-normal ">
+            Connecting Builders and Ecosystems
+          </h1>
           <AnimatedNumberText />
           {/* <h1 className="text-[7rem] ">DAO</h1> */}
+          <InfiniteCarousel />
         </div>
       </div>
     </div>
@@ -108,7 +113,7 @@ const AnimatedNumberText = () => {
 
   return (
     <div className="">
-      <div className=" text-[70px] lg:text-[100px] grotesk leading-none  font-bold text-whi font-mono">
+      <div className=" text-[78px] lg:text-[120px] grotesk leading-none  font-bold text-whi font-mono">
         {displayText || (isAnimating ? "0".repeat(finalText.length) : "")}
       </div>
     </div>

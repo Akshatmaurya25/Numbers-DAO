@@ -28,23 +28,31 @@ export default function Navbar() {
   const { ready, authenticated, login, user, logout } = usePrivy();
   useEffect(() => {}, []);
   return (
-    <header className="fixed top-0 z-50 w-full px-4 sm:px-6 lg:px-8">
+    <header className="fixed top-0 z-50 w-full ">
       <div
+        style={{
+          backdropFilter: "blur(15px)",
+          backgroundColor: "#fffc",
+          borderBottom: "1px solid #0000001f",
+          paddingTop: "1rem",
+          paddingBottom: "1rem",
+          position: "sticky",
+          top: 0,
+        }}
         className={cn(
-          "mx-auto flex h-16 max-w-7xl items-center justify-between transition-all duration-300",
-          scrolled
-            ? "my-4 h-14 rounded-full bg-[#FFF1EC] px-6 shadow-sm"
-            : "px-0"
+          " flex h-16 max-w-full items-center justify-between transition-all duration-300",
+          scrolled ? " h-14  bg-[#ddd] px-6 shadow-sm" : "px-6"
         )}
       >
         <Link href="/" className="flex items-center gap-2">
-          <Image
+          {/* <Image
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-BEh44qGFbH2uORg300ycKObk4zhHbk.png"
             alt="Payman Logo"
             width={120}
             height={32}
             priority
-          />
+          /> */}
+          <h3 className="text-black font-bold">Numbers DAO</h3>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -68,7 +76,12 @@ export default function Navbar() {
           </Link>
         </nav>
 
-      <AuthButton authenticated={authenticated} login={login} logout={logout} user={user} />
+        <AuthButton
+          authenticated={authenticated}
+          login={login}
+          logout={logout}
+          user={user}
+        />
         {/* <Button variant="outline" size="icon" className="md:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"

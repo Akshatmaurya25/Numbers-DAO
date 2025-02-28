@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function DeveloperSection() {
   return (
-    <section className="relative overflow-hidden px-4 py-24 bg-gradient-to-b from-white to-slate-50">
+    <section className="relative  overflow-hidden px-4 py-24 bg-whi">
       <div className="container mx-auto max-w-6xl">
         <div className="grid gap-16 md:grid-cols-2 md:gap-24">
           <div className="space-y-4">

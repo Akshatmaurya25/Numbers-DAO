@@ -36,7 +36,7 @@ const partners = [
 
 export default function PartnerCarousel() {
   return (
-    <section className="min-h-screen bg-[#010314] flex flex-col items-center justify-center px-4 py-20">
+    <section className="min-h-screen bg-[#000000] flex flex-col items-center justify-center px-4 py-20">
       <div className="max-w-7xl mx-auto w-full text-center mb-16">
         <h2 className="text-white font-semibold text-3xl md:text-4xl lg:text-5xl font-space-grotesk mb-2">
           Meet the Hands Behind
