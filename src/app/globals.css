@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jacquard+12&family=Special+Elite&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -45,11 +45,15 @@ body {
 
 /* Default font */
 * {
-  font-family: "Urbanist", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
-
+.grotesk{
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
 .montserrat {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
