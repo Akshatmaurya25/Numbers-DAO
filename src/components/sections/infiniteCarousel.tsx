@@ -34,7 +34,7 @@ export default function InfiniteCarousel() {
   }
 
   return (
-    <div className="flex absolute bottom-[-5rem] text-white justify-center mb-24">
+    <div className="flex absolute w-3/4 bottom-[-5rem] text-white justify-center mb-24">
       <section className="flex w-full max-w-[1080px] flex-col gap-0 self-center ">
         <p className="self-center  my-7 ">Trusted by leading ecosystems</p>
 

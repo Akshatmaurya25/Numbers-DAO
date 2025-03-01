@@ -24,7 +24,7 @@ const CalendlyEmbed = ({ url }: { url: string }) => {
 
 return (
     <div
-        className="calendly-inline-widget h-[400px] md:h-[570px] overflow-hidden  max-w-[900px] relative"
+        className="calendly-inline-widget  overflow-hidden h-[800px] md:h-[800px] w-full relative"
         data-url={url}
     />
 );

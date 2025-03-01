@@ -30,10 +30,10 @@ export default function PixelatedPoster() {
                 Book A Call
               </h2>
             </div>
-            <div className="items-center p-0 m-0 w-full max-w-3xl max-h-fit">
+            <div className="flex justify-center items-center w-full">
               {" "}
               {/* Added max-width for better layout */}
-              <CalendlyEmbed url="https://calendly.com/pranesh25joshi" />
+              <CalendlyEmbed url="https://calendly.com/pranesh25joshi/30min" />
             </div>
           </div>
         </div>
