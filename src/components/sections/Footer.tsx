@@ -4,8 +4,9 @@ import Link from "next/link";
 export default function Footer() {
   return (
     
-    <footer className="border-t border-slate-200 bg-black">
-      <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-start md:justify-between lg:px-8">
+    <footer className=" relative bg-[#000000]  ">
+      <div className="footer absolute "></div>
+      <div className="mx-auto max-w-7xl text-white px-6 py-12 md:flex md:items-start md:justify-between lg:px-8">
         <div className="md:flex-shrink-0">
           <Link
             href="/"

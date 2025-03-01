@@ -48,9 +48,15 @@ const page = () => {
     };
     getUser();
   }, [user]);
-
+ type TypeError= {
+  response ?: {
+    data?:{
+      error?  : String
+    }
+  }
+ }
   const FormUsername = () => {
-    const [duplicate, setDuplicate] = useState(false);
+    const [duplicate, setDuplicate] = useState('');
     const createAccount = async (data: Object) => {
       if (user) {
         const config: AxiosRequestConfig = {
@@ -69,9 +75,11 @@ const page = () => {
           console.log(res.data);
           closeModal();
           setUser(res.data);
-        } catch (error) {
-          console.error("Error creating account:", error);
-          setDuplicate(true);
+        } catch (error ) {
+          const err = error as TypeError;
+          console.error("Error creating account:", err.response?.data?.error);
+          setDuplicate(String(err.response?.data?.error ?? "Not Available"));
+
         }
       }
     };
@@ -90,11 +98,7 @@ const page = () => {
             setData({ ...data, username: e.target.value.toLowerCase() })
           }
         />
-        {duplicate && (
-          <p className="text-red-500">
-            User with that username already exists!
-          </p>
-        )}
+        {duplicate && <p className="text-red-500">{duplicate}</p>}
         <div className="flex gap-2 ">
           <button
             className="bg-black text-white px-8 py-2 rounded "

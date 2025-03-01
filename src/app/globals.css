@@ -174,3 +174,30 @@ p { font-size: 1rem; }
   box-shadow:5px 15px 15px -10px rgba(255, 255, 255, 0.53);
   transform: scale(1.05);
 }
+
+
+.hover-animation-pause:hover{
+  animation-play-state: paused;
+}
+
+.footer{
+  position: relative;
+  z-index: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  width: 100%;
+  height: 100%;
+  background-image: url("https://markmar.is/wp-content/uploads/2019/12/footer-bg-01.png");
+  background-position: center;
+  background-size: contain;
+  opacity: 0.3; 
+
+}
+.footer::before {
+ /* Adjust opacity */
+   /* Place it behind content */
+}
+

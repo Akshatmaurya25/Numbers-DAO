@@ -3,9 +3,9 @@ import CalendlyEmbed from "@/components/sections/calendyEmbed";
 
 export default function PixelatedPoster() {
   return (
-    <section className="pt-6 lg:pt-10 relative ">
+    <section className="pt-6 relative ">
       <div className=" mx-auto ">
-        <div className="bg-black text-white rounded p-6 lg:p-12 text-center relative overflow-hidden">
+        <div className="bg-black pt-6  text-white rounded  text-center relative ">
           {/* Background image */}
           <div className="absolute inset-0">
             {/* <Image
@@ -18,7 +18,7 @@ export default function PixelatedPoster() {
           </div>
 
           {/* Content */}
-          <div className="relative z-10 flex flex-col items-center justify-center min-h-fit">
+          <div className="relative  z-10 flex flex-col items-center justify-center min-h-fit">
             <div className="flex flex-col items-center ">
               <div className="">
                 <div className="text-sm font-medium tracking-wider text-blue-400">
@@ -30,9 +30,7 @@ export default function PixelatedPoster() {
                 Book A Call
               </h2>
             </div>
-            <div className="flex justify-center items-center w-full">
-              {" "}
-              {/* Added max-width for better layout */}
+            <div className="flex flex-col  justify-center items-center  overflow-y-hidden w-full min-h-fit  ">
               <CalendlyEmbed url="https://calendly.com/pranesh25joshi/30min" />
             </div>
           </div>
