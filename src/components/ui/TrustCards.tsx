@@ -19,7 +19,7 @@ const TrustCards = ({
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(36,0,36,0.8)_0%,_rgba(0,0,0,1)_80%)]" />
       <div className="relative z-10">
-        <p className="mb-5 text-zinc-400 font-medium">{des}</p>
+        <p className="mb-5 text-zinc-400 font-medium text-left">{des}</p>
         <div className="flex gap-2">
           <Image
             src={logo}
@@ -29,8 +29,8 @@ const TrustCards = ({
             className="w-12 aspect-square rounded-full object-cover mb-5"
           />
           <div>
-            <p className="font-medium text-zinc-200 text-base">{name}</p>
-            <p className="text-xs text-zinc-500">{role}</p>
+            <p className="font-medium text-zinc-200 text-base text-left">{name}</p>
+            <p className="text-xs text-zinc-500 text-left">{role}</p>
           </div>
         </div>
       </div>
