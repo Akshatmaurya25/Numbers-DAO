@@ -1,7 +1,6 @@
 "use client"
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 
 const partners = [
   {
@@ -32,9 +31,23 @@ const partners = [
       "",
     description: "Leading expert in mergers & acquisitions and corporate finance advisory.",
   },
+  {
+    name: "Sumitsemcool",
+    role: "All Stack Developer",
+    image:
+      "",
+    description: "Leading expert in mergers & acquisitions and corporate finance advisory.",
+  },
+  {
+    name: "Sumitsemcool",
+    role: "All Stack Developer",
+    image:
+      "",
+    description: "Leading expert in mergers & acquisitions and corporate finance advisory.",
+  },
 ]
 
-export default function PartnerCarousel() {
+export default function PartnersGrid() {
   return (
     <section className="min-h-screen bg-[#000000] flex flex-col items-center justify-center px-4 py-20">
       <div className="max-w-7xl mx-auto w-full text-center mb-16">
@@ -46,37 +59,32 @@ export default function PartnerCarousel() {
         </p>
       </div>
 
-      <Carousel
-        opts={{
-          align: "start",
-          loop: true,
-        }}
-        className="w-full max-w-6xl"
-      >
-        <CarouselContent className="-ml-2 md:-ml-4">
+      <div className="w-full max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {partners.map((partner, index) => (
-            <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-              <div className="relative group">
-                <Card className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#1a1f47] to-[#0a0d24] border-0">
-                  <div className="aspect-[3/4] relative">
-                    <Image src={partner.image || "/placeholder.svg"} alt={partner.name} fill className="object-cover" />
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1f47]/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                      <div className="text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 className="text-xl font-semibold mb-2">{partner.name}</h3>
-                        <p className="text-sm text-blue-300 mb-3">{partner.role}</p>
-                        <p className="text-sm text-gray-300">{partner.description}</p>
-                      </div>
+            <div key={index} className="relative group">
+              <Card className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#1a1f47] to-[#0a0d24] border-0 h-full">
+                <div className="aspect-[3/4] relative">
+                  <Image 
+                    src={partner.image || "/placeholder.svg"} 
+                    alt={partner.name} 
+                    fill 
+                    className="object-cover" 
+                  />
+                  {/* Static info for mobile, visible by default */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a1f47]/90 to-transparent flex items-end p-6 md:opacity-0 md:group-hover:opacity-100 md:transition-opacity md:duration-300">
+                    <div className="text-white md:transform md:translate-y-4 md:group-hover:translate-y-0 md:transition-transform md:duration-300">
+                      <h3 className="text-xl font-semibold mb-2">{partner.name}</h3>
+                      <p className="text-sm text-blue-300 mb-3">{partner.role}</p>
+                      <p className="text-sm text-gray-300">{partner.description}</p>
                     </div>
                   </div>
-                </Card>
-              </div>
-            </CarouselItem>
+                </div>
+              </Card>
+            </div>
           ))}
-        </CarouselContent>
-        <CarouselPrevious className="hidden md:flex -left-12 bg-transparent border-white/20 hover:bg-white/10 text-white" />
-        <CarouselNext className="hidden md:flex -right-12 bg-transparent border-white/20 hover:bg-white/10 text-white" />
-      </Carousel>
+        </div>
+      </div>
     </section>
   )
 }
