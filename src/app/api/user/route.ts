@@ -31,12 +31,22 @@ export async function GET() {
 type errorType={
   errorResponse: object
 }
+const BannedUsername= [
+  "dashboard", "test", "privacy-policy","team","about", "contact", "blog"
+]
 export async function POST(req: Request) {
   try {
     await dbConnect();
     
     const user = await req.json();
     console.log("user=>",user);
+    if (BannedUsername.includes(user.data.username)){
+      return NextResponse.json(
+        { error: `Some keywords cannot be used as username.`,
+       }, 
+        { status: 409 }
+      );
+    }
     
     await User.create(user.data);
     

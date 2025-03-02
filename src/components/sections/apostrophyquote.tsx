@@ -35,9 +35,7 @@ export default function ApostrophyQuote() {
               Full autonomy for AI? We don&apos;t even give that to humans.
             </h2>
             <p className="text-base lg:text-lg text-whi mb-6 lg:mb-8">
-              Don&apos;t get stuck wondering how or where your AI is spending
-              money. Work alongside your AI with smart controls and approvals.
-              Because sometimes even the brightest need a helping hand.
+            We aim to unlock the potential of talent across global market, helping them learn, collaborate, and create impactful solutions for the future of Web3 and AI
             </p>
             <a
               href=""

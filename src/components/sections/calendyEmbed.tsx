@@ -22,12 +22,12 @@ const CalendlyEmbed = ({ url }: { url: string }) => {
     };
   }, []);
 
-return (
+  return (
     <div
-        className="calendly-inline-widget  overflow-hidden h-[800px] md:h-[800px] w-full relative"
-        data-url={url}
+      className="calendly-inline-widget flex flex-col  overflow-hidden  h-[950px] md:h-[800px] w-full relative"
+      data-url={url}
     />
-);
+  );
 };
 
 export default CalendlyEmbed;

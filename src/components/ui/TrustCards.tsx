@@ -29,7 +29,7 @@ const TrustCards = ({
             className="w-12 aspect-square rounded-full object-cover mb-5"
           />
           <div>
-            <p className="font-medium text-base">{name}</p>
+            <p className="font-medium text-zinc-200 text-base">{name}</p>
             <p className="text-xs text-zinc-500">{role}</p>
           </div>
         </div>
