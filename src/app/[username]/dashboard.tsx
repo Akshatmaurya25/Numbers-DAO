@@ -16,11 +16,14 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Header from "../dashboard/_components/Header";
+import { usePrivy } from "@privy-io/react-auth";
 // import User from '@/modal/user';
 
 export default function Dashboard(props: any) {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const { user } = usePrivy();
+  console.log(user);
   const projects = [
     {
       title: "Community Project 1",
@@ -42,7 +45,8 @@ export default function Dashboard(props: any) {
   ];
 
   return (
-    <div className="min-h-screen pt-20  bg-black text-white p-4 md:p-6 font-sans">
+    <div className="min-h-screen   bg-black text-white p-4 md:p-6 font-sans">
+     
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 md:gap-6">
         {/* left */}
         <div className="flex flex-col gap-4 w-[95%]">

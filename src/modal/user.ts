@@ -42,7 +42,7 @@ const UserSchema = new Schema({
   authData:[],
   workExperience: [
     {
-      tag: String,
+      tag: [String],
       orgName: String,
       positionName: String,
       from: Date,

@@ -6,11 +6,13 @@ import axios, { AxiosRequestConfig } from "axios";
 import { get } from "http";
 import { useModal } from "@/context/ModalContext";
 import { set } from "mongoose";
+import Header from "./_components/Header";
+import { UserDocument } from "@/modal/interfacetypes";
 
 const page = () => {
   const { user } = usePrivy();
   const [loading, setLoading] = useState(true);
-  const [User, setUser] = useState({});
+  const [User, setUser] = useState<UserDocument>();
   const [form, showForm] = useState(false);
 
   const [username, setUsername] = useState("");
@@ -48,15 +50,15 @@ const page = () => {
     };
     getUser();
   }, [user]);
- type TypeError= {
-  response ?: {
-    data?:{
-      error?  : String
-    }
-  }
- }
+  type TypeError = {
+    response?: {
+      data?: {
+        error?: String;
+      };
+    };
+  };
   const FormUsername = () => {
-    const [duplicate, setDuplicate] = useState('');
+    const [duplicate, setDuplicate] = useState("");
     const createAccount = async (data: Object) => {
       if (user) {
         const config: AxiosRequestConfig = {
@@ -65,7 +67,7 @@ const page = () => {
           },
           data: {
             authId: user.id,
-            autData: user.wallet,
+            authData: user.wallet,
             ...data,
           },
         };
@@ -75,11 +77,10 @@ const page = () => {
           console.log(res.data);
           closeModal();
           setUser(res.data);
-        } catch (error ) {
+        } catch (error) {
           const err = error as TypeError;
           console.error("Error creating account:", err.response?.data?.error);
           setDuplicate(String(err.response?.data?.error ?? "Not Available"));
-
         }
       }
     };
@@ -124,9 +125,16 @@ const page = () => {
     );
 
   return (
-    <>
+    <div className="bg-black text-white">
+      <Header
+        source={User?.profileImage}
+        walletAddress={user?.wallet?.address}
+      />
+      <div className="max-w-7xl mx-auto border-b border-1 border-[#181717]"> 
+sdsa
+      </div>
       <Dashboard {...User} />
-    </>
+    </div>
   );
 };
 
