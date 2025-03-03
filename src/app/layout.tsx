@@ -55,9 +55,9 @@ export default function RootLayout({
           <>
         <ModalProvider>
           <Modal />
-            <Navbar />
+         
             {children}
-            <Footer />
+          
         </ModalProvider>
           </> 
           {/* </UserProvider> */}

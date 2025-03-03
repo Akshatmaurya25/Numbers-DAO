@@ -3,10 +3,13 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    
-    <footer className=" relative bg-[#000000]  ">
-      <div className="footer absolute "></div>
-      <div className="mx-auto max-w-7xl text-white px-6 py-12 md:flex md:items-start md:justify-between lg:px-8">
+    <footer className="relative  bg-[#000000]  ">
+      <div
+        style={{
+          zIndex: 40,
+        }}
+        className="  mx-auto max-w-7xl z-30 text-white px-6 py-12 md:flex md:items-start md:justify-between lg:px-8"
+      >
         <div className="md:flex-shrink-0">
           <Link
             href="/"
@@ -24,7 +27,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Dev Docs
                   </Link>
@@ -32,7 +35,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     GitHub
                   </Link>
@@ -46,7 +49,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     X (Twitter)
                   </Link>
@@ -54,7 +57,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Discord
                   </Link>
@@ -62,7 +65,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Luma
                   </Link>
@@ -70,7 +73,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     YouTube
                   </Link>
@@ -84,7 +87,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Service Status
                   </Link>
@@ -92,7 +95,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     FAQ
                   </Link>
@@ -100,7 +103,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Terms of Service
                   </Link>
@@ -108,7 +111,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href="#"
-                    className="hover:underline  text-sm text-slate-400 hover:text-whi"
+                    className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Privacy Policy
                   </Link>
@@ -118,6 +121,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <div className=" w-full top-0  h-full absolute"></div>
     </footer>
   );
 }
