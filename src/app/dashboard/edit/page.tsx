@@ -3,9 +3,11 @@
 import React, { useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, Replace, Shuffle } from "lucide-react";
 import { Loader } from "@/components/ui/loader";
 import { UserDocument } from "@/modal/interfacetypes";
+import { AvatarGenerator } from "random-avatar-generator";
+import axios from "axios";
 
 const socialPlatforms = {
   github: ["github.com"],
@@ -18,14 +20,14 @@ const socialPlatforms = {
   hashNode: ["hashnode.com"],
 };
 
-const page = (props: Object) => {
+const Page = (props: Object) => {
   const [value, setValue] = useState("");
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
   const [value3, setValue3] = useState("");
   const [value4, setValue4] = useState("");
   const [value5, setValue5] = useState("");
-  const [user, setUser] = useState<UserDocument>(props as UserDocument);
+  const [user, setUser] = useState<UserDocument>({ ...props } as UserDocument);
   const [modal, setModal] = useState<string | undefined>(undefined);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("Nakul chouskey");
@@ -93,6 +95,12 @@ const page = (props: Object) => {
     document.body.classList.remove("overflow-hidden");
   };
 
+  const generator = new AvatarGenerator();
+  const generateRandomAvatar = () => {
+    const imageLink = generator.generateRandomAvatar();
+    setUser({ ...user, profileImage: imageLink });
+  };
+
   const addObject = () => {
     if (modal == "Projects") {
       const newProject = {
@@ -133,6 +141,16 @@ const page = (props: Object) => {
     setValue4("");
     setValue5("");
     closeModal();
+  };
+
+  const handleSubmit = async () => {
+    let res = await axios.patch("/api/user/", {
+      ...user,
+    });
+    if (res.status == 200) {
+      setUser(res.data.result);
+      console.log(res.data);
+    }
   };
 
   if (!user) {
@@ -196,51 +214,56 @@ const page = (props: Object) => {
       <div className="bg-black max-w-7xl w-full grid xl:grid-cols-2 md:grid-cols-1">
         <div className="px-4 md:px-16 py-10">
           <div className="w-full h-full flex flex-col gap-4">
-            <InputField
-              label={"Name"}
-              value={user?.username}
-              setValue={setName}
-            />
-            <div className="Username">
+            <div className="Username flex flex-col gap-2">
               <p className="text-white text-lg font-medium">Username</p>
               <input
                 type="text"
-                value="Naaakul"
+                value={user?.username}
                 readOnly
                 className="bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
               />
             </div>
-            <div className="image">
+            <div className="image flex flex-col gap-2">
               <p className="text-white text-lg font-medium">Profile Photo</p>
-
-              <input
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                onChange={handleImageChange}
-                className="hidden"
-              />
-              <div
-                className="bg-[#0C0C0E] border border-[#27272A] rounded-md w-20 h-20 flex items-center justify-center cursor-pointer overflow-hidden"
-                onClick={() => fileInputRef.current?.click()}
-              >
-                {image ? (
-                  <img
-                    src={image}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-sm text-[#a1a1aa]">Upload</span>
-                )}
+              <div className="flex gap-3 items-center">
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+                <div
+                  className="bg-[#0C0C0E] border border-[#27272A] rounded-md w-20 h-20 flex items-center justify-center cursor-pointer overflow-hidden"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  {user.profileImage ? (
+                    <div className="flex gap-2 items-center ">
+                      <img
+                        src={user.profileImage}
+                        alt="Preview"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <span className="text-sm text-[#a1a1aa]">Upload</span>
+                  )}
+                </div>
+                <button
+                  onClick={generateRandomAvatar}
+                  className="bg-white flex text-sm items-center gap-1 h-fit rounded px-3 py-1 text-black"
+                >
+                  Random
+                  <Shuffle size={13} />
+                </button>
               </div>
             </div>
-            <InputField label={"Bio"} value={bio} setValue={setBio} />
-            <SocialLinksInput />
-            <div>
+            <div className="flex flex-col gap-2">
               <p className="text-white text-lg font-medium">Status</p>
               <Status status={status} setStatus={setStatus} />
             </div>
+            <InputField label={"Bio"} value={bio} setValue={setBio} />
+            <SocialLinksInput />
           </div>
         </div>
         <div className="px-4 md:px-16 py-10">
@@ -269,8 +292,12 @@ const page = (props: Object) => {
               setValue={setDomains}
               openModal={openModal}
             />
-            <button className="text-white ml-auto mt-6 w-fit rounded-md px-3 py-1 bg-[#004403]">
-              Done
+            <button
+              onClick={handleSubmit}
+              className="bg-white ml-auto flex w-fit items-center gap-1 h-fit rounded px-4 py-2 text-black"
+            >
+              Update
+              <Replace size={14} />
             </button>
           </div>
         </div>
@@ -291,7 +318,7 @@ const InputField = ({
   placeHolder?: string;
 }) => {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <p className="text-white text-lg font-medium">{label}</p>
       <input
         onFocus={(e) => e.target.select()}
@@ -426,4 +453,4 @@ const Status = ({ status, setStatus }: { status: string; setStatus: any }) => {
   );
 };
 
-export default page;
+export default Page;
