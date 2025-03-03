@@ -58,21 +58,27 @@ export default function Navbar() {
         <nav className="hidden items-center gap-8 md:flex">
           <Link
             href="/"
-            className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
           >
             Home
           </Link>
           <Link
             href="/developers"
-            className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
           >
             Developers
           </Link>
           <Link
             href="/blog"
-            className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
           >
             Blog
+          </Link>
+          <Link
+            href="/partners"
+            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+          >
+            Partners
           </Link>
         </nav>
 

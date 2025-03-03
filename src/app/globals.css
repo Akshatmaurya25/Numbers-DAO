@@ -182,9 +182,7 @@ p { font-size: 1rem; }
 
 .footer{
   position: relative;
-  z-index: 0;
-  content: "";
-  position: absolute;
+
   top: 0;
   left: 0;
   
@@ -193,11 +191,6 @@ p { font-size: 1rem; }
   background-image: url("https://markmar.is/wp-content/uploads/2019/12/footer-bg-01.png");
   background-position: center;
   background-size: contain;
-  opacity: 0.3; 
-
+  /* opacity: 0.5;  */
+  z-index: 3;
 }
-.footer::before {
- /* Adjust opacity */
-   /* Place it behind content */
-}
-

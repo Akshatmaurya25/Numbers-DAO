@@ -21,10 +21,10 @@ export default function PixelatedPoster() {
           <div className="relative  z-10 flex flex-col items-center justify-center min-h-fit">
             <div className="flex flex-col items-center ">
               <div className="">
-                <div className="text-sm font-medium tracking-wider text-blue-400">
+                {/* <div className="text-sm font-medium tracking-wider text-blue-400">
                   GET STARTED
                 </div>
-                <div className="w-full h-[2px] bg-blue-400 mt-1 opacity-50"></div>
+                <div className="w-full h-[2px] bg-blue-400 mt-1 opacity-50"></div> */}
               </div>
               <h2 className="text-2xl md:text-7xl lg:text-[50px] leading-tight lg:leading-[58px] font-semibold bg-gradient-to-r from-white/90 to-white/60 text-transparent bg-clip-text">
                 Book A Call

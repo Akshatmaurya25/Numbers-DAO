@@ -20,6 +20,7 @@ export default function Home() {
   return (
     <>
       {" "}
+      <Navbar />
       <Hero />
       {/* <InfiniteCarousel /> */}
       <CardHero />
@@ -28,6 +29,7 @@ export default function Home() {
       <NumbersSection />
       <DeveloperSection />
       <TrustSection />
+      <Footer />
     </>
   );
 }
