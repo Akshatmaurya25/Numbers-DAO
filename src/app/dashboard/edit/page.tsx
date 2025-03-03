@@ -3,6 +3,9 @@
 import React, { useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
+import { LoaderCircle } from "lucide-react";
+import { Loader } from "@/components/ui/loader";
+import { UserDocument } from "@/modal/interfacetypes";
 
 const socialPlatforms = {
   github: ["github.com"],
@@ -15,14 +18,14 @@ const socialPlatforms = {
   hashNode: ["hashnode.com"],
 };
 
-const page = () => {
+const page = (props: Object) => {
   const [value, setValue] = useState("");
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
   const [value3, setValue3] = useState("");
   const [value4, setValue4] = useState("");
   const [value5, setValue5] = useState("");
-
+  const [user, setUser] = useState<UserDocument>(props as UserDocument);
   const [modal, setModal] = useState<string | undefined>(undefined);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("Nakul chouskey");
@@ -132,10 +135,12 @@ const page = () => {
     closeModal();
   };
 
+  if (!user) {
+    return <Loader />;
+  }
+
   return (
     <>
-      <div className="w-full h-16 bg-black"></div>
-
       {isModalOpen && (
         <div className="fixed backdrop-blur-[1px] bg-black/10  w-screen h-screen top-0 left-0 z-50">
           <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 max-w-md p-12 rounded-xl border border-[#27272A] bg-black flex flex-col">
@@ -188,10 +193,14 @@ const page = () => {
         </div>
       )}
 
-      <div className="bg-black w-full min-w-full grid xl:grid-cols-2 md:grid-cols-1">
+      <div className="bg-black max-w-7xl w-full grid xl:grid-cols-2 md:grid-cols-1">
         <div className="px-4 md:px-16 py-10">
           <div className="w-full h-full flex flex-col gap-4">
-            <InputField label={"Name"} value={name} setValue={setName} />
+            <InputField
+              label={"Name"}
+              value={user?.username}
+              setValue={setName}
+            />
             <div className="Username">
               <p className="text-white text-lg font-medium">Username</p>
               <input
@@ -230,7 +239,7 @@ const page = () => {
             <SocialLinksInput />
             <div>
               <p className="text-white text-lg font-medium">Status</p>
-                <Status status={status} setStatus={setStatus}/>
+              <Status status={status} setStatus={setStatus} />
             </div>
           </div>
         </div>
@@ -260,11 +269,9 @@ const page = () => {
               setValue={setDomains}
               openModal={openModal}
             />
-          <button
-            className="text-white ml-auto mt-6 w-fit rounded-md px-3 py-1 bg-[#004403]"
-          >
-            Done
-          </button>
+            <button className="text-white ml-auto mt-6 w-fit rounded-md px-3 py-1 bg-[#004403]">
+              Done
+            </button>
           </div>
         </div>
       </div>
@@ -417,7 +424,6 @@ const Status = ({ status, setStatus }: { status: string; setStatus: any }) => {
       ))}
     </div>
   );
-}
-
+};
 
 export default page;

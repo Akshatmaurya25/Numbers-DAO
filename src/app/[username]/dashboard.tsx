@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+
 import Header from "../dashboard/_components/Header";
 import { usePrivy } from "@privy-io/react-auth";
 // import User from '@/modal/user';
@@ -21,7 +21,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { MilestoneForm } from "@/components/forms/milestone-form";
 
-export default function Dashboard(props: any) {
+export default function zDashboard(props: any) {
   // Core states
   const [currentSlide, setCurrentSlide] = useState(0);
   const { user } = usePrivy();
@@ -41,11 +41,14 @@ export default function Dashboard(props: any) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
   const [showMilestoneForm, setShowMilestoneForm] = useState(false);
-  const [achievements, setAchievements] = useState(() => props.achievements || {
-    projects: [],
-    milestones: [],
-    workExperience: []
-  });
+  const [achievements, setAchievements] = useState(
+    () =>
+      props.achievements || {
+        projects: [],
+        milestones: [],
+        workExperience: [],
+      }
+  );
 
   // Update achievements when props change
   useEffect(() => {
@@ -60,9 +63,9 @@ export default function Dashboard(props: any) {
     setMessage({ type: "", text: "" });
 
     try {
-      const response = await axios.patch('/api/user/', {
+      const response = await axios.patch("/api/user/", {
         authId: props.authId,
-        bio: newBio
+        bio: newBio,
       });
 
       if (response.data.success) {
@@ -70,12 +73,12 @@ export default function Dashboard(props: any) {
         props.bio = newBio;
         setShowBioForm(false);
       } else {
-        throw new Error(response.data.error || 'Failed to update bio');
+        throw new Error(response.data.error || "Failed to update bio");
       }
     } catch (error: any) {
-      setMessage({ 
-        type: "error", 
-        text: error.response?.data?.error || "Failed to update bio" 
+      setMessage({
+        type: "error",
+        text: error.response?.data?.error || "Failed to update bio",
       });
     } finally {
       setIsSubmitting(false);
@@ -84,35 +87,29 @@ export default function Dashboard(props: any) {
 
   const handleMilestoneSuccess = (newData: any) => {
     try {
-      const achievementsData = newData?.result?.achievements || newData?.achievements;
-      
+      const achievementsData =
+        newData?.result?.achievements || newData?.achievements;
+
       if (achievementsData) {
         setAchievements(achievementsData);
-        setMessage({ 
-          type: "success", 
-          text: "Achievements updated successfully!" 
+        setMessage({
+          type: "success",
+          text: "Achievements updated successfully!",
         });
         setTimeout(() => setShowMilestoneForm(false), 1000);
       } else {
-        setMessage({ 
-          type: "error", 
-          text: "Unexpected response format" 
+        setMessage({
+          type: "error",
+          text: "Unexpected response format",
         });
       }
     } catch (error) {
-      setMessage({ 
-        type: "error", 
-        text: "Failed to update achievements" 
+      setMessage({
+        type: "error",
+        text: "Failed to update achievements",
       });
     }
   };
-
-  // Sample data
-  const projects = [{
-    title: "Community Project 1",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%204-wnC1n8AlUNWcfa5kF9YuARIenYuXKN.png",
-    description: "Building a decentralized community focused on empowering Bhopal through web3 technology",
-  }];
 
   const techStack = [
     { name: "Ethereum", icon: "/placeholder.svg" },
@@ -125,7 +122,6 @@ export default function Dashboard(props: any) {
 
   return (
     <div className="min-h-screen   bg-black text-white p-4 md:p-6 font-sans">
-     
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 md:gap-6">
         {/* left */}
         <div className="flex flex-col gap-4 w-[95%]">
@@ -138,12 +134,10 @@ export default function Dashboard(props: any) {
                     {props.username ? `@${props.username}` : "Anonymous User"}
                   </h1>
                   <div className="flex items-start gap-4">
-                    <Image
+                    <img
                       src={props.profileImage || "/placeholder.svg"}
                       alt="Profile"
-                      width={40}
-                      height={40}
-                      className="rounded-full"
+                      className="rounded-full h-32 w-32 aspect-square"
                     />
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
@@ -162,14 +156,14 @@ export default function Dashboard(props: any) {
                             placeholder="Enter your bio..."
                           />
                           <div className="flex gap-2">
-                            <Button 
-                              type="submit" 
+                            <Button
+                              type="submit"
                               variant="secondary"
                               disabled={isSubmitting}
                             >
                               {isSubmitting ? "Saving..." : "Save Bio"}
                             </Button>
-                            <Button 
+                            <Button
                               type="button"
                               variant="outline"
                               onClick={() => setShowBioForm(false)}
@@ -178,22 +172,30 @@ export default function Dashboard(props: any) {
                             </Button>
                           </div>
                           {message.text && (
-                            <p className={`text-sm ${message.type === "error" ? "text-red-500" : "text-green-500"}`}>
+                            <p
+                              className={`text-sm ${
+                                message.type === "error"
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
                               {message.text}
                             </p>
                           )}
                         </form>
                       ) : (
                         <div className="flex justify-between items-start gap-2">
-                          <p className="text-zinc-300 text-sm">{props.bio || "No bio yet"}</p>
-                          <Button
+                          <p className="text-zinc-300 text-sm">
+                            {props.bio || "No bio yet"}
+                          </p>
+                          {/* <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => setShowBioForm(true)}
                             className="text-zinc-400 hover:text-white"
                           >
                             Edit
-                          </Button>
+                          </Button> */}
                         </div>
                       )}
                     </div>
@@ -206,8 +208,8 @@ export default function Dashboard(props: any) {
                       <Circle className="w-4 h-4" />
                     </Link>
                     <Button
-                      variant="secondary"
-                      className="ml-auto gap-2 text-sm py-1"
+                    
+                      className="ml-auto bg-white text-black gap-2 text-sm py-1"
                     >
                       <Send className="w-3 h-3" />
                       Let&apos;s talk!
@@ -260,14 +262,14 @@ export default function Dashboard(props: any) {
                         Celebrating growth and achievement
                       </p>
                     </div>
-                    <Button
+                    {/* <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => setShowMilestoneForm(true)}
                       className="text-zinc-400 hover:text-white"
                     >
                       Edit
-                    </Button>
+                    </Button> */}
                   </div>
 
                   {showMilestoneForm ? (
@@ -280,29 +282,43 @@ export default function Dashboard(props: any) {
                   ) : (
                     <div className="space-y-6 text-left">
                       {message.text && (
-                        <p className={`text-sm ${message.type === "error" ? "text-red-500" : "text-green-500"}`}>
+                        <p
+                          className={`text-sm ${
+                            message.type === "error"
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
                           {message.text}
                         </p>
                       )}
-                      {["projects", "milestones", "workExperience"].map((section) => (
-                        <div key={section} className="space-y-2">
-                          <h3 className="text-lg font-semibold capitalize text-zinc-200">
-                            {section}
-                          </h3>
-                          <div className="space-y-2">
-                            {achievements?.[section as keyof typeof achievements]?.map((item: string, index: number) => (
-                              <div
-                                key={index}
-                                className="p-3 rounded-lg bg-zinc-800/50"
-                              >
-                                <p className="text-zinc-300 text-sm">{item}</p>
-                              </div>
-                            )) || (
-                              <p className="text-zinc-500 text-sm">No {section} added yet</p>
-                            )}
+                      {["projects", "milestones", "workExperience"].map(
+                        (section) => (
+                          <div key={section} className="space-y-2">
+                            <h3 className="text-lg font-semibold capitalize text-zinc-200">
+                              {section}
+                            </h3>
+                            <div className="space-y-2">
+                              {achievements?.[
+                                section as keyof typeof achievements
+                              ]?.map((item: string, index: number) => (
+                                <div
+                                  key={index}
+                                  className="p-3 rounded-lg bg-zinc-800/50"
+                                >
+                                  <p className="text-zinc-300 text-sm">
+                                    {item}
+                                  </p>
+                                </div>
+                              )) || (
+                                <p className="text-zinc-500 text-sm">
+                                  No {section} added yet
+                                </p>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        )
+                      )}
                     </div>
                   )}
                 </div>
