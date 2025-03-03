@@ -368,14 +368,102 @@ const SocialLinksInput = () => {
       <p className="text-white text-lg font-medium">Social</p>
       <div className="flex flex-col gap-2">
         {inputs.map((value, index) => (
-          <InputField
-            placeHolder={"Social Link " + (index + 1)}
+          <SocialDropDown
             key={index}
             value={value}
             setValue={(val: string) => handleChange(index, val)}
           />
         ))}
       </div>
+    </div>
+  );
+};
+
+const SocialDropDown = ({
+  value,
+  setValue,
+}: {
+  value?: string;
+  setValue: any;
+}) => {
+  type PlatformKeys =
+    | "Instagram"
+    | "GitHub"
+    | "X"
+    | "Dribbble"
+    | "Hashnode"
+    | "YouTube"
+    | "HackerRank"
+    | "LeetCode"
+    | "HackerEarth"
+    | "Discord"
+    | "Twitter"
+    | "CodePen"
+    | "StackOverflow"
+    | "Figma"
+    | "Behance"
+    | "Medium"
+    | "CodeChef"
+    | "Codeforces"
+    | "Telegram"
+    | "";
+
+  const [selectedPlatform, setSelectedPlatform] = useState<PlatformKeys>("");
+
+  const platforms: Record<Exclude<PlatformKeys, "">, string> = {
+    Instagram: "instagram.com/",
+    GitHub: "github.com/",
+    X: "x.com/",
+    Dribbble: "dribbble.com/",
+    Hashnode: "hashnode.com/",
+    YouTube: "youtube.com/",
+    HackerRank: "hackerrank.com/",
+    LeetCode: "leetcode.com/",
+    HackerEarth: "hackerearth.com/",
+    Discord: "discord.com/",
+    Twitter: "twitter.com/",
+    CodePen: "codepen.io/",
+    StackOverflow: "stackoverflow.com/",
+    Figma: "figma.com/",
+    Behance: "behance.net/",
+    Medium: "medium.com/",
+    CodeChef: "codechef.com/",
+    Codeforces: "codeforces.com/",
+    Telegram: "t.me/",
+  };
+
+  const handleSelect = (platform: string) => {
+    setSelectedPlatform(platform as PlatformKeys);
+    setValue("");
+  };
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="relative">
+        <select
+          onChange={(e) => handleSelect(e.target.value)}
+          className="bg-[#0C0C0E] border border-[#27272A] px-3 py-1 rounded-md text-[#A1A1AA] w-fit"
+          style={{ maxHeight: "150px", overflowY: "auto" }}
+        >
+          <option value="">Select Platform</option>
+          {Object.keys(platforms).map((platform) => (
+            <option key={platform} value={platform}>
+              {platform}
+            </option>
+          ))}
+        </select>
+      </div>
+      {selectedPlatform && (
+        <div className="flex items-center gap-2">
+          <span className="text-[#A1A1AA]">{platforms[selectedPlatform]}</span>
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            className="bg-[#0C0C0E] border border-[#27272A] px-3 py-1 rounded-md text-[#A1A1AA] w-full"
+          />
+        </div>
+      )}
     </div>
   );
 };
