@@ -50,7 +50,12 @@ const UserSchema = new Schema({
       orgLogoLink: String
     }
   ],
-  stack: [String]
+  stack: [String],
+  achievements: {
+    projects: [String],
+    milestones: [String],
+    workExperience: [String]
+  }
 });
 
 // Export model
