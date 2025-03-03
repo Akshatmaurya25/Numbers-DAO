@@ -207,10 +207,7 @@ export default function zDashboard(props: any) {
                     <Link href="#" className="hover:text-zinc-300">
                       <Circle className="w-4 h-4" />
                     </Link>
-                    <Button
-                    
-                      className="ml-auto bg-white text-black gap-2 text-sm py-1"
-                    >
+                    <Button className="ml-auto bg-white text-black gap-2 text-sm py-1">
                       <Send className="w-3 h-3" />
                       Let&apos;s talk!
                     </Button>

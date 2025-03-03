@@ -9,7 +9,7 @@ import Footer from "@/components/sections/Footer";
 // import { UserProvider } from "@/lib/contexts/useUser";
 import { ModalProvider } from "@/context/ModalContext";
 import Modal from "@/components/ui/Modal"
-
+import  { Toaster } from 'react-hot-toast';
 config();
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,9 +55,27 @@ export default function RootLayout({
           <>
         <ModalProvider>
           <Modal />
-         
+         <>
             {children}
-          
+          <Toaster position="top-right"  toastOptions={{
+    // Define default options
+    className: '',
+    duration: 4000,
+    removeDelay: 1000,
+    style: {
+      background: '#363636',
+      color: '#fff',
+    },
+
+    success: {
+      duration: 3000,
+      iconTheme: {
+        primary: 'green',
+        secondary: 'black',
+      },
+    },
+  }}/> 
+         </>
         </ModalProvider>
           </> 
           {/* </UserProvider> */}

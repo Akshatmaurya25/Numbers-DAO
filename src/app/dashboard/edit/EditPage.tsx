@@ -3,11 +3,13 @@
 import React, { useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
-import { LoaderCircle, Replace, Shuffle } from "lucide-react";
+import { Dot, LoaderCircle, Replace, Shuffle } from "lucide-react";
 import { Loader } from "@/components/ui/loader";
 import { UserDocument } from "@/modal/interfacetypes";
 import { AvatarGenerator } from "random-avatar-generator";
 import axios from "axios";
+import { uploadImageToCloudinary } from "@/utils/uploadFile";
+import toast from "react-hot-toast";
 
 const socialPlatforms = {
   github: ["github.com"],
@@ -20,7 +22,8 @@ const socialPlatforms = {
   hashNode: ["hashnode.com"],
 };
 
-const Page = (props: Object) => {
+const EditPage = (props: UserDocument) => {
+  console.log(props);
   const [value, setValue] = useState("");
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
@@ -34,6 +37,7 @@ const Page = (props: Object) => {
   const [image, setImage] = useState<string | null>(null);
   const [bio, setBio] = useState("Hey there");
   const [status, setStatus] = useState<string>("available");
+  const [imgLoading, setImgLoading] = useState(false);
   const [projects, setProjects] = useState([
     {
       projectName: "Wizzz",
@@ -75,9 +79,16 @@ const Page = (props: Object) => {
   ]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]));
+      setImgLoading(true);
+      let img = await uploadImageToCloudinary(e.target.files[0]);
+      console.log(img);
+      if (img) {
+        setImgLoading(false);
+        setUser({ ...user, profileImage: img });
+        setImage(img);
+      }
     }
   };
 
@@ -97,6 +108,9 @@ const Page = (props: Object) => {
 
   const generator = new AvatarGenerator();
   const generateRandomAvatar = () => {
+    if (imgLoading) {
+      setImgLoading(false);
+    }
     const imageLink = generator.generateRandomAvatar();
     setUser({ ...user, profileImage: imageLink });
   };
@@ -144,8 +158,14 @@ const Page = (props: Object) => {
   };
 
   const handleSubmit = async () => {
-    let res = await axios.patch("/api/user/", {
+    let res1 = axios.patch("/api/user/", {
       ...user,
+    });
+    let res = await res1;
+    toast.promise(res1, {
+      loading: "Updating user...",
+      success: "User updated successfully!",
+      error: "Failed to update user",
     });
     if (res.status == 200) {
       setUser(res.data.result);
@@ -218,7 +238,7 @@ const Page = (props: Object) => {
               <p className="text-white text-lg font-medium">Username</p>
               <input
                 type="text"
-                value={user?.username}
+              
                 readOnly
                 className="bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
               />
@@ -237,7 +257,11 @@ const Page = (props: Object) => {
                   className="bg-[#0C0C0E] border border-[#27272A] rounded-md w-20 h-20 flex items-center justify-center cursor-pointer overflow-hidden"
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  {user.profileImage ? (
+                  {imgLoading ? (
+                    <div>
+                      <Loader />
+                    </div>
+                  ) : user.profileImage ? (
                     <div className="flex gap-2 items-center ">
                       <img
                         src={user.profileImage}
@@ -262,7 +286,13 @@ const Page = (props: Object) => {
               <p className="text-white text-lg font-medium">Status</p>
               <Status status={status} setStatus={setStatus} />
             </div>
-            <InputField label={"Bio"} value={bio} setValue={setBio} />
+            <InputField
+              label={"Bio"}
+              value={user.bio}
+              maxLength={60}
+              onChange={(e) => setUser({ ...user, bio: e.target.value })}
+              // setValue={setBio}
+            />
             <SocialLinksInput />
           </div>
         </div>
@@ -311,11 +341,15 @@ const InputField = ({
   value,
   setValue,
   placeHolder,
+  maxLength,
+  onChange
 }: {
   label?: string;
   value?: string;
-  setValue: any;
+  setValue?: any;
+  maxLength?: number;
   placeHolder?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }) => {
   return (
     <div className="flex flex-col gap-2">
@@ -324,10 +358,12 @@ const InputField = ({
         onFocus={(e) => e.target.select()}
         placeholder={label ? label : placeHolder}
         type="text"
+        maxLength={maxLength}
         value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}
+        // onChange={(e) => {
+        //   setValue(e.target.value);
+        // }}
+        onChange={onChange}
         className="placeholder-zinc-700 bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
       />
     </div>
@@ -439,18 +475,18 @@ const Status = ({ status, setStatus }: { status: string; setStatus: any }) => {
         <button
           key={value}
           onClick={() => setStatus(value)}
-          className={`px-3 py-1 rounded-full flex gap-2 border items-center 
+          className={`px-3 py-1 rounded-full flex gap-1 border items-center 
             ${
               status === value
                 ? "bg-[#030311] text-white border-[#000044]"
                 : "bg-[#0C0C0E] text-gray-400 border-[#27272A]"
             }`}
         >
-          {label} {status === value && <FaCheck className="text-white" />}
+          {status === value && <Dot className="text-white" />} {label}
         </button>
       ))}
     </div>
   );
 };
 
-export default Page;
+export default EditPage;

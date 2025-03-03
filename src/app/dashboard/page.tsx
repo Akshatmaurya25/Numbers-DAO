@@ -10,7 +10,7 @@ import Header from "./_components/Header";
 import { UserDocument } from "@/modal/interfacetypes";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Edit from "./edit/page";
+import EditPage from "./edit/EditPage";
 import { AvatarGenerator } from "random-avatar-generator";
 import { Loader } from "@/components/ui/loader";
 const page = () => {
@@ -163,7 +163,7 @@ const page = () => {
       {activated == "Portfolio" && <Dashboard {...User} />}
       {activated == "Edit" && (
         <div className="flex justify-center items-center ">
-          <Edit {...User} />
+          <EditPage {...User as UserDocument} />
         </div>
       )}
     </div>
