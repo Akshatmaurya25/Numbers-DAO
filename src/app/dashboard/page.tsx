@@ -32,8 +32,7 @@ const page = () => {
 
         try {
           const res = await axios.get(`/api/user/getUserById`, config);
-          console.log("Hitting request");
-
+          console.log("User data received:", res.data); // Add this line to debug
           setUser(res.data);
           setLoading(false);
         } catch (error: any) {

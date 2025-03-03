@@ -6,10 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import {
   ArrowUpRight,
   Circle,
-  // Instagram,
   Linkedin,
   Send,
-  // InstagramIcon as TiktokIcon,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -19,8 +17,12 @@ import { useState } from "react";
 import Header from "../dashboard/_components/Header";
 import { usePrivy } from "@privy-io/react-auth";
 // import User from '@/modal/user';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { MilestoneForm } from "@/components/forms/milestone-form";
 
 export default function Dashboard(props: any) {
+  // Core states
   const [currentSlide, setCurrentSlide] = useState(0);
   const { user } = usePrivy();
   console.log(user);
@@ -34,6 +36,83 @@ export default function Dashboard(props: any) {
     },
     // Add more projects as needed
   ];
+  const [showBioForm, setShowBioForm] = useState(false);
+  const [newBio, setNewBio] = useState(props.bio || "");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState({ type: "", text: "" });
+  const [showMilestoneForm, setShowMilestoneForm] = useState(false);
+  const [achievements, setAchievements] = useState(() => props.achievements || {
+    projects: [],
+    milestones: [],
+    workExperience: []
+  });
+
+  // Update achievements when props change
+  useEffect(() => {
+    if (props.achievements) {
+      setAchievements(props.achievements);
+    }
+  }, [props.achievements]);
+
+  const handleBioSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setMessage({ type: "", text: "" });
+
+    try {
+      const response = await axios.patch('/api/user/', {
+        authId: props.authId,
+        bio: newBio
+      });
+
+      if (response.data.success) {
+        setMessage({ type: "success", text: "Bio updated successfully!" });
+        props.bio = newBio;
+        setShowBioForm(false);
+      } else {
+        throw new Error(response.data.error || 'Failed to update bio');
+      }
+    } catch (error: any) {
+      setMessage({ 
+        type: "error", 
+        text: error.response?.data?.error || "Failed to update bio" 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleMilestoneSuccess = (newData: any) => {
+    try {
+      const achievementsData = newData?.result?.achievements || newData?.achievements;
+      
+      if (achievementsData) {
+        setAchievements(achievementsData);
+        setMessage({ 
+          type: "success", 
+          text: "Achievements updated successfully!" 
+        });
+        setTimeout(() => setShowMilestoneForm(false), 1000);
+      } else {
+        setMessage({ 
+          type: "error", 
+          text: "Unexpected response format" 
+        });
+      }
+    } catch (error) {
+      setMessage({ 
+        type: "error", 
+        text: "Failed to update achievements" 
+      });
+    }
+  };
+
+  // Sample data
+  const projects = [{
+    title: "Community Project 1",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%204-wnC1n8AlUNWcfa5kF9YuARIenYuXKN.png",
+    description: "Building a decentralized community focused on empowering Bhopal through web3 technology",
+  }];
 
   const techStack = [
     { name: "Ethereum", icon: "/placeholder.svg" },
@@ -56,7 +135,7 @@ export default function Dashboard(props: any) {
               <Card className="bg-zinc-900/50 border-zinc-800 p-4">
                 <div className="space-y-4">
                   <h1 className="text-red-500 text-2xl font-bold">
-                    {props.username || "Anonymous User"}
+                    {props.username ? `@${props.username}` : "Anonymous User"}
                   </h1>
                   <div className="flex items-start gap-4">
                     <Image
@@ -73,7 +152,50 @@ export default function Dashboard(props: any) {
                           {props.status}
                         </span>
                       </div>
-                      <p className="text-zinc-300 text-sm">{props.bio}</p>
+                      {showBioForm ? (
+                        <form onSubmit={handleBioSubmit} className="space-y-2">
+                          <textarea
+                            value={newBio}
+                            onChange={(e) => setNewBio(e.target.value)}
+                            className="w-full px-3 py-2 bg-zinc-800 rounded-md text-white"
+                            rows={3}
+                            placeholder="Enter your bio..."
+                          />
+                          <div className="flex gap-2">
+                            <Button 
+                              type="submit" 
+                              variant="secondary"
+                              disabled={isSubmitting}
+                            >
+                              {isSubmitting ? "Saving..." : "Save Bio"}
+                            </Button>
+                            <Button 
+                              type="button"
+                              variant="outline"
+                              onClick={() => setShowBioForm(false)}
+                            >
+                              Cancel
+                            </Button>
+                          </div>
+                          {message.text && (
+                            <p className={`text-sm ${message.type === "error" ? "text-red-500" : "text-green-500"}`}>
+                              {message.text}
+                            </p>
+                          )}
+                        </form>
+                      ) : (
+                        <div className="flex justify-between items-start gap-2">
+                          <p className="text-zinc-300 text-sm">{props.bio || "No bio yet"}</p>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setShowBioForm(true)}
+                            className="text-zinc-400 hover:text-white"
+                          >
+                            Edit
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -129,30 +251,60 @@ export default function Dashboard(props: any) {
               {/* Personal Milestone */}
               <Card className="bg-zinc-900/50 border-zinc-800 p-4 h-full">
                 <div className="space-y-4">
-                  <div>
-                    <h2 className="text-xl font-bold text-purple-500">
-                      Personal Milestones
-                    </h2>
-                    <p className="text-zinc-400 text-xsny mt-1">
-                      Celebrating growth and achievement
-                    </p>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h2 className="text-xl font-bold text-purple-500">
+                        Personal Achievements
+                      </h2>
+                      <p className="text-zinc-400 text-sm mt-1">
+                        Celebrating growth and achievement
+                      </p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setShowMilestoneForm(true)}
+                      className="text-zinc-400 hover:text-white"
+                    >
+                      Edit
+                    </Button>
                   </div>
-                  <div className="space-y-4">
-                    {props.milestones &&
-                      props.milestones.map((milestone: any, index: number) => (
-                        <div
-                          key={index}
-                          className="p-3 rounded-lg bg-zinc-800/50"
-                        >
-                          <h3 className="text-lg font-semibold text-white mb-1">
-                            {milestone.title}
+
+                  {showMilestoneForm ? (
+                    <MilestoneForm
+                      authId={props.authId}
+                      onClose={() => setShowMilestoneForm(false)}
+                      onSuccess={handleMilestoneSuccess}
+                      initialData={achievements} // Use state instead of props
+                    />
+                  ) : (
+                    <div className="space-y-6 text-left">
+                      {message.text && (
+                        <p className={`text-sm ${message.type === "error" ? "text-red-500" : "text-green-500"}`}>
+                          {message.text}
+                        </p>
+                      )}
+                      {["projects", "milestones", "workExperience"].map((section) => (
+                        <div key={section} className="space-y-2">
+                          <h3 className="text-lg font-semibold capitalize text-zinc-200">
+                            {section}
                           </h3>
-                          <p className="text-zinc-400 text-xs">
-                            {milestone.description}
-                          </p>
+                          <div className="space-y-2">
+                            {achievements?.[section as keyof typeof achievements]?.map((item: string, index: number) => (
+                              <div
+                                key={index}
+                                className="p-3 rounded-lg bg-zinc-800/50"
+                              >
+                                <p className="text-zinc-300 text-sm">{item}</p>
+                              </div>
+                            )) || (
+                              <p className="text-zinc-500 text-sm">No {section} added yet</p>
+                            )}
+                          </div>
                         </div>
                       ))}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </Card>
             </div>
@@ -354,14 +506,33 @@ export default function Dashboard(props: any) {
                   ))}
                 </div>
               </div>
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-zinc-100">
+                  Top Tech of 2024
+                </h2>
+                <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+                  {techStack.map((tech, index) => (
+                    <div
+                      key={index}
+                      className="aspect-square relative rounded-lg bg-zinc-800/50 p-4 flex items-center justify-center hover:bg-zinc-800/70 transition-colors"
+                    >
+                      <Image
+                        src={tech.icon || "/placeholder.svg"}
+                        alt={tech.name}
+                        width={40}
+                        height={40}
+                        className="opacity-50 hover:opacity-100 transition-opacity"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </Card>
           </div>
         </div>
 
         {/* Main Grid */}
         {/* <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-
-
 
 
 

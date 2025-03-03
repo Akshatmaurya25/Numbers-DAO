@@ -77,34 +77,55 @@ export async function POST(req: Request) {
 
 
 export async function PATCH(req: Request) {
-
   try {
     await dbConnect();
-    const { authId, ...updatedData } = await req.json();
+    const body = await req.json();
+    const { authId, achievements } = body;
 
-    console.log(`Updating user ${authId} with data:`, updatedData);
+    console.log('PATCH request received:', { authId, achievements });
 
-    const user = await User.findOneAndUpdate({authId}, updatedData, {
-      new: true,
-    });
-
-    if (!user) {
+    if (!authId) {
       return NextResponse.json(
-        { error: 'User not found' },
+        { error: 'authId is required', success: false },
+        { status: 400 }
+      );
+    }
+
+    // Find user first to verify existence
+    const existingUser = await User.findOne({ authId });
+    if (!existingUser) {
+      return NextResponse.json(
+        { error: 'User not found', success: false },
         { status: 404 }
       );
     }
 
+    // Update with achievements
+    const updatedUser = await User.findOneAndUpdate(
+      { authId },
+      { 
+        $set: { 
+          achievements: {
+            projects: achievements.projects || [],
+            milestones: achievements.milestones || [],
+            workExperience: achievements.workExperience || []
+          }
+        } 
+      },
+      { new: true }
+    );
+
+    console.log('Updated user:', updatedUser);
+
     return NextResponse.json({
-      msg: 'User updated successfully',
       success: true,
-      status: 200,
-      result: user,
+      msg: 'User updated successfully',
+      result: updatedUser
     });
   } catch (error) {
-    console.log('Failed to update user:', error);
+    console.error('Update error:', error);
     return NextResponse.json(
-      { error: 'Failed to update user' },
+      { error: 'Update failed', success: false },
       { status: 500 }
     );
   }
