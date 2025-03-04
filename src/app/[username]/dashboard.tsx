@@ -41,6 +41,7 @@ import {
 } from "react-icons/si";
 import { FaHashnode } from "react-icons/fa6";
 import MilestoneCard from "../dashboard/_components/milestone-card";
+import ProjectsCard from "../dashboard/_components/projects-card";
 export default function zDashboard(props: any) {
   // Core states
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -331,56 +332,15 @@ export default function zDashboard(props: any) {
                       Edit
                     </Button> */}
                   </div>
-
-                  {showMilestoneForm ? (
-                    <MilestoneForm
-                      authId={props.authId}
-                      onClose={() => setShowMilestoneForm(false)}
-                      onSuccess={handleMilestoneSuccess}
-                      initialData={achievements} // Use state instead of props
-                    />
-                  ) : (
-                    <div className="space-y-6 text-left">
-                      {message.text && (
-                        <p
-                          className={`text-sm ${
-                            message.type === "error"
-                              ? "text-red-500"
-                              : "text-green-500"
-                          }`}
-                        >
-                          {message.text}
-                        </p>
-                      )}
-                      {["projects", "milestones", "workExperience"].map(
-                        (section) => (
-                          <div key={section} className="space-y-2">
-                            <h3 className="text-lg font-semibold capitalize text-zinc-200">
-                              {section}
-                            </h3>
-                            <div className="space-y-2">
-                              {achievements?.[
-                                section as keyof typeof achievements
-                              ]?.map((item: string, index: number) => (
-                                <div
-                                  key={index}
-                                  className="p-3 rounded-lg bg-zinc-800/50"
-                                >
-                                  <p className="text-zinc-300 text-sm">
-                                    {item}
-                                  </p>
-                                </div>
-                              )) || (
-                                <p className="text-zinc-500 text-sm">
-                                  No {section} added yet
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        )
-                      )}
-                    </div>
-                  )}
+                  <MilestoneCard
+                    milestones={[
+                      {
+                        title: "string,",
+                        description: "string",
+                        reference: " string",
+                      },
+                    ]}
+                  />
                 </div>
               </Card>
             </div>
@@ -388,29 +348,42 @@ export default function zDashboard(props: any) {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="md:w-2/3">
               {/* DAO Achievements */}
-              <Card className="bg-zinc-900/50 border-zinc-800 p-6 row-span-2 h-full">
-                <div className="space-y-6 md:flex gap-4">
-                  {/* <div className="text-center flex flex-col items-center justify-center">
-                    <h2 className="text-2xl font-bold text-orange-500">
-                      DAO Achievements
-                    </h2>
-                    <p className="text-zinc-400 text-sm mt-1">
-                      Key milestones in our web3 journey
-                    </p>
-                  </div> */}
+              {/* <Card className="bg-zinc-900/50 border-zinc-800 p-6 row-span-2 h-full">
+
+                
                   <div className="space-y-4 h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-800">
-                    <MilestoneCard
-                      milestones={[
-                        {
-                          title: "string,",
-                          description: "string",
-                          reference: " string",
-                        },
-                      ]}
-                    />
+                  
                   </div>
-                </div>
-              </Card>
+            
+              </Card> */}
+              <ProjectsCard
+                projects={[
+                  {
+                    projectName: "Akshat",
+                    projectDescription: "this is project lorem  ipsum",
+                    liveLink: "http://localhost:3000/dashboard",
+                    imageLink:
+                      "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
+                    sourceLink: " http://localhost:3000/dashboard",
+                  },
+                  {
+                    projectName: "Akshat",
+                    projectDescription: "this is project lorem  ipsum",
+                    liveLink: "http://localhost:3000/dashboard",
+                    imageLink:
+                      "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
+                    sourceLink: " http://localhost:3000/dashboard",
+                  },
+                  {
+                    projectName: "Akshat",
+                    projectDescription: "this is project lorem  ipsum",
+                    liveLink: "http://localhost:3000/dashboard",
+                    imageLink:
+                      "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
+                    sourceLink: " http://localhost:3000/dashboard",
+                  },
+                ]}
+              />
             </div>
             <div className="md:w-1/3">
               {/* Community Section */}

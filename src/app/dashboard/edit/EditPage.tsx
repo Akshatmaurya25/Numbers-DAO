@@ -3,13 +3,24 @@
 import React, { useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
-import { Dot, LoaderCircle, Replace, Shuffle } from "lucide-react";
+import {
+  Delete,
+  DeleteIcon,
+  Dot,
+  LoaderCircle,
+  Replace,
+  Shuffle,
+  Trash,
+} from "lucide-react";
 import { Loader } from "@/components/ui/loader";
 import { UserDocument } from "@/modal/interfacetypes";
 import { AvatarGenerator } from "random-avatar-generator";
 import axios from "axios";
-import { uploadImageToCloudinary } from "@/utils/uploadFile";
+import UploadField, { uploadImageToCloudinary } from "@/utils/uploadFile";
 import toast from "react-hot-toast";
+import MilestoneCard from "./_components/MilestoneCard";
+import ProjectCard from "./_components/ProjectCard";
+import WorkExperienceCard from "./_components/WorkExperienceCard";
 
 const socialPlatforms = {
   github: ["github.com"],
@@ -41,40 +52,63 @@ const EditPage = (props: UserDocument) => {
   const [projects, setProjects] = useState([
     {
       projectName: "Wizzz",
-      projectDescription: "",
-      liveLink: "",
-      imageLink: "",
-      sourceLink: "",
+      projectDescription: "A smart AI-powered assistant for productivity.",
+      liveLink: "https://wizzz.io",
+      imageLink:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Wizz_Air_logo.svg/2560px-Wizz_Air_logo.svg.png",
+      sourceLink: "https://github.com/example/wizzz",
     },
     {
-      projectName: "Wizzzard",
-      projectDescription: "",
-      liveLink: "",
-      imageLink: "",
-      sourceLink: "",
+      projectName: "CryptoTracker",
+      projectDescription: "A real-time cryptocurrency tracking platform.",
+      liveLink: "https://cryptotracker.com",
+      imageLink:
+        "https://sc.filehippo.net/images/t_app-icon-l/p/f3e2e429-9747-4e3d-8bbb-5f1ec18e616b/1341664963/cryptotracker-logo",
+      sourceLink: "https://github.com/example/cryptotracker",
+    },
+    {
+      projectName: "DevConnect",
+      projectDescription: "A social platform for developers to network.",
+      liveLink: "https://devconnect.io",
+      imageLink:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMjFMYAoOlNShjc1sXxsou_hQhIXq4hCZ-sQ&s",
+      sourceLink: "https://github.com/example/devconnect",
     },
   ]);
+
   const [milestones, setMilestones] = useState([
-    { title: "DEV Award", description: "", reference: "" },
-    { title: "DEVREL Award", description: "", reference: "" },
+    {
+      title: "DEV Award",
+      description:
+        "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ad velit ratione odit veniam voluptatum magni sit quia hic? Accusamus vero non illo.",
+      reference: "google.com",
+    },
+    {
+      title: "Award 2",
+      description:
+        "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ad velit ratione odit veniam voluptatum magni sit quia hic? Accusamus vero non illo.",
+      reference: "google.com",
+    },
   ]);
   const [domains, setDomains] = useState<string[]>(["notion", "react"]);
   const [workExperience, setWorkExperience] = useState([
     {
-      tag: "",
+      tag: ["Blockchain", "Smart Contracts", "Solidity"],
       orgName: "Numbers DAO",
-      positionName: "",
-      from: "",
-      to: "",
-      orgLogoLink: "",
+      positionName: "Smart Contract Developer",
+      from: "Jan/23",
+      to: "12/23",
+      orgLogoLink:
+        "https://static.chainbroker.io/mediafiles/projects/numbers-protocol/numbers.jpeg",
     },
     {
-      tag: "",
-      orgName: "Bhopal DAO",
-      positionName: "",
-      from: "",
-      to: "",
-      orgLogoLink: "",
+      tag: ["AI/ML", "NLP", "Deep Learning"],
+      orgName: "OpenAI",
+      positionName: "AI Engineer",
+      from: "Feb/22",
+      to: "Present",
+      orgLogoLink:
+        "https://platform.theverge.com/wp-content/uploads/sites/2/2025/02/openai-new-logo_f252fc.png?quality=90&strip=all&crop=7.8125%2C0%2C84.375%2C100&w=2400",
     },
   ]);
 
@@ -136,7 +170,7 @@ const EditPage = (props: UserDocument) => {
     }
     if (modal == "Work Experience") {
       const newWorkExperience = {
-        tag: value,
+        tag: [],
         orgName: value1,
         positionName: value2,
         from: value3,
@@ -191,8 +225,9 @@ const EditPage = (props: UserDocument) => {
                   <InputField label={"Name"} setValue={setValue} />
                   <InputField label={"Description"} setValue={setValue1} />
                   <InputField label={"Live link"} setValue={setValue2} />
-                  <InputField label={"Image link"} setValue={setValue3} />
+
                   <InputField label={"Source link"} setValue={setValue4} />
+                  <UploadField label="Project Image" setValue={setValue3} />
                 </>
               )}
               {modal == "Milestones" && (
@@ -212,7 +247,7 @@ const EditPage = (props: UserDocument) => {
                   <InputField label={"Position"} setValue={setValue2} />
                   <InputField label={"Form"} setValue={setValue3} />
                   <InputField label={"To"} setValue={setValue4} />
-                  <InputField label={"Org Logo Link"} setValue={setValue5} />
+                  <UploadField label={"Org Logo"} setValue={setValue5} />
                 </>
               )}
               {modal == "Domains" && (
@@ -238,7 +273,6 @@ const EditPage = (props: UserDocument) => {
               <p className="text-white text-lg font-medium">Username</p>
               <input
                 type="text"
-              
                 readOnly
                 className="bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
               />
@@ -342,14 +376,14 @@ const InputField = ({
   setValue,
   placeHolder,
   maxLength,
-  onChange
+  onChange,
 }: {
   label?: string;
   value?: string;
   setValue?: any;
   maxLength?: number;
   placeHolder?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
     <div className="flex flex-col gap-2">
@@ -526,23 +560,23 @@ const AddField = ({
         {value.map((val, index) => (
           <div
             key={index}
-            className="px-3 py-1 rounded-full text-[#A1A1AA] flex gap-2 bg-[#0C0C0E] border border-[#27272A]"
+            className=" py-1  text-[#A1A1AA] flex gap-2 bg-[#0C0C0E] "
           >
             <p>
-              {label == "Projects" && val.projectName}
-              {label == "Milestones" && val.title}
-              {label == "Work Experience" && val.orgName}
+              {label == "Projects" && <ProjectCard {...val} />}
+              {label == "Milestones" && <MilestoneCard {...val} />}
+              {label == "Work Experience" && <WorkExperienceCard {...val} />}
               {label == "Domains" && val}
             </p>
             <button onClick={() => handleDelete(index)}>
-              <RxCross2 className="cursor-pointer" />
+              <Trash className="cursor-pointer" />
             </button>
           </div>
         ))}
       </div>
       <button
         onClick={() => openModal(label)}
-        className="text-white w-fit rounded-md px-3 py-1 bg-[#000044]"
+        className="text-white w-fit rounded-md px-3 py-1.5 cursor-pointer border-1 border border-[#d0d0d0] border-solid"
       >
         Add {label}
       </button>

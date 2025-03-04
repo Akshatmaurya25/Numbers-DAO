@@ -1,29 +1,31 @@
-import Image from "next/image"
-import { ExternalLink, Github } from "lucide-react"
+import Image from "next/image";
+import { ExternalLink, Github } from "lucide-react";
 
 interface Project {
-  projectName: string
-  projectDescription: string
-  liveLink: string
-  imageLink: string
-  sourceLink: string
+  projectName: string;
+  projectDescription: string;
+  liveLink: string;
+  imageLink: string;
+  sourceLink: string;
 }
 
 interface ProjectsCardProps {
-  projects: Project[]
+  projects: Project[];
 }
 
 export default function ProjectsCard({ projects }: ProjectsCardProps) {
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+    <div className="w-full max-w-4xl mx-auto h-[300px] overflow-y-auto custom-scrollbar">
+      <div className=" rounded-xl shadow-md ">
         <div className="p-6">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">Projects</h2>
+          <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white mb-6">
+            Projects
+          </h2>
           <div className="space-y-6">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="flex flex-col sm:flex-row gap-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 transition-all hover:shadow-md"
+                className="flex flex-col sm:flex-row gap-4 bg-zinc-900 rounded-lg p-4 transition-all hover:shadow-md"
               >
                 {/* Project Image */}
                 <div className="flex-shrink-0">
@@ -39,7 +41,9 @@ export default function ProjectsCard({ projects }: ProjectsCardProps) {
 
                 {/* Project Details */}
                 <div className="flex-1 min-w-0 flex flex-col">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{project.projectName}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    {project.projectName}
+                  </h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-grow">
                     {project.projectDescription}
                   </p>
@@ -74,6 +78,5 @@ export default function ProjectsCard({ projects }: ProjectsCardProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
