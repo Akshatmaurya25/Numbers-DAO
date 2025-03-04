@@ -39,7 +39,7 @@ interface SocialsType {
   }
   
   export interface UserDocument {
-    _id: string;
+    _id?: string;
     username: string;
     name?: string;
     profileImage?: string;
