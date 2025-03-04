@@ -1,6 +1,9 @@
 "use client";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
+import  Rlogo from "@/assests/icon2.webp";
+import React from "react";
+
 
 const partners = [
   {
@@ -82,9 +85,87 @@ const partners = [
 ];
 
 export default function PartnersGrid() {
+  const [shineTransform, setShineTransform] = React.useState('');
+
   return (
     <section className="min-h-screen bg-[#000000] flex flex-col items-center justify-center px-4 py-20">
-      <div className="max-w-7xl mx-auto w-full text-center mb-16">
+      <div className="mb-12 hidden md:block pt-16 mx-auto w-full max-w-5xl px-6 md:max-w-7xl">
+        {/* Main container for interactive logo section */}
+        <div className="flex w-full items-center justify-center bg-black relative"
+          onMouseMove={(e) => {
+        // Mouse movement handler for shine and background effects
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const x2 = e.clientX - rect.right;
+        const y = e.clientY - rect.top;
+        
+        // Calculate shine position based on mouse location
+        const centerX = rect.width / 2;
+        const isLeft = x < centerX - rect.width / 4;
+        const newShineCode = isLeft ? 'translateX(calc(var(--pointer-x) - 150px))  translateY(calc(var(--pointer-y) - 150px))' : ' translateX(calc(var(--pointer-x2) - 20px)) translateY(calc(var(--pointer-y) - 150px))';
+        setShineTransform(newShineCode);
+
+        // Update shine effect position
+        const shine = e.currentTarget.querySelector('.shine-effect') as HTMLElement;
+        if (shine) {
+          shine.style.setProperty('--pointer-x', `${x}px`);
+          shine.style.setProperty('--pointer-x2', `${x2}px`);
+          shine.style.setProperty('--pointer-y', `${y}px`);
+        }
+
+        // Update dotted background parallax effect
+        const bg = e.currentTarget.querySelector('.dots-bg') as HTMLElement;
+        if (bg) {
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const shiftX = (centerX - x) * 0.12;
+          const shiftY = (centerY - y) * 0.12;
+          bg.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+        }
+          }}>
+          <div className="pointer-events-none h-[450px] w-full">
+        {/* Dotted background layer with parallax effect */}
+        <div className="dots-bg absolute h-full w-full transition-transform duration-300 ease-out" 
+          style={{ backgroundSize: '40px 40px', backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(103, 103, 103) 1px, transparent 0px)', backgroundPosition: 'center center' }}>
+        </div>
+        {/* Logo container with shine effect */}
+        <div className="relative z-10 h-full w-full flex items-center justify-center">
+          <div className="group relative overflow-hidden" style={{ filter: 'grayscale(1)' }}>
+            <div className="relative">
+            {/* Main logo image */}
+            <Image
+            alt="Resend"
+            width={250}
+            height={250}
+            className="mx-auto bg-black transition-transform duration-300 ease-out hover:scale-105"
+            src={Rlogo}
+            style={{ color: 'transparent' }}
+            quality={75}
+          />
+          {/* Shine overlay effect */}
+          <div className="shine-effect pointer-events-none absolute inset-0 opacity-100 transition-transform duration-300 ease-out will-change-transform group-hover:opacity-100"
+            style={{
+              transform: shineTransform,
+              mixBlendMode: 'soft-light',
+              backgroundImage: 'radial-gradient(100px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0))'
+            }}
+          ></div>
+            </div>
+          </div>
+        </div>
+          </div>
+          <div className="absolute top-[80px] h-screen w-full"></div>
+        </div>
+        {/* Hero text section */}
+        <h1 className="font-display effect-font-styling text-[4rem] md:text-7xl leading-[4.35rem] md:leading-[5rem] tracking-tight effect-font-gradient effect-font-hero relative -mt-16 text-center text-white">
+          Building the modern <br />email sending platform
+        </h1>
+        <p className="text-base md:text-[1.125rem] md:leading-[1.5] text-slate-11 font-normal text-balance relative text-center text-white">
+          The web has come a long way in the last ten years, but why is email stuck in the past?<br />
+          It doesn&apos;t have to be that way. We want to change that. We want to reimagine email.
+        </p>
+      </div>
+      <div className="max-w-7xl mx-auto mt-24 w-full text-center mb-16">
         <h2 className="text-white font-semibold text-3xl md:text-4xl lg:text-5xl font-space-grotesk mb-2">
           Meet the Hands Behind
         </h2>
