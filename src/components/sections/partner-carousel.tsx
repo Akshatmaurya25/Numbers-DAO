@@ -102,7 +102,7 @@ export default function PartnersGrid() {
         // Calculate shine position based on mouse location
         const centerX = rect.width / 2;
         const isLeft = x < centerX - rect.width / 4;
-        const newShineCode = isLeft ? 'translateX(calc(var(--pointer-x) - 150px))  translateY(calc(var(--pointer-y) - 150px))' : ' translateX(calc(var(--pointer-x2) - 20px)) translateY(calc(var(--pointer-y) - 150px))';
+        const newShineCode = isLeft ? 'translateX(calc(var(--pointer-x) - 180px))  translateY(calc(var(--pointer-y) - 150px))' : ' translateX(calc(var(--pointer-x2) + 150px)) translateY(calc(var(--pointer-y) - 150px))';
         setShineTransform(newShineCode);
 
         // Update shine effect position
@@ -135,8 +135,8 @@ export default function PartnersGrid() {
             {/* Main logo image */}
             <Image
             alt="Resend"
-            width={250}
-            height={250}
+            width={270}
+            height={270}
             className="mx-auto bg-black transition-transform duration-300 ease-out hover:scale-105"
             src={Rlogo}
             style={{ color: 'transparent' }}
