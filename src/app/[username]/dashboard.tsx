@@ -10,6 +10,7 @@ import {
   Send,
   ChevronLeft,
   ChevronRight,
+  Dribbble,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +21,26 @@ import { usePrivy } from "@privy-io/react-auth";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { MilestoneForm } from "@/components/forms/milestone-form";
-
+import {
+  FaBehance,
+  FaDiscord,
+  FaGithub,
+  FaHackerrank,
+  FaInstagram,
+  FaLinkedin,
+  FaMediumM,
+  FaStackOverflow,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
+import {
+  SiCodechef,
+  SiCodeforces,
+  SiHackerearth,
+  SiLeetcode,
+} from "react-icons/si";
+import { FaHashnode } from "react-icons/fa6";
+import MilestoneCard from "../dashboard/_components/milestone-card";
 export default function zDashboard(props: any) {
   // Core states
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -202,11 +222,54 @@ export default function zDashboard(props: any) {
                   </div>
                   <div className="flex items-center gap-4">
                     <Link href="#" className="hover:text-zinc-300">
-                      <Linkedin className="w-4 h-4" />
+                      <FaLinkedin className="w-4 h-4" />
                     </Link>
                     <Link href="#" className="hover:text-zinc-300">
-                      <Circle className="w-4 h-4" />
+                      <FaInstagram className="w-4 h-4" />
                     </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <FaTwitter className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <SiLeetcode className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <FaGithub className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <Dribbble className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <FaHashnode className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <FaYoutube className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <FaHackerrank className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <SiCodeforces className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <SiHackerearth className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <FaDiscord className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <FaStackOverflow className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <FaBehance className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <FaMediumM className="w-4 h-4" />
+                    </Link>
+                    <Link href="#" className="hover:text-zinc-300">
+                      <SiCodechef className="w-4 h-4" />
+                    </Link>
+
                     <Button className="ml-auto bg-white text-black gap-2 text-sm py-1">
                       <Send className="w-3 h-3" />
                       Let&apos;s talk!
@@ -327,30 +390,24 @@ export default function zDashboard(props: any) {
               {/* DAO Achievements */}
               <Card className="bg-zinc-900/50 border-zinc-800 p-6 row-span-2 h-full">
                 <div className="space-y-6 md:flex gap-4">
-                  <div className="text-center flex flex-col items-center justify-center">
+                  {/* <div className="text-center flex flex-col items-center justify-center">
                     <h2 className="text-2xl font-bold text-orange-500">
                       DAO Achievements
                     </h2>
                     <p className="text-zinc-400 text-sm mt-1">
                       Key milestones in our web3 journey
                     </p>
-                  </div>
+                  </div> */}
                   <div className="space-y-4 h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-800">
-                    {[
-                      "First Community NFT Launch",
-                      "Web3 Education Workshop Series",
-                      "Local Developer Meetups",
-                      "Smart Contract Deployment",
-                      "Community Treasury Formation",
-                    ].map((achievement) => (
-                      <div
-                        key={achievement}
-                        className="flex items-center justify-between p-4 rounded-lg bg-zinc-800/50 hover:bg-zinc-800/70 transition-colors"
-                      >
-                        <span className="text-white">{achievement}</span>
-                        <ArrowUpRight className="w-4 h-4 text-zinc-500" />
-                      </div>
-                    ))}
+                    <MilestoneCard
+                      milestones={[
+                        {
+                          title: "string,",
+                          description: "string",
+                          reference: " string",
+                        },
+                      ]}
+                    />
                   </div>
                 </div>
               </Card>

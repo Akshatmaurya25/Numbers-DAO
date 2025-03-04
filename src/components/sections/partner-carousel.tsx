@@ -63,7 +63,7 @@ const partners = [
   {
     name: "Tushar Patidar",
     role: "SMM Lead",
-    imageId: "1pU3UT4RbywIZk_srLyZe3DIQSy9BuJLp",
+    imageId: "1UvcDAeNmNwZepP8BnqiCkX7lB6fRyGjK",
     description:
       "Expert in social media marketing, crafting strategies to enhance brand presence.",
   },
