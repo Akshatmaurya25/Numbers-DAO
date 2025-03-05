@@ -15,17 +15,21 @@ interface ProjectsCardProps {
 
 export default function ProjectsCard({ projects }: ProjectsCardProps) {
   return (
-    <div className="w-full max-w-4xl mx-auto h-[300px] overflow-y-auto custom-scrollbar">
+    <div className="w-full max-w-4xl mx-auto h-[300px]  custom-scrollbar">
       <div className=" rounded-xl shadow-md ">
         <div className="p-6">
-          <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white mb-6">
+          <h2 className="text-2xl text-center font-semibold text-[#D58929] mb-2">
             Projects
           </h2>
-          <div className="space-y-6">
+          <p className="text-zinc-400 text-center text-sm mt-1 mb-4">
+            Launched communities for designers to exceed the threshold of their
+            creativity
+          </p>
+          <div className="space-y-6  gap-2 items-center">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="flex flex-col sm:flex-row gap-4 bg-zinc-900 rounded-lg p-4 transition-all hover:shadow-md"
+                className="flex flex-col  min-w-[250px] sm:flex-row gap-4 bg-[#131313] rounded-lg p-4 transition-all hover:shadow-md"
               >
                 {/* Project Image */}
                 <div className="flex-shrink-0">

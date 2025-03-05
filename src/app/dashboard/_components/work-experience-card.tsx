@@ -1,30 +1,34 @@
-"use client"
+"use client";
 
-import { format } from "date-fns"
-import Image from "next/image"
+import { format } from "date-fns";
+import Image from "next/image";
 
 interface WorkExperienceProps {
   workExperience: {
-    tag: string[]
-    orgName: string
-    positionName: string
-    from: Date
-    to: Date | null // null represents "Present"
-    orgLogoLink?: string
-  }[]
+    tag: string[];
+    orgName: string;
+    positionName: string;
+    from: Date;
+    to: Date | null; // null represents "Present"
+    orgLogoLink?: string;
+  }[];
 }
 
-export default function WorkExperienceCard({ workExperience }: WorkExperienceProps) {
+export default function WorkExperienceCard({
+  workExperience,
+}: WorkExperienceProps) {
   const formatDate = (date: Date | null): string => {
-    if (!date) return "Present"
-    return format(date, "MM/yy")
-  }
+    if (!date) return "Present";
+    return format(date, "MM/yy");
+  };
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="bg-white w-full dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+      <div className=" w-full rounded-xl shadow-md overflow-hidden">
         <div className="p-6 w-96">
-          <h2 className="text-xl font-semibold text-start text-gray-800 dark:text-white mb-4">Work Experience</h2>
+          <h2 className="text-xl font-semibold text-start text-gray-800 dark:text-white mb-4">
+            Work Experience
+          </h2>
 
           <div className="space-y-6 w-full overflow-y-auto h-[14.3rem] custom-scrollbar">
             {workExperience.map((experience, index) => (
@@ -43,7 +47,9 @@ export default function WorkExperienceCard({ workExperience }: WorkExperiencePro
                         className="object-cover"
                       />
                     ) : (
-                      <span className="text-lg font-bold text-gray-400">{experience.orgName.charAt(0)}</span>
+                      <span className="text-lg font-bold text-gray-400">
+                        {experience.orgName.charAt(0)}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -56,11 +62,14 @@ export default function WorkExperienceCard({ workExperience }: WorkExperiencePro
                     </h3>
 
                     <span className="text-sm text-start text-gray-500 dark:text-gray-400 sm:ml-2 whitespace-nowrap">
-                      {formatDate(experience.from)} - {formatDate(experience.to)}
+                      {formatDate(experience.from)} -{" "}
+                      {formatDate(experience.to)}
                     </span>
                   </div>
 
-                  <p className="text-sm text-start text-gray-600 dark:text-gray-300 mb-3">{experience.orgName}</p>
+                  <p className="text-sm text-start text-gray-600 dark:text-gray-300 mb-3">
+                    {experience.orgName}
+                  </p>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mt-2">
@@ -80,6 +89,5 @@ export default function WorkExperienceCard({ workExperience }: WorkExperiencePro
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -323,7 +323,7 @@ const EditPage = (props: UserDocument) => {
             <InputField
               label={"Bio"}
               value={user.bio}
-              maxLength={60}
+              maxLength={120}
               onChange={(e) => setUser({ ...user, bio: e.target.value })}
               // setValue={setBio}
             />

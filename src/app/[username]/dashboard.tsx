@@ -42,8 +42,9 @@ import {
 import { FaHashnode } from "react-icons/fa6";
 import MilestoneCard from "../dashboard/_components/milestone-card";
 import ProjectsCard from "../dashboard/_components/projects-card";
-import WorkExperienceCard from "../dashboard/_components/work-experience-card";
+import WorkExperienceCard from "../dashboard/edit/_components/WorkExperienceCard";
 export default function zDashboard(props: any) {
+  console.log("props", props);
   // Core states
   const [currentSlide, setCurrentSlide] = useState(0);
   const { user } = usePrivy();
@@ -58,6 +59,35 @@ export default function zDashboard(props: any) {
     },
     // Add more projects as needed
   ];
+  const [workExperience, setWorkExperience] = useState([
+    {
+      tag: ["Blockchain", "Smart Contracts", "Solidity"],
+      orgName: "Resend Protocol",
+      positionName: "Assistant Manager",
+      from: new Date("20212-04-07"),
+      to: "12/23",
+      orgLogoLink: "https://resend.com/static/brand/resend-icon-black.svg",
+    },
+
+    {
+      tag: ["Blockchain", "Smart Contracts", "Solidity"],
+      orgName: "Numbers DAO",
+      positionName: "Smart Contract Developer 2023sdadasdasd",
+      from: new Date("2021-11-01"),
+      to: "12/23",
+      orgLogoLink:
+        "https://static.chainbroker.io/mediafiles/projects/numbers-protocol/numbers.jpeg",
+    },
+    {
+      tag: ["AI/ML", "NLP", "Deep Learning"],
+      orgName: "OpenAI",
+      positionName: "AI Engineer",
+      from: new Date("2023-06-01"),
+      to: null,
+      orgLogoLink:
+        "https://platform.theverge.com/wp-content/uploads/sites/2/2025/02/openai-new-logo_f252fc.png?quality=90&strip=all&crop=7.8125%2C0%2C84.375%2C100&w=2400",
+    },
+  ]);
   const [showBioForm, setShowBioForm] = useState(false);
   const [newBio, setNewBio] = useState(props.bio || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -159,7 +189,7 @@ export default function zDashboard(props: any) {
                     <img
                       src={props.profileImage || "/placeholder.svg"}
                       alt="Profile"
-                      className="rounded-full h-32 w-32 aspect-square"
+                      className="rounded-full h-32 w-32 aspect-square object-cover object-center"
                     />
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
@@ -313,32 +343,15 @@ export default function zDashboard(props: any) {
 
             <div className="md:w-[50%] text-center">
               {/* Personal Milestone */}
-              <Card className="bg-zinc-900/50 w-full border-zinc-800 p-4 h-full">
-                <div className="space-y-4 w-full h-full">
-                  <div className="flex justify-between items-center">
-                    {/* <div className="w-full text-center">
-                      <h2 className="text-xl font-bold text-purple-500">
-                        Personal Achievements
-                      </h2>
-                      <p className="text-zinc-400 text-sm mt-1">
-                        Celebrating growth and achievement
-                      </p>
-                    </div> */}
-                    {/* <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setShowMilestoneForm(true)}
-                      className="text-zinc-400 hover:text-white"
-                    >
-                      Edit
-                    </Button> */}
-                  </div>
+              <Card className="bg-zinc-900/50 w-full border-zinc-800  h-full">
+                <div className="w-full flex items-center justify-center h-full">
                   <MilestoneCard
                     milestones={[
                       {
-                        title: "string,",
-                        description: "string",
-                        reference: " string",
+                        title: "C8 Award",
+                        description:
+                          "I won this award at music festival in fall of summer 2023, I really loved it",
+                        reference: "Check Out",
                       },
                     ]}
                   />
@@ -349,32 +362,35 @@ export default function zDashboard(props: any) {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="md:w-2/3">
               {/* DAO Achievements */}
-              <Card className="bg-zinc-900/50 border-zinc-800 p-6 row-span-2 h-full">
+              <Card className="bg-zinc-900/50 md:overflow-y-hidden hover:overflow-y-auto hover:custom-scrollbar border-zinc-800 p-4 row-span-2 h-full">
                 <ProjectsCard
                   projects={[
                     {
-                      projectName: "Akshat",
-                      projectDescription: "this is project lorem  ipsum",
-                      liveLink: "http://localhost:3000/dashboard",
+                      projectName: "TaskFlow",
+                      projectDescription:
+                        "A modern task management app for teams.",
+                      liveLink: "https://www.trello.com/",
                       imageLink:
-                        "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
-                      sourceLink: " http://localhost:3000/dashboard",
+                        "https://images.unsplash.com/photo-1556740738-b6a63e27c4df",
+                      sourceLink: "https://github.com/yourusername/taskflow",
                     },
                     {
-                      projectName: "Akshat",
-                      projectDescription: "this is project lorem  ipsum",
-                      liveLink: "http://localhost:3000/dashboard",
+                      projectName: "EcoShop",
+                      projectDescription:
+                        "An e-commerce platform promoting sustainable products.",
+                      liveLink: "https://www.shopify.com/",
                       imageLink:
-                        "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
-                      sourceLink: " http://localhost:3000/dashboard",
+                        "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+                      sourceLink: "https://github.com/yourusername/ecoshop",
                     },
                     {
-                      projectName: "Akshat",
-                      projectDescription: "this is project lorem  ipsum",
-                      liveLink: "http://localhost:3000/dashboard",
+                      projectName: "FitTrack",
+                      projectDescription:
+                        "A fitness tracking app for monitoring workouts and diet.",
+                      liveLink: "https://www.myfitnesspal.com/",
                       imageLink:
-                        "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
-                      sourceLink: " http://localhost:3000/dashboard",
+                        "https://images.unsplash.com/photo-1605296867304-46d5465a13f1",
+                      sourceLink: "https://github.com/yourusername/fittrack",
                     },
                   ]}
                 />
@@ -437,113 +453,19 @@ export default function zDashboard(props: any) {
         {/* right */}
         <div className="flex flex-col gap-4 md:w-[45%]">
           <div>
-            <Card className="bg-zinc-900/50 border-zinc-800 p-6 col-span-2">
+            <Card className="bg-zinc-900/50 border-zinc-800 p-4 col-span-2 h-[350px]  md:overflow-y-hidden hover:overflow-y-auto hover:custom-scrollbar">
+              <h2 className="text-2xl text-center font-semibold text-[#1385F9] mb-2">
+                Work Experience
+              </h2>
+              <p className="text-zinc-400 text-center text-sm mt-1 mb-4">
+                The work expeience where I've worked in past
+              </p>
               <div className="space-y-6 text-center">
-                {/* <div>
-                  <h2 className="text-2xl font-bold text-blue-500">
-                    Community Initiatives
-                  </h2>
-                  <p className="text-zinc-400 text-sm mt-1">
-                    Discover the projects and proposals that are shaping
-                    Bhopal&apos;s web3 future
-                  </p>
-                </div>
-                <div className="relative">
-                  <div className="overflow-hidden rounded-lg">
-                    <div className="relative aspect-[16/9]">
-                      <Image
-                        src={projects[currentSlide].image || "/placeholder.svg"}
-                        alt="Project preview"
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center gap-4">
-                        <div className="bg-zinc-900/90 p-4 rounded-lg shadow-lg">
-                          <div className="relative w-[300px] h-[200px] overflow-hidden rounded">
-                            <Image
-                              src={
-                                projects[currentSlide].image ||
-                                "/placeholder.svg"
-                              }
-                              alt="Desktop preview"
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        </div>
-                        <div className="bg-zinc-900/90 p-4 rounded-lg shadow-lg">
-                          <div className="relative w-[100px] h-[200px] overflow-hidden rounded">
-                            <Image
-                              src={
-                                projects[currentSlide].image ||
-                                "/placeholder.svg"
-                              }
-                              alt="Mobile preview"
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute top-1/2 -translate-y-1/2 -left-4 right-auto">
-                    <Button
-                      variant="secondary"
-                      size="icon"
-                      className="rounded-full"
-                      onClick={() =>
-                        setCurrentSlide((prev) =>
-                          prev > 0 ? prev - 1 : projects.length - 1
-                        )
-                      }
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="absolute top-1/2 -translate-y-1/2 -right-4 left-auto">
-                    <Button
-                      variant="secondary"
-                      size="icon"
-                      className="rounded-full"
-                      onClick={() =>
-                        setCurrentSlide((prev) =>
-                          prev < projects.length - 1 ? prev + 1 : 0
-                        )
-                      }
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div> */}
-                <WorkExperienceCard
-                  workExperience={[
-                    {
-                      tag: ["Web3", "Frontend"],
-                      orgName: "Azuki Labs",
-                      positionName: "Frontend Developer",
-                      from: new Date("2023-06-01"),
-                      to: null, // Present
-                      // orgLogoLink: "https://fakeimage.com/azuki.png",
-                    },
-                    {
-                      tag: ["AI", "Full-Stack"],
-                      orgName: "Sanka AI",
-                      positionName: "Full-Stack Engineer",
-                      from: new Date("2022-09-01"),
-                      to: new Date("2023-05-31"),
-                      // orgLogoLink: "https://fakeimage.com/sanka.png",
-                    },
-                    {
-                      tag: ["Blockchain", "Backend"],
-                      orgName: "Numbers DAO",
-                      positionName: "Backend Developer",
-                      from: new Date("2021-11-01"),
-                      to: new Date("2022-08-31"),
-                      // orgLogoLink: "https://fakeimage.com/numbersdao.png",
-                    },
-                  ]}
-                />
+                {workExperience &&
+                  workExperience.length > 0 &&
+                  workExperience.map((work, index) => (
+                    <WorkExperienceCard key={index} {...work} />
+                  ))}
               </div>
             </Card>
           </div>
