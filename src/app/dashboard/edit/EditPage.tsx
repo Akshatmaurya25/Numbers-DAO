@@ -34,6 +34,9 @@ const socialPlatforms = {
 };
 
 const EditPage = (props: UserDocument) => {
+  const [userDetails, setUserDetails] = useState<UserDocument>({
+    ...props,
+  } as UserDocument);
   console.log(props);
   const [value, setValue] = useState("");
   const [value1, setValue1] = useState("");
@@ -46,8 +49,9 @@ const EditPage = (props: UserDocument) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("Nakul chouskey");
   const [image, setImage] = useState<string | null>(null);
+  const [socials, setSocials] = useState<{ [key: string]: string }>({});
   const [bio, setBio] = useState("Hey there");
-  const [status, setStatus] = useState<string>("available");
+  const [status, setStatus] = useState<"available" | "notAvailable" | "busy">("available");
   const [imgLoading, setImgLoading] = useState(false);
   const [projects, setProjects] = useState([
     {
@@ -96,8 +100,9 @@ const EditPage = (props: UserDocument) => {
       tag: ["Blockchain", "Smart Contracts", "Solidity"],
       orgName: "Numbers DAO",
       positionName: "Smart Contract Developer",
-      from: "Jan/23",
-      to: "12/23",
+      from: new Date(),
+      to: new Date(),
+      
       orgLogoLink:
         "https://static.chainbroker.io/mediafiles/projects/numbers-protocol/numbers.jpeg",
     },
@@ -105,8 +110,8 @@ const EditPage = (props: UserDocument) => {
       tag: ["AI/ML", "NLP", "Deep Learning"],
       orgName: "OpenAI",
       positionName: "AI Engineer",
-      from: "Feb/22",
-      to: "Present",
+      from: new Date(),
+      to: new Date(),
       orgLogoLink:
         "https://platform.theverge.com/wp-content/uploads/sites/2/2025/02/openai-new-logo_f252fc.png?quality=90&strip=all&crop=7.8125%2C0%2C84.375%2C100&w=2400",
     },
@@ -173,8 +178,8 @@ const EditPage = (props: UserDocument) => {
         tag: [],
         orgName: value1,
         positionName: value2,
-        from: value3,
-        to: value4,
+        from: new Date(value3),
+        to: new Date(value4),
         orgLogoLink: value5,
       };
       setWorkExperience([...workExperience, newWorkExperience]);
@@ -192,6 +197,7 @@ const EditPage = (props: UserDocument) => {
   };
 
   const handleSubmit = async () => {
+    userDetalisAssembler();
     let res1 = axios.patch("/api/user/", {
       ...user,
     });
@@ -210,6 +216,35 @@ const EditPage = (props: UserDocument) => {
   if (!user) {
     return <Loader />;
   }
+
+  const userDetalisAssembler = () => {
+    const assembledUser = {
+      username: user?.username || "",
+      name: user?.name,
+      profileImage: image || undefined,
+      joined: user?.joined,
+      authId: user?.authId,
+      bio: bio,
+      socials: user?.socials || socials,
+      status: status,
+      projects: projects,
+      milestones: milestones,
+      domains: domains,
+      authData: user?.authData || [],
+      workExperience: workExperience,
+      stack: user?.stack || [],
+      achievements: {
+        projects: projects.map((proj) => proj.projectName),
+        milestones: milestones.map((mile) => mile.title),
+        workExperience: workExperience.map((work) => work.orgName),
+      },
+    };
+
+    setUserDetails(assembledUser);
+    console.log("data for check", userDetails);
+  };
+
+  
 
   return (
     <>
@@ -327,7 +362,7 @@ const EditPage = (props: UserDocument) => {
               onChange={(e) => setUser({ ...user, bio: e.target.value })}
               // setValue={setBio}
             />
-            <SocialLinksInput />
+            <SocialLinksInput setSocials={setSocials} />
           </div>
         </div>
         <div className="px-4 md:px-16 py-10">
@@ -405,8 +440,11 @@ const InputField = ({
   );
 };
 
-const SocialLinksInput = () => {
-  const [socials, setSocials] = useState<{ [key: string]: string }>({});
+interface SocialLinksInputProps {
+  setSocials: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
+}
+
+const SocialLinksInput = ({ setSocials }: SocialLinksInputProps) => {
   const [inputs, setInputs] = useState(["", "", "", ""]);
 
   // useEffect(() => {
@@ -427,7 +465,7 @@ const SocialLinksInput = () => {
     }
 
     if (detectedPlatform) {
-      setSocials((prev) => ({
+      setSocials((prev: { [key: string]: string }) => ({
         ...prev,
         [detectedPlatform]: value,
       }));
@@ -563,12 +601,10 @@ const AddField = ({
             key={index}
             className="py-1 px-2 text-[#A1A1AA] flex gap-2 bg-[#0C0C0E] rounded-xl"
           >
-            <p>
               {label == "Projects" && <ProjectCard {...val} />}
               {label == "Milestones" && <MilestoneCard {...val} />}
               {label == "Work Experience" && <WorkExperienceCard {...val} />}
               {label == "Domains" && val}
-            </p>
             <button onClick={() => handleDelete(index)}>
               <Trash className="cursor-pointer" />
             </button>
