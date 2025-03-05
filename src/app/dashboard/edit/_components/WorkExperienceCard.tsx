@@ -1,5 +1,20 @@
 import React from "react";
 import { Trash2 } from "lucide-react";
+function formatDateToShortString(dateString: string): string {
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) {
+    throw new Error("Invalid date");
+  }
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: "2-digit",
+    month: "short",
+  };
+  return date
+    .toLocaleDateString("en-US", options)
+    .toLowerCase()
+    .replace(" ", "-");
+}
 
 const WorkExperienceCard = (props: any) => {
   return (
@@ -21,7 +36,7 @@ const WorkExperienceCard = (props: any) => {
               </div>
               <div className="ml-auto flex items-center gap-4">
                 <div className="text-sm  inline text-gray-300 px-3 py-1 rounded-lg">
-                  {props.from}
+                  {formatDateToShortString(props.from)}
                 </div>
               </div>
             </div>
