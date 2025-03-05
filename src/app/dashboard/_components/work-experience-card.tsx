@@ -10,7 +10,7 @@ interface WorkExperienceProps {
     positionName: string
     from: Date
     to: Date | null // null represents "Present"
-    orgLogoLink: string
+    orgLogoLink?: string
   }[]
 }
 
@@ -22,11 +22,11 @@ export default function WorkExperienceCard({ workExperience }: WorkExperiencePro
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
-        <div className="p-6">
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">Work Experience</h2>
+      <div className="bg-white w-full dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+        <div className="p-6 w-96">
+          <h2 className="text-xl font-semibold text-start text-gray-800 dark:text-white mb-4">Work Experience</h2>
 
-          <div className="space-y-6">
+          <div className="space-y-6 w-full overflow-y-auto h-[14.3rem] custom-scrollbar">
             {workExperience.map((experience, index) => (
               <div
                 key={index}
@@ -51,16 +51,16 @@ export default function WorkExperienceCard({ workExperience }: WorkExperiencePro
                 {/* Content */}
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
-                    <h3 className="text-base font-medium text-gray-900 dark:text-white truncate">
+                    <h3 className="text-base font-medium text-start text-gray-900 dark:text-white truncate">
                       {experience.positionName}
                     </h3>
 
-                    <span className="text-sm text-gray-500 dark:text-gray-400 sm:ml-2 whitespace-nowrap">
+                    <span className="text-sm text-start text-gray-500 dark:text-gray-400 sm:ml-2 whitespace-nowrap">
                       {formatDate(experience.from)} - {formatDate(experience.to)}
                     </span>
                   </div>
 
-                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{experience.orgName}</p>
+                  <p className="text-sm text-start text-gray-600 dark:text-gray-300 mb-3">{experience.orgName}</p>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mt-2">

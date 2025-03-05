@@ -83,12 +83,12 @@ const EditPage = (props: UserDocument) => {
         "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ad velit ratione odit veniam voluptatum magni sit quia hic? Accusamus vero non illo.",
       reference: "google.com",
     },
-    {
-      title: "Award 2",
-      description:
-        "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ad velit ratione odit veniam voluptatum magni sit quia hic? Accusamus vero non illo.",
-      reference: "google.com",
-    },
+    // {
+    //   title: "Award 2",
+    //   description:
+    //     "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ad velit ratione odit veniam voluptatum magni sit quia hic? Accusamus vero non illo.",
+    //   reference: "google.com",
+    // },
   ]);
   const [domains, setDomains] = useState<string[]>(["notion", "react"]);
   const [workExperience, setWorkExperience] = useState([
@@ -331,7 +331,7 @@ const EditPage = (props: UserDocument) => {
           </div>
         </div>
         <div className="px-4 md:px-16 py-10">
-          <div className="w-full h-full flex flex-col gap-5">
+          <div className="w-full xl:overflow-y-auto custom-scrollbar xl:h-[46rem] flex flex-col gap-5">
             <AddField
               label={"Projects"}
               value={projects}
@@ -356,15 +356,16 @@ const EditPage = (props: UserDocument) => {
               setValue={setDomains}
               openModal={openModal}
             />
-            <button
-              onClick={handleSubmit}
-              className="bg-white ml-auto flex w-fit items-center gap-1 h-fit rounded px-4 py-2 text-black"
-            >
-              Update
-              <Replace size={14} />
-            </button>
           </div>
         </div>
+        <div></div>
+        <button
+          onClick={handleSubmit}
+          className="bg-white ml-auto flex w-fit items-center gap-1 h-fit rounded px-4 py-2 text-black"
+        >
+          Update
+          <Replace size={14} />
+        </button>
       </div>
     </>
   );
@@ -560,7 +561,7 @@ const AddField = ({
         {value.map((val, index) => (
           <div
             key={index}
-            className=" py-1  text-[#A1A1AA] flex gap-2 bg-[#0C0C0E] "
+            className="py-1 px-2 text-[#A1A1AA] flex gap-2 bg-[#0C0C0E] rounded-xl"
           >
             <p>
               {label == "Projects" && <ProjectCard {...val} />}

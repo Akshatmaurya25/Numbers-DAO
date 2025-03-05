@@ -65,8 +65,8 @@ export default function MilestoneCard({ milestones }: MilestoneCardProps) {
   }, [isHovering])
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
-      <div className="bg-[#121212] rounded-xl overflow-hidden border border-gray-800 shadow-xl h-[400px] flex flex-col">
+    <div className="mx-auto">
+      <div className="bg-[#121212] xl:w-96 lg:w-10 rounded-xl overflow-hidden border border-gray-800 shadow-xl h-[20rem] flex flex-col">
         {/* Header with gradient */}
         <div className="p-6 pb-2">
           <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-indigo-500 text-2xl font-bold mb-1">

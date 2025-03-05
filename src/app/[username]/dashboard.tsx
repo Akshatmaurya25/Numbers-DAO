@@ -42,6 +42,7 @@ import {
 import { FaHashnode } from "react-icons/fa6";
 import MilestoneCard from "../dashboard/_components/milestone-card";
 import ProjectsCard from "../dashboard/_components/projects-card";
+import WorkExperienceCard from "../dashboard/_components/work-experience-card";
 export default function zDashboard(props: any) {
   // Core states
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -234,7 +235,7 @@ export default function zDashboard(props: any) {
                     <Link href="#" className="hover:text-zinc-300">
                       <SiLeetcode className="w-4 h-4" />
                     </Link>
-                    <Link href="#" className="hover:text-zinc-300">
+                    {/* <Link href="#" className="hover:text-zinc-300">
                       <FaGithub className="w-4 h-4" />
                     </Link>
                     <Link href="#" className="hover:text-zinc-300">
@@ -269,7 +270,7 @@ export default function zDashboard(props: any) {
                     </Link>
                     <Link href="#" className="hover:text-zinc-300">
                       <SiCodechef className="w-4 h-4" />
-                    </Link>
+                    </Link> */}
 
                     <Button className="ml-auto bg-white text-black gap-2 text-sm py-1">
                       <Send className="w-3 h-3" />
@@ -312,17 +313,17 @@ export default function zDashboard(props: any) {
 
             <div className="md:w-[50%] text-center">
               {/* Personal Milestone */}
-              <Card className="bg-zinc-900/50 border-zinc-800 p-4 h-full">
-                <div className="space-y-4">
+              <Card className="bg-zinc-900/50 w-full border-zinc-800 p-4 h-full">
+                <div className="space-y-4 w-full h-full">
                   <div className="flex justify-between items-center">
-                    <div>
+                    {/* <div className="w-full text-center">
                       <h2 className="text-xl font-bold text-purple-500">
                         Personal Achievements
                       </h2>
                       <p className="text-zinc-400 text-sm mt-1">
                         Celebrating growth and achievement
                       </p>
-                    </div>
+                    </div> */}
                     {/* <Button
                       variant="ghost"
                       size="sm"
@@ -348,42 +349,36 @@ export default function zDashboard(props: any) {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="md:w-2/3">
               {/* DAO Achievements */}
-              {/* <Card className="bg-zinc-900/50 border-zinc-800 p-6 row-span-2 h-full">
-
-                
-                  <div className="space-y-4 h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-800">
-                  
-                  </div>
-            
-              </Card> */}
-              <ProjectsCard
-                projects={[
-                  {
-                    projectName: "Akshat",
-                    projectDescription: "this is project lorem  ipsum",
-                    liveLink: "http://localhost:3000/dashboard",
-                    imageLink:
-                      "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
-                    sourceLink: " http://localhost:3000/dashboard",
-                  },
-                  {
-                    projectName: "Akshat",
-                    projectDescription: "this is project lorem  ipsum",
-                    liveLink: "http://localhost:3000/dashboard",
-                    imageLink:
-                      "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
-                    sourceLink: " http://localhost:3000/dashboard",
-                  },
-                  {
-                    projectName: "Akshat",
-                    projectDescription: "this is project lorem  ipsum",
-                    liveLink: "http://localhost:3000/dashboard",
-                    imageLink:
-                      "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
-                    sourceLink: " http://localhost:3000/dashboard",
-                  },
-                ]}
-              />
+              <Card className="bg-zinc-900/50 border-zinc-800 p-6 row-span-2 h-full">
+                <ProjectsCard
+                  projects={[
+                    {
+                      projectName: "Akshat",
+                      projectDescription: "this is project lorem  ipsum",
+                      liveLink: "http://localhost:3000/dashboard",
+                      imageLink:
+                        "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
+                      sourceLink: " http://localhost:3000/dashboard",
+                    },
+                    {
+                      projectName: "Akshat",
+                      projectDescription: "this is project lorem  ipsum",
+                      liveLink: "http://localhost:3000/dashboard",
+                      imageLink:
+                        "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
+                      sourceLink: " http://localhost:3000/dashboard",
+                    },
+                    {
+                      projectName: "Akshat",
+                      projectDescription: "this is project lorem  ipsum",
+                      liveLink: "http://localhost:3000/dashboard",
+                      imageLink:
+                        "https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f",
+                      sourceLink: " http://localhost:3000/dashboard",
+                    },
+                  ]}
+                />
+              </Card>
             </div>
             <div className="md:w-1/3">
               {/* Community Section */}
@@ -444,7 +439,7 @@ export default function zDashboard(props: any) {
           <div>
             <Card className="bg-zinc-900/50 border-zinc-800 p-6 col-span-2">
               <div className="space-y-6 text-center">
-                <div>
+                {/* <div>
                   <h2 className="text-2xl font-bold text-blue-500">
                     Community Initiatives
                   </h2>
@@ -462,7 +457,6 @@ export default function zDashboard(props: any) {
                         fill
                         className="object-cover"
                       />
-                      {/* Device Mockups Overlay */}
                       <div className="absolute inset-0 flex items-center justify-center gap-4">
                         <div className="bg-zinc-900/90 p-4 rounded-lg shadow-lg">
                           <div className="relative w-[300px] h-[200px] overflow-hidden rounded">
@@ -521,7 +515,35 @@ export default function zDashboard(props: any) {
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </div>
-                </div>
+                </div> */}
+                <WorkExperienceCard
+                  workExperience={[
+                    {
+                      tag: ["Web3", "Frontend"],
+                      orgName: "Azuki Labs",
+                      positionName: "Frontend Developer",
+                      from: new Date("2023-06-01"),
+                      to: null, // Present
+                      // orgLogoLink: "https://fakeimage.com/azuki.png",
+                    },
+                    {
+                      tag: ["AI", "Full-Stack"],
+                      orgName: "Sanka AI",
+                      positionName: "Full-Stack Engineer",
+                      from: new Date("2022-09-01"),
+                      to: new Date("2023-05-31"),
+                      // orgLogoLink: "https://fakeimage.com/sanka.png",
+                    },
+                    {
+                      tag: ["Blockchain", "Backend"],
+                      orgName: "Numbers DAO",
+                      positionName: "Backend Developer",
+                      from: new Date("2021-11-01"),
+                      to: new Date("2022-08-31"),
+                      // orgLogoLink: "https://fakeimage.com/numbersdao.png",
+                    },
+                  ]}
+                />
               </div>
             </Card>
           </div>
