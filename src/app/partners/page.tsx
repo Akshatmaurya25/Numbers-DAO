@@ -1,6 +1,7 @@
 import React from "react";
 import DynamicLogoCard from "./_components/dynamic-logo-card";
-import ProfileCard from "./_components/profile-card";
+
+import Image from "next/image";
 
 const partners = [
   {
@@ -8,21 +9,21 @@ const partners = [
     backgroundLogo: "/Aarambh.png",
     text: "Aarambh Labs",
     hoverText: "Learn more about our partnership",
-    href: "#"
+    href: "#",
   },
   {
     logo: "/wizz.png",
     backgroundLogo: "/wizz.png",
     text: "WizzHQ",
     hoverText: "Learn more about our opportunities",
-    href: "#"
+    href: "#",
   },
   {
     logo: "/gsq.png",
     backgroundLogo: "/gsq.png",
     text: "GrowthSquare",
     hoverText: "Learn more about our opportunities",
-    href: "#"
+    href: "#",
   },
   // Add more partners here as needed
 ];
@@ -32,73 +33,117 @@ const profiles = [
   {
     name: "Akshat Maurya",
     title: "Founder & CEO",
-    imageUrl: "/profiles/john.jpg"
+    imageUrl: "/profiles/john.jpg",
   },
   {
     name: "Pranesh Joshi",
     title: "Head of Partnerships",
-    imageUrl: "/profiles/jane.jpg"
+    imageUrl: "/profiles/jane.jpg",
   },
   {
     name: "Yatharth Urmaliya",
     title: "Lead Developer",
-    imageUrl: "/profiles/alex.jpg"
-  }
+    imageUrl: "/profiles/alex.jpg",
+  },
 ];
 
 const secondRowProfiles = [
   {
     name: "SK Kartik",
     title: "Marketing Director",
-    imageUrl: "/profiles/sarah.jpg"
+    imageUrl: "/profiles/sarah.jpg",
   },
   {
     name: "Sumitsemcool",
     title: "Technical Lead",
-    imageUrl: ""
+    imageUrl: "",
   },
   {
     name: "Nakul",
     title: "Designer",
-    imageUrl: "/profiles/emily.jpg"
-  }
+    imageUrl: "/profiles/emily.jpg",
+  },
+];
+
+const BrandLogos: {
+  name?: string;
+  src: string;
+  height?: number;
+  width?: number;
+}[] = [
+  {
+    src: "https://drive.google.com/uc?export=view&id=1mnHcsMrzx_0yFfIIVEylrRyEWCXh64AK",
+  },
+  {
+    name: "Central Dao",
+    src: "https://drive.google.com/uc?export=view&id=1pS50HASlVH702ImgZppGMl-d9bBTlvqa",
+  },
+  {
+    src: "partners/secure.svg",
+  },
+  {
+    src: "/partners/vyug.png",
+  },
+
+  {
+    src: "partners/cheescake.svg",
+    height: 100,
+    width: 100,
+  },
+  {
+    src: "partners/easydapp.svg",
+  },
+  {
+    src: "partners/zo.svg",
+    // src: "partners/zo.svg",
+    height: 80,
+    width: 80,
+  },
+  {
+    src: "https://drive.google.com/uc?export=view&id=1tERDPfQhjzuWdtRACQC4N3IWyn2yTCbY",
+  },
+  {
+    src: "https://drive.google.com/uc?export=view&id=1TpB_6lGfvDCPCSv4xalJ5GhMhVZTKDFC",
+  },
+  {
+    src: "https://drive.google.com/uc?export=view&id=1-tZLUT4Ao4E6EBbcVP40VXBKQVCgJZS5",
+  },
+  {
+    src: "https://drive.google.com/uc?export=view&id=1rppTuqe3X_E6aTSIYeQrOp7YOFQHElYU",
+  },
 ];
 
 const PartnersPage = () => {
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center py-20">
-      <div className="container mx-auto space-y-24">
+    <div className="min-h-screen pt-28 bg-black flex flex-col items-center justify-center py-20">
+      <h2 className="text-white text-center py-16 font-semibold text-4xl md:text-4xl lg:text-[4rem] font-space-grotesk mb-2">
+        Meet Our Partners
+      </h2>
+
+      <div className=" md:mx-16 space-y-24  ">
         {/* Partners Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+        <div className="flex gap-8 items-center justify-center ">
           {partners.map((partner, index) => (
-            <DynamicLogoCard
-              key={`partner-${index}`}
-              {...partner}
-            />
+            <DynamicLogoCard key={`partner-${index}`} {...partner} />
           ))}
         </div>
 
         {/* Team Profiles Section */}
-        <div className="flex justify-center">
-          <div className="w-full max-w-[1000px] space-y-8">
-            {/* First Row */}
-            <div className="grid grid-cols-3 gap-8">
-              {profiles.map((profile, index) => (
-                <div key={`profile-1-${index}`} className="flex justify-center">
-                  <ProfileCard {...profile} />
-                </div>
-              ))}
+
+        {/* Third Section */}
+        <div className="grid md:grid-cols-4 grid-cols-2 gap-10 md:gap-28 place-items-center md:px-24">
+          {BrandLogos.map((val, index) => (
+            <div key={index} className="flex justify-center items-center">
+              <Image
+                src={val.src}
+                width={val?.width || 150}
+                height={val?.height || 50}
+                draggable={false}
+                alt={val.name || "Brand Logo"}
+                className="grayscale  object-contain"
+              />
             </div>
-            
-            {/* Second Row */}
-            <div className="grid grid-cols-3 gap-8">
-              {secondRowProfiles.map((profile, index) => (
-                <div key={`profile-2-${index}`} className="flex justify-center">
-                  <ProfileCard {...profile} />
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

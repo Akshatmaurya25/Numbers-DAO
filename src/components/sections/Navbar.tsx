@@ -62,17 +62,23 @@ export default function Navbar() {
           >
             Home
           </Link>
-          <Link
+          {/* <Link
             href="/developers"
             className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
           >
             Developers
-          </Link>
+          </Link> */}
           <Link
-            href="/blog"
+            href="/team"
             className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
           >
-            Blog
+            Team
+          </Link>
+          <Link
+            href="/community"
+            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+          >
+            Community
           </Link>
           <Link
             href="/partners"
