@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";
 import {
@@ -37,92 +37,35 @@ const EditPage = (props: UserDocument) => {
   const [userDetails, setUserDetails] = useState<UserDocument>({
     ...props,
   } as UserDocument);
-  console.log(props);
-  const [value, setValue] = useState("");
-  const [value1, setValue1] = useState("");
-  const [value2, setValue2] = useState("");
-  const [value3, setValue3] = useState("");
-  const [value4, setValue4] = useState("");
-  const [value5, setValue5] = useState("");
+  const [value, setValue] = useState<any>();
+  const [value1, setValue1] = useState<any>();
+  const [value2, setValue2] = useState<any>();
+  const [value3, setValue3] = useState<any>();
+  const [value4, setValue4] = useState<any>();
+  const [value5, setValue5] = useState<any>();
+  const [tag, setTag] = useState([]);
   const [user, setUser] = useState<UserDocument>({ ...props } as UserDocument);
   const [modal, setModal] = useState<string | undefined>(undefined);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [name, setName] = useState("Nakul chouskey");
   const [image, setImage] = useState<string | null>(null);
-  const [socials, setSocials] = useState<{ [key: string]: string }>({});
-  const [bio, setBio] = useState("Hey there");
-  const [status, setStatus] = useState<"available" | "notAvailable" | "busy">("available");
+  const [socials, setSocials] = useState<{ [key: string]: string }>(
+    (userDetails.socials as { [key: string]: string }) || {}
+  );
   const [imgLoading, setImgLoading] = useState(false);
-  const [projects, setProjects] = useState([
-    {
-      projectName: "Wizzz",
-      projectDescription: "A smart AI-powered assistant for productivity.",
-      liveLink: "https://wizzz.io",
-      imageLink:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Wizz_Air_logo.svg/2560px-Wizz_Air_logo.svg.png",
-      sourceLink: "https://github.com/example/wizzz",
-    },
-    {
-      projectName: "CryptoTracker",
-      projectDescription: "A real-time cryptocurrency tracking platform.",
-      liveLink: "https://cryptotracker.com",
-      imageLink:
-        "https://sc.filehippo.net/images/t_app-icon-l/p/f3e2e429-9747-4e3d-8bbb-5f1ec18e616b/1341664963/cryptotracker-logo",
-      sourceLink: "https://github.com/example/cryptotracker",
-    },
-    {
-      projectName: "DevConnect",
-      projectDescription: "A social platform for developers to network.",
-      liveLink: "https://devconnect.io",
-      imageLink:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMjFMYAoOlNShjc1sXxsou_hQhIXq4hCZ-sQ&s",
-      sourceLink: "https://github.com/example/devconnect",
-    },
-  ]);
+  const [projects, setProjects] = useState(userDetails.projects);
 
-  const [milestones, setMilestones] = useState([
-    {
-      title: "DEV Award",
-      description:
-        "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ad velit ratione odit veniam voluptatum magni sit quia hic? Accusamus vero non illo.",
-      reference: "google.com",
-    },
-    // {
-    //   title: "Award 2",
-    //   description:
-    //     "  Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ad velit ratione odit veniam voluptatum magni sit quia hic? Accusamus vero non illo.",
-    //   reference: "google.com",
-    // },
-  ]);
-  const [domains, setDomains] = useState<string[]>(["notion", "react"]);
-  const [workExperience, setWorkExperience] = useState([
-    {
-      tag: ["Blockchain", "Smart Contracts", "Solidity"],
-      orgName: "Numbers DAO",
-      positionName: "Smart Contract Developer",
-      from: new Date(),
-      to: new Date(),
-      
-      orgLogoLink:
-        "https://static.chainbroker.io/mediafiles/projects/numbers-protocol/numbers.jpeg",
-    },
-    {
-      tag: ["AI/ML", "NLP", "Deep Learning"],
-      orgName: "OpenAI",
-      positionName: "AI Engineer",
-      from: new Date(),
-      to: new Date(),
-      orgLogoLink:
-        "https://platform.theverge.com/wp-content/uploads/sites/2/2025/02/openai-new-logo_f252fc.png?quality=90&strip=all&crop=7.8125%2C0%2C84.375%2C100&w=2400",
-    },
-  ]);
+  const [milestones, setMilestones] = useState(userDetails.milestones);
+  const [domains, setDomains] = useState<string[]>(userDetails.domains);
+  const [workExperience, setWorkExperience] = useState(
+    userDetails.workExperience
+  );
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImgLoading(true);
       let img = await uploadImageToCloudinary(e.target.files[0]);
-      console.log(img);
+      // console.log(img);
       if (img) {
         setImgLoading(false);
         setUser({ ...user, profileImage: img });
@@ -157,36 +100,37 @@ const EditPage = (props: UserDocument) => {
   const addObject = () => {
     if (modal == "Projects") {
       const newProject = {
-        projectName: value,
-        projectDescription: value1,
-        liveLink: value2,
-        imageLink: value3,
-        sourceLink: value4,
+        projectName: value.Name,
+        projectDescription: value1.Description,
+        liveLink: value2["Live link"],
+        imageLink: value3["Project Image"] || "",
+        sourceLink: value4["Source link"],
       };
       setProjects([...projects, newProject]);
     }
     if (modal == "Milestones") {
       const newMilestone = {
-        title: value,
-        description: value1,
-        reference: value2,
+        title: value.Title,
+        description: value1.Description,
+        reference: value2.Reference,
       };
       setMilestones([...milestones, newMilestone]);
     }
     if (modal == "Work Experience") {
       const newWorkExperience = {
-        tag: [],
-        orgName: value1,
-        positionName: value2,
-        from: new Date(value3),
-        to: new Date(value4),
+        tag: tag,
+        orgName: value1["Organisation name"],
+        positionName: value2.Position,
+        from: new Date(value3.From),
+        to: new Date(value4.To),
         orgLogoLink: value5,
       };
       setWorkExperience([...workExperience, newWorkExperience]);
     }
     if (modal == "Domains") {
-      setDomains([...domains, value]);
+      setDomains([...domains, value.Domains]);
     }
+    setTag([]);
     setValue("");
     setValue1("");
     setValue2("");
@@ -194,10 +138,31 @@ const EditPage = (props: UserDocument) => {
     setValue4("");
     setValue5("");
     closeModal();
+
+    Assembler();
+  };
+
+  const Assembler = async () => {
+    console.log("socials:", socials);
+    console.log("projects:", projects);
+    console.log("milestones:", milestones);
+    console.log("workExperience:", workExperience);
+    console.log("domains:", domains);
+
+    await setUserDetails((prev) => ({
+      ...prev,
+      socials,
+      projects,
+      milestones,
+      workExperience,
+      domains,
+    }));
+
+    console.log("user Details", userDetails);
   };
 
   const handleSubmit = async () => {
-    userDetalisAssembler();
+    Assembler();
     let res1 = axios.patch("/api/user/", {
       ...user,
     });
@@ -209,42 +174,12 @@ const EditPage = (props: UserDocument) => {
     });
     if (res.status == 200) {
       setUser(res.data.result);
-      console.log(res.data);
     }
   };
 
   if (!user) {
     return <Loader />;
   }
-
-  const userDetalisAssembler = () => {
-    const assembledUser = {
-      username: user?.username || "",
-      name: user?.name,
-      profileImage: image || undefined,
-      joined: user?.joined,
-      authId: user?.authId,
-      bio: bio,
-      socials: user?.socials || socials,
-      status: status,
-      projects: projects,
-      milestones: milestones,
-      domains: domains,
-      authData: user?.authData || [],
-      workExperience: workExperience,
-      stack: user?.stack || [],
-      achievements: {
-        projects: projects.map((proj) => proj.projectName),
-        milestones: milestones.map((mile) => mile.title),
-        workExperience: workExperience.map((work) => work.orgName),
-      },
-    };
-
-    setUserDetails(assembledUser);
-    console.log("data for check", userDetails);
-  };
-
-  
 
   return (
     <>
@@ -274,13 +209,13 @@ const EditPage = (props: UserDocument) => {
               )}
               {modal == "Work Experience" && (
                 <>
-                  <InputField label={"Tag"} setValue={setValue} />
+                  <TagField label={"Tag"} setValue={setTag} value={tag} />
                   <InputField
                     label={"Organisation name"}
                     setValue={setValue1}
                   />
                   <InputField label={"Position"} setValue={setValue2} />
-                  <InputField label={"Form"} setValue={setValue3} />
+                  <InputField label={"From"} setValue={setValue3} />
                   <InputField label={"To"} setValue={setValue4} />
                   <UploadField label={"Org Logo"} setValue={setValue5} />
                 </>
@@ -301,7 +236,7 @@ const EditPage = (props: UserDocument) => {
         </div>
       )}
 
-      <div className="bg-black max-w-7xl w-full grid xl:grid-cols-2 md:grid-cols-1">
+      <div className="bg-black w-full grid xl:grid-cols-2 md:grid-cols-1">
         <div className="px-4 md:px-16 py-10">
           <div className="w-full h-full flex flex-col gap-4">
             <div className="Username flex flex-col gap-2">
@@ -309,6 +244,7 @@ const EditPage = (props: UserDocument) => {
               <input
                 type="text"
                 readOnly
+                value={userDetails.username}
                 className="bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
               />
             </div>
@@ -353,20 +289,19 @@ const EditPage = (props: UserDocument) => {
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-white text-lg font-medium">Status</p>
-              <Status status={status} setStatus={setStatus} />
+              <Status status={userDetails} setStatus={setUserDetails} />
             </div>
             <InputField
-              label={"Bio"}
-              value={user.bio}
+              label={"bio"}
+              value={userDetails}
               maxLength={60}
-              onChange={(e) => setUser({ ...user, bio: e.target.value })}
-              // setValue={setBio}
+              setValue={setUserDetails}
             />
-            <SocialLinksInput setSocials={setSocials} />
+            <SocialLinksInput setSocials={setSocials} socials={socials} />
           </div>
         </div>
         <div className="px-4 md:px-16 py-10">
-          <div className="w-full xl:overflow-y-auto custom-scrollbar xl:h-[46rem] flex flex-col gap-5">
+          <div className="w-full custom-scrollbar xl:h-[46rem] flex flex-col gap-5">
             <AddField
               label={"Projects"}
               value={projects}
@@ -396,7 +331,7 @@ const EditPage = (props: UserDocument) => {
         <div></div>
         <button
           onClick={handleSubmit}
-          className="bg-white ml-auto flex w-fit items-center gap-1 h-fit rounded px-4 py-2 text-black"
+          className="bg-white ml-auto md:mr-16 mr-10 flex w-fit items-center gap-1 h-fit rounded px-4 py-2 text-black"
         >
           Update
           <Replace size={14} />
@@ -412,10 +347,9 @@ const InputField = ({
   setValue,
   placeHolder,
   maxLength,
-  onChange,
 }: {
   label?: string;
-  value?: string;
+  value?: any;
   setValue?: any;
   maxLength?: number;
   placeHolder?: string;
@@ -427,13 +361,10 @@ const InputField = ({
       <input
         onFocus={(e) => e.target.select()}
         placeholder={label ? label : placeHolder}
-        type="text"
+        type={label == "From" || label === "To" ? "date" : "text"}
         maxLength={maxLength}
-        value={value}
-        // onChange={(e) => {
-        //   setValue(e.target.value);
-        // }}
-        onChange={onChange}
+        value={value && label && value?.[label]}
+        onChange={(e) => setValue({ ...value, [label!]: e.target.value })}
         className="placeholder-zinc-700 bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
       />
     </div>
@@ -442,45 +373,23 @@ const InputField = ({
 
 interface SocialLinksInputProps {
   setSocials: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
+  socials: { [key: string]: string };
 }
 
-const SocialLinksInput = ({ setSocials }: SocialLinksInputProps) => {
-  const [inputs, setInputs] = useState(["", "", "", ""]);
-
-  // useEffect(() => {
-  //   console.log("Updated Socials:", socials);
-  // }, [socials]);
-
-  const handleChange = (index: number, value: string) => {
-    const updatedInputs = [...inputs];
-    updatedInputs[index] = value;
-    setInputs(updatedInputs);
-
-    let detectedPlatform = "";
-    for (const [platform, urls] of Object.entries(socialPlatforms)) {
-      if (urls.some((url) => value.includes(url))) {
-        detectedPlatform = platform;
-        break;
-      }
-    }
-
-    if (detectedPlatform) {
-      setSocials((prev: { [key: string]: string }) => ({
-        ...prev,
-        [detectedPlatform]: value,
-      }));
-    }
-  };
+const SocialLinksInput = ({ setSocials, socials }: SocialLinksInputProps) => {
+  // Initialize with 4 input fields
+  const [inputs] = useState([0, 1, 2, 3]);
 
   return (
     <div>
       <p className="text-white text-lg font-medium">Social</p>
       <div className="flex flex-col gap-2">
-        {inputs.map((value, index) => (
+        {inputs.map((index) => (
           <SocialDropDown
             key={index}
-            value={value}
-            setValue={(val: string) => handleChange(index, val)}
+            setSocials={setSocials}
+            socials={socials}
+            index={index}
           />
         ))}
       </div>
@@ -489,11 +398,13 @@ const SocialLinksInput = ({ setSocials }: SocialLinksInputProps) => {
 };
 
 const SocialDropDown = ({
-  value,
-  setValue,
+  setSocials,
+  socials,
+  index,
 }: {
-  value?: string;
-  setValue: any;
+  setSocials: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
+  socials: { [key: string]: string };
+  index: number;
 }) => {
   type PlatformKeys =
     | "Instagram"
@@ -517,8 +428,6 @@ const SocialDropDown = ({
     | "Telegram"
     | "";
 
-  const [selectedPlatform, setSelectedPlatform] = useState<PlatformKeys>("");
-
   const platforms: Record<Exclude<PlatformKeys, "">, string> = {
     Instagram: "instagram.com/",
     GitHub: "github.com/",
@@ -541,15 +450,53 @@ const SocialDropDown = ({
     Telegram: "t.me/",
   };
 
+  const [selectedPlatform, setSelectedPlatform] = useState<PlatformKeys>(() => {
+    const existingPlatforms = Object.keys(socials) as PlatformKeys[];
+    return index < existingPlatforms.length ? existingPlatforms[index] : "";
+  });
+
+  const [username, setUsername] = useState<string>(() => {
+    if (selectedPlatform && socials[selectedPlatform]) {
+      const platformPrefix = platforms[selectedPlatform];
+      return socials[selectedPlatform].replace(platformPrefix, "");
+    }
+    return "";
+  });
+
+  useEffect(() => {
+    if (selectedPlatform && username) {
+      const fullUrl = platforms[selectedPlatform] + username;
+      setSocials((prev) => ({
+        ...prev,
+        [selectedPlatform]: fullUrl
+      }));
+    }
+  }, [selectedPlatform, username, setSocials]);
+
   const handleSelect = (platform: string) => {
-    setSelectedPlatform(platform as PlatformKeys);
-    setValue("");
+    const newPlatform = platform as PlatformKeys;
+    
+    if (selectedPlatform && selectedPlatform !== newPlatform) {
+      setSocials((prev) => {
+        const updated = { ...prev };
+        delete updated[selectedPlatform];
+        return updated;
+      });
+    }
+    
+    setSelectedPlatform(newPlatform);
+    setUsername("");
+  };
+
+  const handleUsernameChange = (newUsername: string) => {
+    setUsername(newUsername);
   };
 
   return (
     <div className="flex flex-col gap-2">
       <div className="relative">
         <select
+          value={selectedPlatform}
           onChange={(e) => handleSelect(e.target.value)}
           className="bg-[#0C0C0E] border border-[#27272A] px-3 py-1 rounded-md text-[#A1A1AA] w-fit"
           style={{ maxHeight: "150px", overflowY: "auto" }}
@@ -567,9 +514,10 @@ const SocialDropDown = ({
           <span className="text-[#A1A1AA]">{platforms[selectedPlatform]}</span>
           <input
             type="text"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
+            value={username}
+            onChange={(e) => handleUsernameChange(e.target.value)}
             className="bg-[#0C0C0E] border border-[#27272A] px-3 py-1 rounded-md text-[#A1A1AA] w-full"
+            placeholder="username"
           />
         </div>
       )}
@@ -601,10 +549,10 @@ const AddField = ({
             key={index}
             className="py-1 px-2 text-[#A1A1AA] flex gap-2 bg-[#0C0C0E] rounded-xl"
           >
-              {label == "Projects" && <ProjectCard {...val} />}
-              {label == "Milestones" && <MilestoneCard {...val} />}
-              {label == "Work Experience" && <WorkExperienceCard {...val} />}
-              {label == "Domains" && val}
+            {label == "Projects" && <ProjectCard {...val} />}
+            {label == "Milestones" && <MilestoneCard {...val} />}
+            {label == "Work Experience" && <WorkExperienceCard {...val} />}
+            {label == "Domains" && val}
             <button onClick={() => handleDelete(index)}>
               <Trash className="cursor-pointer" />
             </button>
@@ -621,7 +569,46 @@ const AddField = ({
   );
 };
 
-const Status = ({ status, setStatus }: { status: string; setStatus: any }) => {
+const TagField = ({
+  label,
+  setValue,
+  value,
+}: {
+  label: string;
+  setValue: any;
+  value: any;
+}) => {
+  const [input, setInput] = useState<string>("");
+  return (
+    <div className="flex flex-col gap-2">
+      <p className="text-white text-lg font-medium">{label}</p>
+      <input
+        onFocus={(e) => e.target.select()}
+        placeholder={label}
+        type="text"
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+        className="placeholder-zinc-700 bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
+      />
+      <div className="flex w-full gap-1 overflow-auto !scrollbar-hide">
+        {value.map((value: string) => (
+          <p className="py-1 px-2 bg-[#131315] rounded-full" key={value}>
+            {value}
+          </p>
+        ))}
+      </div>
+      <button
+        onClick={() => setValue([...value, input])}
+        className="text-white w-fit rounded-md px-3 py-1 bg-[#000044]"
+      >
+        Add
+      </button>
+    </div>
+  );
+};
+
+const Status = ({ status, setStatus }: { status: any; setStatus: any }) => {
   const statuses = [
     { label: "Available", value: "available" },
     { label: "Not Available", value: "notAvailable" },
@@ -633,15 +620,15 @@ const Status = ({ status, setStatus }: { status: string; setStatus: any }) => {
       {statuses.map(({ label, value }) => (
         <button
           key={value}
-          onClick={() => setStatus(value)}
+          onClick={() => setStatus({ ...status, status: value })}
           className={`px-3 py-1 rounded-full flex gap-1 border items-center 
             ${
-              status === value
+              status.status === value
                 ? "bg-[#030311] text-white border-[#000044]"
                 : "bg-[#0C0C0E] text-gray-400 border-[#27272A]"
             }`}
         >
-          {status === value && <Dot className="text-white" />} {label}
+          {status.status === value && <Dot className="text-white" />} {label}
         </button>
       ))}
     </div>
