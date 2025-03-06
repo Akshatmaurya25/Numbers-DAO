@@ -161,7 +161,7 @@ const page = () => {
       </div>
 
       {activated == "Portfolio" && <Dashboard {...User} />}
-      {activated == "Edit" && (
+      {activated == "Edit" && ( 
         <div className="flex justify-center items-center ">
           <EditPage {...User as UserDocument} />
         </div>
