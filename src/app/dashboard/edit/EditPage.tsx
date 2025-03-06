@@ -46,8 +46,11 @@ const EditPage = (props: UserDocument) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("Nakul chouskey");
   const [image, setImage] = useState<string | null>(null);
+  const [socials, setSocials] = useState<{ [key: string]: string }>({});
   const [bio, setBio] = useState("Hey there");
-  const [status, setStatus] = useState<string>("available");
+  const [status, setStatus] = useState<"available" | "notAvailable" | "busy">(
+    "available"
+  );
   const [imgLoading, setImgLoading] = useState(false);
   const [projects, setProjects] = useState([
     {
@@ -96,8 +99,9 @@ const EditPage = (props: UserDocument) => {
       tag: ["Blockchain", "Smart Contracts", "Solidity"],
       orgName: "Numbers DAO",
       positionName: "Smart Contract Developer",
-      from: "Jan/23",
-      to: "12/23",
+      from: new Date(),
+      to: new Date(),
+
       orgLogoLink:
         "https://static.chainbroker.io/mediafiles/projects/numbers-protocol/numbers.jpeg",
     },
@@ -105,8 +109,8 @@ const EditPage = (props: UserDocument) => {
       tag: ["AI/ML", "NLP", "Deep Learning"],
       orgName: "OpenAI",
       positionName: "AI Engineer",
-      from: "Feb/22",
-      to: "Present",
+      from: new Date(),
+      to: new Date(),
       orgLogoLink:
         "https://platform.theverge.com/wp-content/uploads/sites/2/2025/02/openai-new-logo_f252fc.png?quality=90&strip=all&crop=7.8125%2C0%2C84.375%2C100&w=2400",
     },
@@ -158,7 +162,7 @@ const EditPage = (props: UserDocument) => {
         imageLink: value3,
         sourceLink: value4,
       };
-      setProjects([...projects, newProject]);
+      setUser({ ...user, projects: [...user.projects, newProject] });
     }
     if (modal == "Milestones") {
       const newMilestone = {
@@ -166,21 +170,24 @@ const EditPage = (props: UserDocument) => {
         description: value1,
         reference: value2,
       };
-      setMilestones([...milestones, newMilestone]);
+      setUser({ ...user, milestones: [...user.milestones, newMilestone] });
     }
     if (modal == "Work Experience") {
       const newWorkExperience = {
         tag: [],
         orgName: value1,
         positionName: value2,
-        from: value3,
-        to: value4,
+        from: new Date(value3),
+        to: new Date(value4),
         orgLogoLink: value5,
       };
-      setWorkExperience([...workExperience, newWorkExperience]);
+      setUser({
+        ...user,
+        workExperience: [...user.workExperience, newWorkExperience],
+      });
     }
     if (modal == "Domains") {
-      setDomains([...domains, value]);
+      setUser({ ...user, domains: [...user.domains, value] });
     }
     setValue("");
     setValue1("");
@@ -274,7 +281,9 @@ const EditPage = (props: UserDocument) => {
               <input
                 type="text"
                 readOnly
-                className="bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
+                value={user.username}
+                title="Username cannot be changed"
+                className="bg-[#0C0C0E] border cursor-pointer border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
               />
             </div>
             <div className="image flex flex-col gap-2">
@@ -318,7 +327,7 @@ const EditPage = (props: UserDocument) => {
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-white text-lg font-medium">Status</p>
-              <Status status={status} setStatus={setStatus} />
+              <Status user={user} setUser={setUser} />
             </div>
             <InputField
               label={"Bio"}
@@ -327,32 +336,32 @@ const EditPage = (props: UserDocument) => {
               onChange={(e) => setUser({ ...user, bio: e.target.value })}
               // setValue={setBio}
             />
-            <SocialLinksInput />
+            <SocialLinksInput setSocials={setSocials} />
           </div>
         </div>
         <div className="px-4 md:px-16 py-10">
           <div className="w-full xl:overflow-y-auto custom-scrollbar xl:h-[46rem] flex flex-col gap-5">
             <AddField
               label={"Projects"}
-              value={projects}
+              value={user.projects}
               setValue={setProjects}
               openModal={openModal}
             />
             <AddField
               label={"Milestones"}
-              value={milestones}
+              value={user.milestones}
               setValue={setMilestones}
               openModal={openModal}
             />
             <AddField
               label={"Work Experience"}
-              value={workExperience}
+              value={user.workExperience}
               setValue={setWorkExperience}
               openModal={openModal}
             />
             <AddField
               label={"Domains"}
-              value={domains}
+              value={user.domains}
               setValue={setDomains}
               openModal={openModal}
             />
@@ -405,8 +414,11 @@ const InputField = ({
   );
 };
 
-const SocialLinksInput = () => {
-  const [socials, setSocials] = useState<{ [key: string]: string }>({});
+interface SocialLinksInputProps {
+  setSocials: React.Dispatch<React.SetStateAction<{ [key: string]: string }>>;
+}
+
+const SocialLinksInput = ({ setSocials }: SocialLinksInputProps) => {
   const [inputs, setInputs] = useState(["", "", "", ""]);
 
   // useEffect(() => {
@@ -427,7 +439,7 @@ const SocialLinksInput = () => {
     }
 
     if (detectedPlatform) {
-      setSocials((prev) => ({
+      setSocials((prev: { [key: string]: string }) => ({
         ...prev,
         [detectedPlatform]: value,
       }));
@@ -563,12 +575,10 @@ const AddField = ({
             key={index}
             className="py-1 px-2 text-[#A1A1AA] flex gap-2 bg-[#0C0C0E] rounded-xl"
           >
-            <p>
-              {label == "Projects" && <ProjectCard {...val} />}
-              {label == "Milestones" && <MilestoneCard {...val} />}
-              {label == "Work Experience" && <WorkExperienceCard {...val} />}
-              {label == "Domains" && val}
-            </p>
+            {label == "Projects" && <ProjectCard {...val} />}
+            {label == "Milestones" && <MilestoneCard {...val} />}
+            {label == "Work Experience" && <WorkExperienceCard {...val} />}
+            {label == "Domains" && val}
             <button onClick={() => handleDelete(index)}>
               <Trash className="cursor-pointer" />
             </button>
@@ -585,7 +595,13 @@ const AddField = ({
   );
 };
 
-const Status = ({ status, setStatus }: { status: string; setStatus: any }) => {
+const Status = ({
+  user,
+  setUser,
+}: {
+  user: UserDocument;
+  setUser: Function;
+}) => {
   const statuses = [
     { label: "Available", value: "available" },
     { label: "Not Available", value: "notAvailable" },
@@ -596,16 +612,15 @@ const Status = ({ status, setStatus }: { status: string; setStatus: any }) => {
     <div className="flex gap-3">
       {statuses.map(({ label, value }) => (
         <button
-          key={value}
-          onClick={() => setStatus(value)}
+          onClick={() => setUser({ ...user, status: value })}
           className={`px-3 py-1 rounded-full flex gap-1 border items-center 
             ${
-              status === value
+              user.status === value
                 ? "bg-[#030311] text-white border-[#000044]"
                 : "bg-[#0C0C0E] text-gray-400 border-[#27272A]"
             }`}
         >
-          {status === value && <Dot className="text-white" />} {label}
+          {user.status === value && <Dot className="text-white" />} {label}
         </button>
       ))}
     </div>

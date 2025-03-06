@@ -25,7 +25,7 @@ interface SocialsType {
   }
   
   interface WorkExperienceType {
-    tag: string;
+    tag: string[];
     orgName: string;
     positionName: string;
     from: Date;

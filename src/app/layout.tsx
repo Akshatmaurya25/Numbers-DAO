@@ -47,7 +47,7 @@ export default function RootLayout({
             },
             // Create embedded wallets for users who don't have a wallet
             embeddedWallets: {
-              createOnLogin: "users-without-wallets",
+              createOnLogin: "users-without-wallets" ,
             },
           }}
         >
