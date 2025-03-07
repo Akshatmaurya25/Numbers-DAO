@@ -4,9 +4,9 @@ import NumCard from "../ui/NumCard";
 
 const NumbersSection = () => {
   return (
-    <div className="bg-black h-screen min-h-fit w-full pb-6 px-8  sm:px-12 md:px-16 lg:px-20 xl:px-32 2xl:px-60">
+    <div className="bg-black h-screen min-h-fit w-full pb-6 px-8  sm:px-12 md:px-16 pt-28  lg:px-20 xl:px-32 2xl:px-60">
 
-      <h2 className="text-2xl pb-6 text-center md:text-7xl lg:text-[50px] leading-tight lg:leading-[58px] font-semibold bg-gradient-to-r from-white to-white/90 text-transparent bg-clip-text">
+      <h2 className="text-2xl pb-6  text-center md:text-7xl lg:text-[50px] leading-tight lg:leading-[58px] font-semibold bg-gradient-to-r from-white to-white/90 text-transparent bg-clip-text">
         The Numbers Priciples
       </h2>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 ">
