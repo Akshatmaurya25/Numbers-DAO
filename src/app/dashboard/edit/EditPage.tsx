@@ -99,14 +99,20 @@ const EditPage = (props: UserDocument) => {
 
   const addObject = () => {
     if (modal == "Projects") {
+      console.log(value3);
       const newProject = {
         projectName: value.Name,
         projectDescription: value1.Description,
         liveLink: value2["Live link"],
-        imageLink: value3["Project Image"] || "",
+        imageLink: value3 || "",
         sourceLink: value4["Source link"],
       };
-      setUser({ ...user, projects: [...user.projects, newProject] });
+      console.log("new project", newProject);
+      setUserDetails({
+        ...userDetails,
+        projects: [...userDetails.projects, newProject],
+      });
+      console.log(userDetails);
     }
     if (modal == "Milestones") {
       const newMilestone = {
@@ -114,24 +120,32 @@ const EditPage = (props: UserDocument) => {
         description: value1.Description,
         reference: value2.Reference,
       };
-      setUser({ ...user, milestones: [...user.milestones, newMilestone] });
+      setUserDetails({
+        ...userDetails,
+        milestones: [...userDetails.milestones, newMilestone],
+      });
     }
     if (modal == "Work Experience") {
+      console.log(value4);
       const newWorkExperience = {
         tag: tag,
         orgName: value1["Organisation name"],
         positionName: value2.Position,
         from: new Date(value3.From),
-        to: new Date(value4.To),
+        to: value4 !== null ? new Date(value4.To) : null,
         orgLogoLink: value5,
       };
-      setUser({
-        ...user,
-        workExperience: [...user.workExperience, newWorkExperience],
+      setUserDetails({
+        ...userDetails,
+        workExperience: [...userDetails.workExperience, newWorkExperience],
       });
     }
     if (modal == "Domains") {
-      setDomains([...domains, value.Domains]);
+      console.log("domains", value);
+      setUserDetails({
+        ...userDetails,
+        domains: [...userDetails.domains, value.Domains],
+      });
     }
     setTag([]);
     setValue("");
@@ -140,9 +154,8 @@ const EditPage = (props: UserDocument) => {
     setValue3("");
     setValue4("");
     setValue5("");
-    closeModal();
 
-    Assembler();
+    // closeModal();
   };
 
   const Assembler = async () => {
@@ -154,20 +167,21 @@ const EditPage = (props: UserDocument) => {
 
     await setUserDetails((prev) => ({
       ...prev,
-      socials,
+      socials: socials,
       projects,
       milestones,
       workExperience,
       domains,
     }));
-
-    console.log("user Details", userDetails);
   };
 
   const handleSubmit = async () => {
-    Assembler();
-    let res1 = axios.patch("/api/user/", {
-      ...user,
+    console.log("user Details for request", userDetails);
+
+    let res1;
+    res1 = axios.patch("/api/user/", {
+      ...userDetails,
+      socials: socials,
     });
     let res = await res1;
     toast.promise(res1, {
@@ -176,6 +190,7 @@ const EditPage = (props: UserDocument) => {
       error: "Failed to update user",
     });
     if (res.status == 200) {
+      console.log("Response for update request", res.data);
       setUser(res.data.result);
     }
   };
@@ -211,7 +226,7 @@ const EditPage = (props: UserDocument) => {
                 </>
               )}
               {modal == "Work Experience" && (
-                <>
+                <div className="flex flex-col items-start gap-2">
                   <TagField label={"Tag"} setValue={setTag} value={tag} />
                   <InputField
                     label={"Organisation name"}
@@ -219,9 +234,26 @@ const EditPage = (props: UserDocument) => {
                   />
                   <InputField label={"Position"} setValue={setValue2} />
                   <InputField label={"From"} setValue={setValue3} />
-                  <InputField label={"To"} setValue={setValue4} />
+
+                  <InputField
+                    label={"To"}
+                    disabled={value4 === null}
+                    setValue={setValue4}
+                  />
+                  <div className=" flex gap-2 items-center">
+                    <input
+                      type="checkbox"
+                      onChange={(e) =>
+                        (e.target.checked && setValue4(null)) ||
+                        (!e.target.checked && setValue4(""))
+                      }
+                    />
+                    <p className="text-sm">
+                      Click if you are currently working here
+                    </p>
+                  </div>
                   <UploadField label={"Org Logo"} setValue={setValue5} />
-                </>
+                </div>
               )}
               {modal == "Domains" && (
                 <>
@@ -231,7 +263,7 @@ const EditPage = (props: UserDocument) => {
             </div>
             <button
               onClick={addObject}
-              className="text-white ml-auto mt-6 w-full rounded-md px-3 py-1 bg-[#000044]"
+              className="text-white ml-auto mt-6 w-full rounded-md px-3 py-1 bg-[#121212] border border-white"
             >
               Add
             </button>
@@ -239,7 +271,7 @@ const EditPage = (props: UserDocument) => {
         </div>
       )}
 
-      <div className="bg-black w-full grid xl:grid-cols-2 md:grid-cols-1">
+      <div className="bg-black w-full grid xl:grid-cols-2 md:grid-cols-1 min-h-fit pb-16">
         <div className="px-4 md:px-16 py-10">
           <div className="w-full h-full flex flex-col gap-4">
             <div className="Username flex flex-col gap-2">
@@ -303,29 +335,29 @@ const EditPage = (props: UserDocument) => {
             <SocialLinksInput setSocials={setSocials} socials={socials} />
           </div>
         </div>
-        <div className="px-4 md:px-16 py-10">
-          <div className="w-full custom-scrollbar xl:h-[46rem] flex flex-col gap-5">
+        <div className="px-4 md:px-16 py-10 h-fit">
+          <div className="w-full custom-scrollbar flex flex-col gap-5">
             <AddField
               label={"Projects"}
-              value={user.projects}
+              value={userDetails.projects}
               setValue={setProjects}
               openModal={openModal}
             />
             <AddField
               label={"Milestones"}
-              value={user.milestones}
+              value={userDetails.milestones}
               setValue={setMilestones}
               openModal={openModal}
             />
             <AddField
               label={"Work Experience"}
-              value={user.workExperience}
+              value={userDetails.workExperience}
               setValue={setWorkExperience}
               openModal={openModal}
             />
             <AddField
               label={"Domains"}
-              value={user.domains}
+              value={userDetails.domains}
               setValue={setDomains}
               openModal={openModal}
             />
@@ -347,12 +379,14 @@ const EditPage = (props: UserDocument) => {
 const InputField = ({
   label,
   value,
+  disabled,
   setValue,
   placeHolder,
   maxLength,
 }: {
   label?: string;
   value?: any;
+  disabled?: boolean;
   setValue?: any;
   maxLength?: number;
   placeHolder?: string;
@@ -366,9 +400,12 @@ const InputField = ({
         placeholder={label ? label : placeHolder}
         type={label == "From" || label === "To" ? "date" : "text"}
         maxLength={maxLength}
+        disabled={disabled}
         value={value && label && value?.[label]}
         onChange={(e) => setValue({ ...value, [label!]: e.target.value })}
-        className="placeholder-zinc-700 bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
+        className={`placeholder-zinc-700  ${
+          !disabled ? "bg-[#0C0C0E]" : "bg-[#5a5a5a]"
+        } border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]`}
       />
     </div>
   );
@@ -496,7 +533,7 @@ const SocialDropDown = ({
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex gap-3">
       <div className="relative">
         <select
           value={selectedPlatform}
@@ -513,13 +550,13 @@ const SocialDropDown = ({
         </select>
       </div>
       {selectedPlatform && (
-        <div className="flex items-center gap-2">
-          <span className="text-[#A1A1AA]">{platforms[selectedPlatform]}</span>
+        <div className="flex items-center px-3 py-1 rounded-md bg-[#0C0C0E] border border-[#27272A]">
+          <span className="text-[#ffffff]">{platforms[selectedPlatform]}</span>
           <input
             type="text"
             value={username}
             onChange={(e) => handleUsernameChange(e.target.value)}
-            className="bg-[#0C0C0E] border border-[#27272A] px-3 py-1 rounded-md text-[#A1A1AA] w-full"
+            className="bg-[#ffffff00] outline-none  text-[#ffffff] placeholder:text-[#6e6e6e] w-full"
             placeholder="username"
           />
         </div>
@@ -540,7 +577,9 @@ const AddField = ({
   openModal: any;
 }) => {
   const handleDelete = (index: number) => {
-    setValue(value.filter((_, i) => i !== index));
+    console.log(value, "and", index);
+    let res = value.filter((_, i) => i !== index);
+    setValue(res);
   };
 
   return (

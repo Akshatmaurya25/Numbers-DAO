@@ -17,7 +17,6 @@ function formatDateToShortString(dateString: string): string {
 }
 
 const WorkExperienceCard = (props: any) => {
-  console.log(props);
   return (
     <div className="flex items-center max-w-xl justify-between p-4 bg-[#131313] rounded-lg shadow-lg w-full text-white relative">
       <div className="flex items-center gap-4">

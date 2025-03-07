@@ -88,6 +88,8 @@ const logos: {
   {
     src: AirDAO,
     alt: "Air DAO",
+    height: "105",
+    width: "200",
   },
 
   {
@@ -103,10 +105,10 @@ const logos: {
     alt: "Base Protocol",
   },
   {
-    src: bera,
+    src: "/Bera.png",
     alt: "Bera Chain",
-    // width: "160",
-    // height: "60",
+    width: "200",
+    height: "100",
   },
   {
     src: scroll,

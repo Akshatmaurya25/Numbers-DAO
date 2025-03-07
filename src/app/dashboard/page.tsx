@@ -96,11 +96,11 @@ const page = () => {
     });
     return (
       <div className="h-fit p-6 items-center  gap-2 justify-center flex flex-col text-black ">
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username">Enter Username</label>
         <input
           type="text"
           id="username"
-          className="text-black"
+          className="text-black p-2 outline-gray-500 bg-[#f0f0f0] rounded"
           value={data.username}
           onChange={(e) =>
             setData({ ...data, username: e.target.value.toLowerCase() })
@@ -161,9 +161,9 @@ const page = () => {
       </div>
 
       {activated == "Portfolio" && <Dashboard {...User} />}
-      {activated == "Edit" && ( 
+      {activated == "Edit" && (
         <div className="flex justify-center items-center ">
-          <EditPage {...User as UserDocument} />
+          <EditPage {...(User as UserDocument)} />
         </div>
       )}
     </div>
