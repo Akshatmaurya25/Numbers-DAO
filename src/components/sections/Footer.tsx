@@ -121,7 +121,20 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className=" w-full top-0  h-full absolute"></div>
+      <div className="w-full z-50 md:px-[3rem] sm:px-[1.5rem] lg:px-[9.5rem] py-5 flex flex-col gap-5">
+        <div className="w-full border border-zinc-800"></div>
+        <div className="w-full text-white flex justify-between lg:flex-row md:flex-row sm:flex-col">
+          <p className="text-sm text-zinc-600 hidden lg:block">© Copyright NumbersDAO 2025</p>
+          <div className="flex gap-12 lg:w-fit w-full justify-between">
+            <p>
+              <Link href="/privacy-policy">Privacy Policy</Link>
+            </p>
+            <p>
+              <Link href="/terms-of-service">Terms of Service</Link>
+            </p>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }
