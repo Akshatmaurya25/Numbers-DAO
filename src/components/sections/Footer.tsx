@@ -1,5 +1,7 @@
 "use client";
 import Link from "next/link";
+import { FaXTwitter } from "react-icons/fa6";
+import { BiLogoTelegram } from "react-icons/bi";
 
 export default function Footer() {
   return (
@@ -121,11 +123,17 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="w-full z-50 md:px-[3rem] sm:px-[1.5rem] lg:px-[9.5rem] py-5 flex flex-col gap-5">
+      <div className="w-full z-50 py-5 flex flex-col gap-5">
         <div className="w-full border border-zinc-800"></div>
-        <div className="w-full text-white flex justify-between lg:flex-row md:flex-row sm:flex-col">
-          <p className="text-sm text-zinc-600 hidden lg:block">© Copyright NumbersDAO 2025</p>
-          <div className="flex gap-12 lg:w-fit w-full justify-between">
+        <div className="w-full md:px-[3rem] sm:px-[1.5rem] lg:px-[9.5rem] text-white flex justify-between lg:flex-row md:flex-row sm:flex-col">
+          <div className="flex gap-2 items-center ml-5 lg:ml-0">
+            <Link href={""} className="text-black bg-white rounded-sm p-1"><BiLogoTelegram /></Link>
+            <Link href={""} className="text-black bg-white rounded-sm p-1 mr-3 "><FaXTwitter /></Link>
+            <p className="text-sm text-zinc-600 hidden lg:block">
+              © Copyright NumbersDAO 2025
+            </p>
+          </div>
+          <div className="flex gap-12 lg:w-fit w-full justify-between hidden lg:block">
             <p>
               <Link href="/privacy-policy">Privacy Policy</Link>
             </p>
