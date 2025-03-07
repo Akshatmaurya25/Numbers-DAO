@@ -38,7 +38,7 @@ export default function DeveloperSection() {
                   <LinkIcon className="h-3.5 w-3.5 text-[#00A2A2]" />
                 </div>
                 <span className="text-base ">
-                  Cross-chain synchronous composability today
+                Make it easier for leading Web3 ecosystems and protocols to onboard builders and creators
                 </span>
               </div>
 
@@ -83,7 +83,7 @@ export default function DeveloperSection() {
                   </svg>
                 </div>
                 <span className="text-base ">
-                  Scalable native applications with access to Ethereum liquidity
+                Enhance user acquisition efforts for Web3 ecosystems
                 </span>
               </div>
 
@@ -91,7 +91,7 @@ export default function DeveloperSection() {
                 <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FFF7ED]">
                   <Sparkles className="h-3.5 w-3.5 text-[#FB923C]  " />
                 </div>
-                <span className="text-base ">Reduced ecosystem dependency</span>
+                <span className="text-base ">Integrate user acquisition efforts as an input to loyalty and rewards strategies</span>
               </div>
             </div>
 
