@@ -32,7 +32,7 @@ export default function ApostrophyQuote() {
 
           <div className="max-w-3xl flex flex-col  justify-center items-center mx-auto relative z-10 px-4 lg:px-0">
             <h2 className="text-3xl lg:text-[50px] leading-tight lg:leading-[58px] font-bold mb-4 lg:mb-6">
-              Full autonomy for AI? We don&apos;t even give that to humans.
+            Driving Innovation and Collaboration
             </h2>
             <p className="text-base lg:text-lg text-whi mb-6 lg:mb-8">
             We aim to unlock the potential of talent across global market, helping them learn, collaborate, and create impactful solutions for the future of Web3 and AI
