@@ -88,7 +88,7 @@ const partners = [
   {
     name: "Tanushka Sahu",
     role: "Technical Content Writer",
-    imageLink: "/team/tanushka.jpg",
+    imageLink: "/team/arc/tanushka.jpg",
     description:
       "Passionate about creating engaging technical articles and documentation.",
   },
@@ -213,11 +213,9 @@ export default function PartnersGrid() {
                   />
                   {/* Static info for mobile, visible by default */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/90 to-transparent flex items-end p-6 md:opacity-0 md:group-hover:opacity-100 md:transition-opacity md:duration-300">
-                    <div className="text-white md:transform md:translate-y-4 md:group-hover:translate-y-0 md:transition-transform md:duration-300">
-                      <h3 className="text- font-semibold mb-2">
-                        {partner.name}
-                      </h3>
-                      <p className="text-sm text-blue-300 mb-3">
+                    <div className="text-white md:transform md:translate-y-4 md:group-hover:translate-y-0 md:transition-transform md:duration-300 flex flex-col">
+                      <h3 className="text- font-semibold">{partner.name}</h3>
+                      <p className="text-sm text-blue-300 mb-2">
                         {partner.role}
                       </p>
                       <p className="text-sm text-gray-300">

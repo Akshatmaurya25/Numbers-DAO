@@ -94,7 +94,7 @@ const EditPage = (props: UserDocument) => {
       setImgLoading(false);
     }
     const imageLink = generator.generateRandomAvatar();
-    setUser({ ...user, profileImage: imageLink });
+    setUserDetails({ ...user, profileImage: imageLink });
   };
 
   const addObject = () => {
@@ -274,12 +274,39 @@ const EditPage = (props: UserDocument) => {
       <div className="bg-black w-full grid xl:grid-cols-2 md:grid-cols-1 min-h-fit pb-16">
         <div className="px-4 md:px-16 py-10">
           <div className="w-full h-full flex flex-col gap-4">
-            <div className="Username flex flex-col gap-2">
+            <div className="Username flex flex-col gap-2  ">
               <p className="text-white text-lg font-medium">Username</p>
               <input
                 type="text"
                 readOnly
                 value={userDetails.username}
+                className="bg-[#4c4c4c] border border-[#27272A] hover:cursor-not-allowed w-full px-3 py-1 rounded-md text-[#A1A1AA]"
+              />
+            </div>
+            <div className="Username flex flex-col gap-2  ">
+              <p className="text-white text-lg font-medium">Email</p>
+              <input
+                type="text"
+                readOnly
+                value={String(userDetails?.email || "")}
+                className="bg-[#4c4c4c] border border-[#27272A] hover:cursor-not-allowed w-full px-3 py-1 rounded-md text-[#A1A1AA]"
+              />
+            </div>
+
+            <div className="Username flex flex-col gap-2 ">
+              <p className="text-white text-lg font-medium">Gender</p>
+              <input
+                type="text"
+                readOnly
+                value={userDetails.gender || ""}
+                className="bg-[#4c4c4c] border border-[#27272A] hover:cursor-not-allowed w-full max-w-24 px-3 py-1 rounded-md text-[#A1A1AA]"
+              />
+            </div>
+            <div className="Username flex flex-col gap-2">
+              <p className="text-white text-lg font-medium">Contact</p>
+              <input
+                type="text"
+                value={String(userDetails?.contact || "")}
                 className="bg-[#0C0C0E] border border-[#27272A] w-full px-3 py-1 rounded-md text-[#A1A1AA]"
               />
             </div>
@@ -304,7 +331,7 @@ const EditPage = (props: UserDocument) => {
                   ) : user.profileImage ? (
                     <div className="flex gap-2 items-center ">
                       <img
-                        src={user.profileImage}
+                        src={userDetails.profileImage}
                         alt="Preview"
                         className="w-full h-full object-cover"
                       />

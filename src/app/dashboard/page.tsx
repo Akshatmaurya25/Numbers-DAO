@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import EditPage from "./edit/EditPage";
 import { AvatarGenerator } from "random-avatar-generator";
 import { Loader } from "@/components/ui/loader";
+import Image from "next/image";
 const page = () => {
   const { user } = usePrivy();
   const [loading, setLoading] = useState(true);
@@ -62,8 +63,23 @@ const page = () => {
     };
   };
   const FormUsername = () => {
+    const [tab, setTab] = useState(1);
     const [duplicate, setDuplicate] = useState("");
-    const createAccount = async (data: Object) => {
+    const [data, setData] = useState({
+      username,
+      email: "",
+      contact: "",
+      gender: "",
+    });
+    const createAccount = async (data: {
+      username: string;
+      email: string;
+      contact: string;
+      gender: string;
+    }) => {
+      if (!data.username || !data.email || !data.gender) {
+        return setDuplicate("All required are not provided.");
+      }
       if (user) {
         const imageLink = generator.generateRandomAvatar();
         console.log(imageLink);
@@ -83,7 +99,7 @@ const page = () => {
           console.log("Creating account");
           console.log(res.data);
           closeModal();
-          setUser(res.data);
+          setUser(res.data.resultdi);
         } catch (error) {
           const err = error as TypeError;
           console.error("Error creating account:", err.response?.data?.error);
@@ -91,34 +107,157 @@ const page = () => {
         }
       }
     };
-    const [data, setData] = useState({
-      username,
-    });
+
     return (
-      <div className="h-fit p-6 items-center  gap-2 justify-center flex flex-col text-black ">
-        <label htmlFor="username">Enter Username</label>
-        <input
-          type="text"
-          id="username"
-          className="text-black p-2 outline-gray-500 bg-[#f0f0f0] rounded"
-          value={data.username}
-          onChange={(e) =>
-            setData({ ...data, username: e.target.value.toLowerCase() })
-          }
-        />
-        {duplicate && <p className="text-red-500">{duplicate}</p>}
+      <div className="h-fit p-6 min-h-96 items-center  gap-2 justify-center flex flex-col text-black ">
+        <div className="min-h-68 flex items-center flex-col gap-2 justify-center text-center">
+          {tab == 1 && (
+            <>
+              <Image
+                height={200}
+                width={200}
+                src="/onboarding/tab1.svg"
+                alt={`${tab}`}
+              />
+              <h1 className="text-2xl"> Lets get started </h1>
+              <p className="text-sm">
+                Let get started with some of details which will help understand
+                you better
+              </p>
+            </>
+          )}
+          {tab == 2 && (
+            <>
+              <Image
+                height={200}
+                width={200}
+                src="/onboarding/tab2.svg"
+                alt={`${tab}`}
+              />
+              <h1 className="text-2xl">Provide your information</h1>
+              <p className="text-sm">
+                Provide information about yourself, your work, milestone and
+                experience.
+              </p>
+            </>
+          )}
+          {tab == 3 && (
+            <>
+              <Image
+                height={200}
+                width={200}
+                src="/onboarding/tab3.svg"
+                alt={`${tab}`}
+              />
+              <h1 className="text-2xl">Build Portfolio</h1>
+              <p className="text-sm">
+                Build a industry level protfolio to showcase your work.
+              </p>
+            </>
+          )}
+          {tab == 4 && (
+            <>
+              <div className="flex flex-col gap-2 items-start">
+                <label htmlFor="username">
+                  Enter Username<span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  className="text-black w-[260px] p-2 outline-gray-500 bg-[#f0f0f0] rounded"
+                  value={data.username}
+                  onChange={(e) =>
+                    setData({ ...data, username: e.target.value.toLowerCase() })
+                  }
+                />
+
+                <label htmlFor="email">
+                  Email<span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="text-black w-[260px] p-2 outline-gray-500 bg-[#f0f0f0] rounded"
+                  value={data.email}
+                  onChange={(e) =>
+                    setData({ ...data, email: e.target.value.toLowerCase() })
+                  }
+                />
+                <label htmlFor="contact">Contact </label>
+                <input
+                  type="tel"
+                  id="contact"
+                  className="text-black w-[260px] p-2 outline-gray-500 bg-[#f0f0f0] rounded"
+                  value={data.contact}
+                  onChange={(e) =>
+                    setData({ ...data, contact: e.target.value.toLowerCase() })
+                  }
+                />
+                <label htmlFor="gender">
+                  Gender<span className="text-red-600">*</span>{" "}
+                </label>
+                <div className="flex items-center gap-2 ">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    id="male"
+                    className="text-black p-2 outline-gray-500 bg-[#f0f0f0] rounded"
+                    onChange={(e) =>
+                      setData({ ...data, gender: e.target.value })
+                    }
+                  />
+                  <label htmlFor="male" className="">
+                    Male
+                  </label>
+
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="female"
+                    id="female"
+                    className="text-black p-2 outline-gray-500 bg-[#f0f0f0] rounded"
+                    onChange={(e) =>
+                      setData({ ...data, gender: e.target.value })
+                    }
+                  />
+                  <label htmlFor="female" className="">
+                    Female
+                  </label>
+                </div>
+                {duplicate && <p className="text-red-500">{duplicate}</p>}
+              </div>
+            </>
+          )}
+        </div>
+        <div className="flex gap-2 my-2 justify-center items-center">
+          {[1, 2, 3, 4].map((t, index) => (
+            <div
+              key={index}
+              className={`h-1 w-1 rounded-full ${
+                t === tab ? "bg-[#3a3a3a]" : "bg-[#acacac]"
+              }`}
+            />
+          ))}
+        </div>
         <div className="flex gap-2 ">
           <button
-            className="bg-black text-white px-8 py-2 rounded "
-            onClick={() => createAccount(data)}
+            className="border-black border-solid border-2  text-black px-8 py-2 rounded "
+            onClick={() => {
+              if (tab > 1) setTab(tab - 1);
+            }}
           >
-            Submit
+            Previous
           </button>
           <button
-            className="border-black border-solid border-2  text-black px-8 py-2 rounded "
-            onClick={() => closeModal}
+            className="bg-black w-fit text-white px-8 py-2 rounded "
+            onClick={() => {
+              if (tab === 4) {
+                createAccount(data);
+              } else setTab(tab + 1);
+            }}
           >
-            Close
+            {tab == 4 ? "Submit" : "Next"}
           </button>
         </div>
       </div>

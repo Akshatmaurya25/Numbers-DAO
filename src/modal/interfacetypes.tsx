@@ -42,6 +42,9 @@ export interface UserDocument {
   _id?: string;
   username: string;
   name?: string;
+  gender?: string;
+  email?: String;
+  contact?: String;
   profileImage?: string;
   joined: Date;
   authId: string;

@@ -2,6 +2,7 @@ import DeveloperSection from "@/components/sections/developer-section";
 import PartnerCarousel from "@/components/sections/partner-carousel";
 import React from "react";
 import ProfileCard from "./profile-card";
+import Heading from "@/utils/Heading";
 
 function page() {
   const datadummy = [
@@ -270,12 +271,13 @@ function page() {
   ];
 
   return (
-    <div>
+    <div className="grotesk">
       <PartnerCarousel />
       <div className="bg-black">
-        <h2 className="text-white text-center py-16 font-semibold text-4xl md:text-4xl lg:text-[4rem] font-space-grotesk mb-2">
+        <h2 className="text-white text-center py-16 font-semibold text-4xl md:text-4xl lg:text-[4rem]  mb-2">
           Our Contributors
         </h2>
+
         <div className="md:px-[8rem] px-[2.5rem] grid grid-cols-4 gap-8 ">
           {data &&
             data.length &&

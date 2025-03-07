@@ -48,12 +48,13 @@ export async function POST(req: Request) {
       );
     }
     
-    await User.create(user.data);
+    let userResult = await User.create(user.data);
     
     return NextResponse.json({
       msg: "User created successfully",
       success: true,
-      status: 200
+      status: 200,
+      result: userResult,
     });
   } catch (error: unknown) {
     if (error instanceof Error && error.message.includes('E11000')) {
@@ -61,7 +62,7 @@ export async function POST(req: Request) {
       const mongoError = error as any;
       console.log(mongoError.keyValue);
       return NextResponse.json(
-        { error: `Duplicate Key found ${Object.keys(mongoError.keyValue)[0]}`,
+        { error: `${Object.keys(mongoError.keyValue)[0]} is not available`,
          duplicate : Object.keys(mongoError.keyValue)[0] }, 
         { status: 409 }
       );

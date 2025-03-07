@@ -12,7 +12,7 @@ export const Hero = () => {
   // Disable login when Privy is not ready or the user is already authenticated
   const disableLogin = !ready || (ready && authenticated);
   return (
-    <div className=" relative mt-16 mb-10">
+    <div className=" relative mt-16 mb-10 ">
       {/* <div className="h-[75vh] overflow-hidden w-full justify-center items-center flex flex-col  bg-black p-4 rounded-2xl">
         <Vortex
           backgroundColor="black"
@@ -27,24 +27,22 @@ export const Hero = () => {
           <AnimatedNumberText />
         </Vortex>
       </div> */}
-      <div className="relative w-full h-full">
+      <div className="relative min-h-svh w-full h-full">
         {/* <div className="w-full h-full absolute bg-black opacity-40"></div> */}
         <video
-          width="1920"
-          height="1080"
           controls={false}
           autoPlay
           loop
           muted
-          className="w-full h-full  object-cover"
+          className="w-full h-full  min-h-svh object-cover"
         >
           <source src="particle.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
         {/* Overlay Content */}
-        <div className="absolute gap-4 inset-0 flex flex-col items-center justify-center text-white montserrat">
-          <h1 className="text-4xl font-normal ">
+        <div className="absolute  gap-4 inset-0 flex flex-col items-center justify-center text-white montserrat">
+          <h1 className="md:text-4xl text-3xl text-center font-normal ">
             Connecting Builders and Ecosystems
           </h1>
           <AnimatedNumberText />
@@ -113,7 +111,7 @@ const AnimatedNumberText = () => {
 
   return (
     <div className="">
-      <div className=" text-[78px] lg:text-[120px] grotesk leading-none  font-bold text-whi font-mono">
+      <div className=" text-[58px] lg:text-[120px] grotesk leading-none  font-bold text-whi font-mono">
         {displayText || (isAnimating ? "0".repeat(finalText.length) : "")}
       </div>
     </div>
