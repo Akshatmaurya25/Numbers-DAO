@@ -112,42 +112,42 @@ function CommunityCard({
   members,
 }: CommunityCardProps) {
   return (
-    <div className="rounded-2xl bg-gradient-to-br from-black via-[#1a1a1a] to-[#262626] text-white p-6 transition-all duration-500 ease-in-out hover:from-[#1a1a1a] hover:via-[#262626] hover:to-[#333333] hover:shadow-[0_0_20px_rgba(0,139,163,0.15)] group">
+    <div className="rounded-2xl bg-gradient-to-br from-black via-[#1a1a1a] to-[#262626] text-white p-6 transition-all duration-500 ease-in-out hover:from-[#1a1a1a] hover:via-[#262626] hover:to-[#333333] hover:shadow-[0_0_20px_rgba(0,139,163,0.15)] hover:scale-105 group">
       <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href={href}
-        className="group items-center flex h-full flex-col"
+      target="_blank"
+      rel="noopener noreferrer"
+      href={href}
+      className="group items-center flex h-full flex-col"
       >
-        <div className="flex w-full flex-col items-start gap-6 lg:flex-row lg:items-center">
-          <div className="order-2 flex-grow lg:order-1 transition-colors duration-300 group-hover:text-[#008BA3]">{icon}</div>
-          <span className="order-1 rounded-full bg-[#008BA3]/10 px-3 py-1 text-xs font-medium lg:order-2 border border-[#C0C0C0] shadow-md transition-all duration-300 group-hover:bg-[#008BA3]/20 group-hover:border-[#008BA3]">
-            {label}
-          </span>
+      <div className="flex w-full flex-col items-start gap-6 lg:flex-row lg:items-center">
+        <div className="order-2 flex-grow lg:order-1 transition-colors duration-300 group-hover:text-[#008BA3]">{icon}</div>
+        <span className="order-1 rounded-full bg-[#008BA3]/10 px-3 py-1 text-xs font-medium lg:order-2 border border-[#C0C0C0] shadow-md transition-all duration-300 group-hover:bg-[#008BA3]/20 group-hover:border-[#008BA3]">
+        {label}
+        </span>
+      </div>
+      <div className="mt-6 flex w-full grow flex-col prose-p:text-sm prose-p:font-thin">
+        <div className="mb-8 flex flex-row items-start">
+        <h3 className="m-0 flex grow flex-col gap-2 py-0 pl-0 text-lg font-medium group-hover:text-secondary sm:gap-3 sm:pr-4 lg:text-2xl">
+          {title}
+        </h3>
+        <svg
+          width="20"
+          height="18"
+          viewBox="0 0 20 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="inline-block flex-shrink-0 fill-current h-[24px] w-[24px] group-hover:text-secondary md:h-[32px] md:w-[32px]"
+        >
+          <path d="M13.4583 6.64901L5.82687 14.2644C5.69709 14.3884 5.54298 14.4503 5.36454 14.4503C5.18609 14.4503 5.03198 14.3884 4.9022 14.2644C4.77827 14.1346 4.71631 13.9805 4.71631 13.8021C4.71631 13.6236 4.77827 13.4695 4.9022 13.3398L12.5176 5.70832H5.86502C5.69456 5.70832 5.5425 5.64146 5.40883 5.50774C5.27515 5.374 5.20831 5.21856 5.20831 5.04141C5.20831 4.86424 5.27515 4.70889 5.40883 4.57534C5.5425 4.4418 5.69678 4.37503 5.87168 4.37503H14C14.2112 4.37503 14.396 4.45416 14.5542 4.61241C14.7125 4.77066 14.7916 4.9554 14.7916 5.16663V13.2949C14.7916 13.4699 14.7247 13.6241 14.591 13.7578C14.4573 13.8915 14.3018 13.9583 14.1247 13.9583C13.9475 13.9583 13.7922 13.8915 13.6586 13.7578C13.5251 13.6241 13.4583 13.4721 13.4583 13.3016V6.64901Z" />
+        </svg>
         </div>
-        <div className="mt-6 flex w-full grow flex-col prose-p:text-sm prose-p:font-thin">
-          <div className="mb-8 flex flex-row items-start">
-            <h3 className="m-0 flex grow flex-col gap-2 py-0 pl-0 text-lg font-medium group-hover:text-secondary sm:gap-3 sm:pr-4 lg:text-2xl">
-              {title}
-            </h3>
-            <svg
-              width="20"
-              height="18"
-              viewBox="0 0 20 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="inline-block flex-shrink-0 fill-current h-[24px] w-[24px] group-hover:text-secondary md:h-[32px] md:w-[32px]"
-            >
-              <path d="M13.4583 6.64901L5.82687 14.2644C5.69709 14.3884 5.54298 14.4503 5.36454 14.4503C5.18609 14.4503 5.03198 14.3884 4.9022 14.2644C4.77827 14.1346 4.71631 13.9805 4.71631 13.8021C4.71631 13.6236 4.77827 13.4695 4.9022 13.3398L12.5176 5.70832H5.86502C5.69456 5.70832 5.5425 5.64146 5.40883 5.50774C5.27515 5.374 5.20831 5.21856 5.20831 5.04141C5.20831 4.86424 5.27515 4.70889 5.40883 4.57534C5.5425 4.4418 5.69678 4.37503 5.87168 4.37503H14C14.2112 4.37503 14.396 4.45416 14.5542 4.61241C14.7125 4.77066 14.7916 4.9554 14.7916 5.16663V13.2949C14.7916 13.4699 14.7247 13.6241 14.591 13.7578C14.4573 13.8915 14.3018 13.9583 14.1247 13.9583C13.9475 13.9583 13.7922 13.8915 13.6586 13.7578C13.5251 13.6241 13.4583 13.4721 13.4583 13.3016V6.64901Z" />
-            </svg>
-          </div>
-          <div className="flex grow flex-col">
-            <div className="flex-grow">
-              <p>{description}</p>
-            </div>
-            <p className="mt-4">{members}</p>
-          </div>
+        <div className="flex grow flex-col">
+        <div className="flex-grow">
+          <p>{description}</p>
         </div>
+        <p className="mt-4">{members}</p>
+        </div>
+      </div>
       </a>
     </div>
   );
