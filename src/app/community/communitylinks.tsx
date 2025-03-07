@@ -112,16 +112,16 @@ function CommunityCard({
   members,
 }: CommunityCardProps) {
   return (
-    <div className="rounded-2xl bg-black text-white p-6">
+    <div className="rounded-2xl bg-gradient-to-br from-black via-[#1a1a1a] to-[#262626] text-white p-6 transition-all duration-500 ease-in-out hover:from-[#1a1a1a] hover:via-[#262626] hover:to-[#333333] hover:shadow-[0_0_20px_rgba(0,139,163,0.15)] group">
       <a
         target="_blank"
         rel="noopener noreferrer"
         href={href}
-        className="group items-center group flex h-full flex-col"
+        className="group items-center flex h-full flex-col"
       >
         <div className="flex w-full flex-col items-start gap-6 lg:flex-row lg:items-center">
-          <div className="order-2 flex-grow lg:order-1">{icon}</div>
-          <span className="order-1 rounded-full bg-[#008BA3]/10 px-3 py-1 text-xs font-medium lg:order-2 border border-[#C0C0C0] shadow-md">
+          <div className="order-2 flex-grow lg:order-1 transition-colors duration-300 group-hover:text-[#008BA3]">{icon}</div>
+          <span className="order-1 rounded-full bg-[#008BA3]/10 px-3 py-1 text-xs font-medium lg:order-2 border border-[#C0C0C0] shadow-md transition-all duration-300 group-hover:bg-[#008BA3]/20 group-hover:border-[#008BA3]">
             {label}
           </span>
         </div>

@@ -23,7 +23,7 @@ export default function DynamicLogoCard({
   return (
     <a
       href={href}
-      className="block w-full max-w-[320px] aspect-[4/5] relative group"
+      className="block w-full max-w-[380px] aspect-[3/4] relative group"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
@@ -43,7 +43,7 @@ export default function DynamicLogoCard({
         {/* Background Logo */}
         <div 
           className={`
-            absolute left-[-6rem] top-1/2 -translate-y-1/2 w-3/4 aspect-square grayscale 
+            absolute left-[-6rem] top-1/2 -translate-y-1/2 w-3/4 aspect-square 
             opacity-[3%] transition-all duration-300 ease-in-out
             ${isHovering ? 'opacity-[8%] scale-[1.05]' : ''}
           `}
