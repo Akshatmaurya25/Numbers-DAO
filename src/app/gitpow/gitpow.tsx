@@ -90,6 +90,7 @@ export default function FetchGitHubData() {
       setLanguages(Object.entries(languageCount).map(([lang, count]) => ({ name: lang, value: count })));
     } catch (err) {
       setError("Error fetching data");
+      console.error(err);
     } finally {
       setLoading(false);
     }
