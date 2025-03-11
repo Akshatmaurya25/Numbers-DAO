@@ -2,6 +2,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import {config} from "dotenv";
+config();
 
 interface GitHubUser {
   login: string;
@@ -70,7 +72,7 @@ export default function FetchGitHubData() {
       const graphQLRes = await axios.post(
         "https://api.github.com/graphql",
         graphQLQuery,
-        { headers: { Authorization: `Bearer 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` } } // Replace with your GitHub Token
+        { headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` } }
       );
 
       const totalContributions = graphQLRes.data.data.user.contributionsCollection.contributionCalendar.totalContributions;
