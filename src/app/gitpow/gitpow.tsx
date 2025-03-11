@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import {config} from "dotenv";
+import { config } from "dotenv";
 config();
 
 interface GitHubUser {
@@ -40,12 +40,19 @@ export default function FetchGitHubData() {
     setError(null);
 
     try {
+
+      // Verify token exists
+      const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+      if (!token) {
+        throw new Error('GitHub token not configured');
+      }
+
       // Fetch GitHub user profile
       const userRes = await axios.get<GitHubUser>(`https://api.github.com/users/${username}`);
-      
+
       // Fetch repositories
       const reposRes = await axios.get<GitHubRepo[]>(`https://api.github.com/users/${username}/repos?per_page=100`);
-      
+
       // Analyze most used languages
       const languageCount: Record<string, number> = {};
       reposRes.data.forEach((repo) => {
@@ -72,7 +79,7 @@ export default function FetchGitHubData() {
       const graphQLRes = await axios.post(
         "https://api.github.com/graphql",
         graphQLQuery,
-        { headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}` } }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       const totalContributions = graphQLRes.data.data.user.contributionsCollection.contributionCalendar.totalContributions;
@@ -113,7 +120,7 @@ export default function FetchGitHubData() {
           <p>Public Repos: {user.public_repos}</p>
           <p>Followers: {user.followers}</p>
           <p>Contributions (Last Year): {contributions}</p>
-          
+
           <h3 className="mt-4 text-lg font-bold">Most Used Languages</h3>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={languages}>
