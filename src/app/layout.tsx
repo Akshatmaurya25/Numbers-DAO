@@ -10,6 +10,7 @@ import Footer from "@/components/sections/Footer";
 import { ModalProvider } from "@/context/ModalContext";
 import Modal from "@/components/ui/Modal"
 import  { Toaster } from 'react-hot-toast';
+
 config();
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href={"https://res.cloudinary.com/duogkpk5c/image/upload/v1741713593/vjjlvc2oxdwibaqixf8i.png"} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-whi`}
       >
