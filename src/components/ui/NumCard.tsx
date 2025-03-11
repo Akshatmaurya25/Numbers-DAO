@@ -30,7 +30,7 @@ const NumCard = ({
   img: string;
 }) => {
   return (
-    <div className="w-full hover-shadow-box-animation-white transition-all duration-150 hover:scale-[1.05] h-64 flex flex-col rounded-md overflow-hidden">
+    <div className="w-full hover-shadow-box-animation-white transition-all duration-150 hover:scale-[1.01] h-64 flex flex-col rounded-md overflow-hidden">
       <div className="bg-white w-full h-full flex justify-center items-center">
         <Image src={`/${img}.png`} alt={"img"} height={135} width={135}></Image>
       </div>

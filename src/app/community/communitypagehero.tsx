@@ -42,7 +42,7 @@ export default function CommunityPageHero() {
             <Image
               src="https://cartesi.io/static/90df5cd405904e363c14d55b4680d745/dec56/hero.webp"
               alt=""
-              className="h-full w-auto grayscale opacity-25 object-cover object-top"
+              className="h-full w-auto grayscale opacity-25 object-cover -translate-x-20 scale-125 object-top"
               fill
               sizes="(min-width: 4000px) 4000px, 100vw"
               priority

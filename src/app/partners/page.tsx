@@ -2,6 +2,7 @@ import React from "react";
 import DynamicLogoCard from "./_components/dynamic-logo-card";
 
 import Image from "next/image";
+import Link from "next/link";
 
 const partners = [
   {
@@ -70,45 +71,57 @@ const BrandLogos: {
   src: string;
   height?: number;
   width?: number;
+  link: string;
 }[] = [
   {
+    link: "https://devcon.org/en/",
     src: "https://drive.google.com/uc?export=view&id=1mnHcsMrzx_0yFfIIVEylrRyEWCXh64AK",
   },
   {
+    link: "https://twitter.com/Central_DAO",
     name: "Central Dao",
     src: "https://drive.google.com/uc?export=view&id=1pS50HASlVH702ImgZppGMl-d9bBTlvqa",
   },
   {
+    link: "https://securedapp.io/",
     src: "partners/secure.svg",
   },
   {
+    link: "https://www.vyugmetaverse.com/",
     src: "/partners/vyug.png",
   },
 
   {
+    link: "https://www.thecheesecake.xyz/",
     src: "partners/cheescake.svg",
     height: 100,
     width: 100,
   },
   {
+    link: "",
     src: "partners/easydapp.svg",
   },
   {
+    link: "https://zo.xyz/",
     src: "partners/zo.svg",
     // src: "partners/zo.svg",
     height: 80,
     width: 80,
   },
   {
+    link: "",
     src: "https://drive.google.com/uc?export=view&id=1tERDPfQhjzuWdtRACQC4N3IWyn2yTCbY",
   },
   {
+    link: "https://www.hackquest.io/",
     src: "https://drive.google.com/uc?export=view&id=1TpB_6lGfvDCPCSv4xalJ5GhMhVZTKDFC",
   },
   {
+    link: "https://devdock.ai/",
     src: "https://drive.google.com/uc?export=view&id=1-tZLUT4Ao4E6EBbcVP40VXBKQVCgJZS5",
   },
   {
+    link: "https://cubane.space/",
     src: "https://drive.google.com/uc?export=view&id=1rppTuqe3X_E6aTSIYeQrOp7YOFQHElYU",
   },
 ];
@@ -133,16 +146,18 @@ const PartnersPage = () => {
         {/* Third Section */}
         <div className="grid md:grid-cols-4 grid-cols-2 gap-10 md:gap-28 place-items-center md:px-24">
           {BrandLogos.map((val, index) => (
-            <div key={index} className="flex justify-center items-center">
-              <Image
-                src={val.src}
-                width={val?.width || 150}
-                height={val?.height || 50}
-                draggable={false}
-                alt={val.name || "Brand Logo"}
-                className="grayscale  object-contain"
-              />
-            </div>
+            <Link href={val.link}>
+              <div key={index} className="flex justify-center items-center">
+                <Image
+                  src={val.src}
+                  width={val?.width || 150}
+                  height={val?.height || 50}
+                  draggable={false}
+                  alt={val.name || "Brand Logo"}
+                  className="grayscale  object-contain"
+                />
+              </div>
+            </Link>
           ))}
         </div>
       </div>
