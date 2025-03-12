@@ -10,10 +10,10 @@ export async function GET(request: Request) {
   }
 
   try {
-    // Single API call with all needed fields
-    const response = await axios.get('https://api.linkedin.com/v2/me', {
+    // Fetch profile data with all fields
+    const profileResponse = await axios.get('https://api.linkedin.com/v2/me', {
       params: {
-        projection: '(id,localizedFirstName,localizedLastName,headline,profilePicture(displayImage~:playableStreams),positions)'
+        projection: '(id,localizedFirstName,localizedLastName,headline,profilePicture(displayImage~:playableStreams))'
       },
       headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -22,20 +22,14 @@ export async function GET(request: Request) {
       }
     });
 
-    console.log('Raw LinkedIn Response:', JSON.stringify(response.data, null, 2));
+    console.log('Raw Profile Response:', profileResponse.data);
 
-    // Simplified data transformation
     const profileData = {
-      id: response.data.id,
-      firstName: response.data.localizedFirstName || '',
-      lastName: response.data.localizedLastName || '',
-      profilePicture: response.data.profilePicture?.['displayImage~']?.elements?.[0]?.identifiers?.[0]?.identifier || '',
-      headline: response.data.headline || '',
-      connections: 0, // LinkedIn API v2 doesn't provide connection count
-      positions: response.data.positions?.values?.map((pos: any) => ({
-        company: pos.companyName || '',
-        title: pos.title || ''
-      })) || []
+      id: profileResponse.data.id,
+      firstName: profileResponse.data.localizedFirstName,
+      lastName: profileResponse.data.localizedLastName,
+      headline: profileResponse.data.headline,
+      pictureUrl: profileResponse.data.profilePicture?.['displayImage~']?.elements?.[0]?.identifiers?.[0]?.identifier
     };
 
     console.log('Transformed Profile Data:', profileData);
@@ -43,12 +37,13 @@ export async function GET(request: Request) {
   } catch (error: any) {
     console.error('LinkedIn API Error:', {
       message: error.message,
-      status: error.response?.status,
-      data: error.response?.data
+      response: error.response?.data,
     });
     return NextResponse.json({ 
       error: 'Failed to fetch LinkedIn data',
-      details: error.response?.data || error.message
-    }, { status: error.response?.status || 500 });
+      details: error.response?.data || error.message 
+    }, { 
+      status: error.response?.status || 500 
+    });
   }
 }
