@@ -8,8 +8,8 @@ import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 // import { UserProvider } from "@/lib/contexts/useUser";
 import { ModalProvider } from "@/context/ModalContext";
-import Modal from "@/components/ui/Modal"
-import  { Toaster } from 'react-hot-toast';
+import Modal from "@/components/ui/Modal";
+import { Toaster } from "react-hot-toast";
 config();
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,41 +43,44 @@ export default function RootLayout({
             appearance: {
               theme: "light",
               accentColor: "#676FFF",
-              logo: "https://your-logo-url",
+              logo: "https://res.cloudinary.com/duogkpk5c/image/upload/v1741764384/zipqt3v5m3tqaqx1vg9i.png",
             },
             // Create embedded wallets for users who don't have a wallet
             embeddedWallets: {
-              createOnLogin: "users-without-wallets" ,
+              createOnLogin: "users-without-wallets",
             },
           }}
         >
           {/* <UserProvider> */}
           <>
-        <ModalProvider>
-          <Modal />
-         <>
-            {children}
-          <Toaster position="top-right"  toastOptions={{
-    // Define default options
-    className: '',
-    duration: 4000,
-    removeDelay: 1000,
-    style: {
-      background: '#363636',
-      color: '#fff',
-    },
+            <ModalProvider>
+              <Modal />
+              <>
+                {children}
+                <Toaster
+                  position="top-right"
+                  toastOptions={{
+                    // Define default options
+                    className: "",
+                    duration: 4000,
+                    removeDelay: 1000,
+                    style: {
+                      background: "#363636",
+                      color: "#fff",
+                    },
 
-    success: {
-      duration: 3000,
-      iconTheme: {
-        primary: 'green',
-        secondary: 'black',
-      },
-    },
-  }}/> 
-         </>
-        </ModalProvider>
-          </> 
+                    success: {
+                      duration: 3000,
+                      iconTheme: {
+                        primary: "green",
+                        secondary: "black",
+                      },
+                    },
+                  }}
+                />
+              </>
+            </ModalProvider>
+          </>
           {/* </UserProvider> */}
         </PrivyProvider>
       </body>

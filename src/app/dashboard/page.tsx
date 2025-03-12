@@ -159,7 +159,7 @@ const page = () => {
             <>
               <div className="flex flex-col gap-2 items-start">
                 <label htmlFor="username">
-                  Enter Username<span className="text-red-600">*</span>
+                  Username<span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -234,15 +234,15 @@ const page = () => {
           {[1, 2, 3, 4].map((t, index) => (
             <div
               key={index}
-              className={`h-1 w-1 rounded-full ${
-                t === tab ? "bg-[#3a3a3a]" : "bg-[#acacac]"
+              className={`h-1 w-1 rounded-full transition-all duration-200 ${
+                t === tab ? "bg-[#3a3a3a] scale-125" : "bg-[#acacac]"
               }`}
             />
           ))}
         </div>
         <div className="flex gap-2 ">
           <button
-            className="border-black border-solid border-2  text-black px-8 py-2 rounded "
+            className="border-black border-solid border-2 min-w-[140px]  text-black px-8 py-2 rounded "
             onClick={() => {
               if (tab > 1) setTab(tab - 1);
             }}
@@ -250,7 +250,7 @@ const page = () => {
             Previous
           </button>
           <button
-            className="bg-black w-fit text-white px-8 py-2 rounded "
+            className="bg-black w-fit min-w-[140px] text-white px-8 py-2 rounded "
             onClick={() => {
               if (tab === 4) {
                 createAccount(data);
