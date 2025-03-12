@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/util";
 import AuthButton from "../navbar/NavbarButton";
 
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -52,7 +53,7 @@ export default function Navbar() {
             height={32}
             priority
           /> */}
-          <h3 className="text-black font-bold">Numbers DAO</h3>
+          <Image src={"/logo.png"} alt="logo" height={1000} width={1000} className="w-64"></Image>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

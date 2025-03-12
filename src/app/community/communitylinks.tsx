@@ -10,7 +10,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export default function CommunityLinks() {
   return (
-    <div className="mb-20 p-5">
+    <div className="p-5">
       <section className="flex flex-col justify-center items-center py-section">
         <div className="container xl:max-w-screen-xl">
           <div className="mb-8 lg:mb-16">
