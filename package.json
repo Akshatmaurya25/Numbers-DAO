@@ -34,6 +34,7 @@
     "mongoose": "^8.10.1",
     "motion": "^12.4.7",
     "next": "15.1.7",
+    "next-auth": "^4.24.11",
     "random-avatar-generator": "^2.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
