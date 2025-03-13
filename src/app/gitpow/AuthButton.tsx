@@ -15,12 +15,27 @@ export default function AuthButton() {
             
             {session.user.provider === 'github' && (
                 <div className="space-y-2 text-center">
-                <p>Followers: {session.user.followers}</p>
-                <p>Public Repositories: {session.user.public_repos}</p>
-                <p>Most Used Language: {session.user.most_used_language}</p>
-                <p>Total Contributions: {session.user.contribution_count}</p>
+                    <p>Followers: {session.user.followers}</p>
+                    <p>Public Repositories: {session.user.public_repos}</p>
+                    <p>Most Used Language: {session.user.most_used_language}</p>
+                    <p>Total Contributions: {session.user.contribution_count}</p>
                 </div>
             )}
+
+            {/* {session.user.provider === 'linkedin' && (
+                <div className="space-y-2 text-center">
+                    <p>First Name: {session.user.firstName}</p>
+                    <p>Last Name: {session.user.lastName}</p>
+                    <p>Headline: {session.user.headline}</p>
+                    {session.user.profilePicture && (
+                        <img 
+                            src={session.user.profilePicture} 
+                            alt="LinkedIn Profile" 
+                            className="w-20 h-20 rounded-full mx-auto"
+                        />
+                    )}
+                </div>
+            )} */}
 
             <button 
                 onClick={() => signOut()} 
