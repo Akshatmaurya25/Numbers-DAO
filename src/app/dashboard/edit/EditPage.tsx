@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import MilestoneCard from "./_components/MilestoneCard";
 import ProjectCard from "./_components/ProjectCard";
 import WorkExperienceCard from "./_components/WorkExperienceCard";
+import SocialGraphs from "@/components/dashboard/SocialConnecter";
 
 const socialPlatforms = {
   github: ["github.com"],
@@ -359,7 +360,8 @@ const EditPage = (props: UserDocument) => {
               maxLength={60}
               setValue={setUserDetails}
             />
-            <SocialLinksInput setSocials={setSocials} socials={socials} />
+            {/* <SocialLinksInput setSocials={setSocials} socials={socials} /> */}
+            <SocialGraphs socials={socials} setSocials={setSocials} />
           </div>
         </div>
         <div className="px-4 md:px-16 py-10 h-fit">

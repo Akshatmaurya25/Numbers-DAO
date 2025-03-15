@@ -38,9 +38,7 @@ export default function RootLayout({
       <head>
         <link
           rel="icon"
-          href={
-            "https://res.cloudinary.com/duogkpk5c/image/upload/v1741713593/vjjlvc2oxdwibaqixf8i.png"
-          }
+          href="https://res.cloudinary.com/duogkpk5c/image/upload/v1741713593/vjjlvc2oxdwibaqixf8i.png"
         />
       </head>
       <body

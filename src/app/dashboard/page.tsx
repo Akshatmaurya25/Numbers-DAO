@@ -14,6 +14,7 @@ import EditPage from "./edit/EditPage";
 import { AvatarGenerator } from "random-avatar-generator";
 import { Loader } from "@/components/ui/loader";
 import Image from "next/image";
+import Chat from "../test/page";
 const page = () => {
   const { user } = usePrivy();
   const [loading, setLoading] = useState(true);
@@ -293,6 +294,16 @@ const page = () => {
           >
             Edit
           </span>
+          <span
+            onClick={() => setActivated("Chat")}
+            className={`px-2 cursor-pointer ${
+              activated == "Edit"
+                ? "text-white border-b border-white"
+                : "text-[#363636]"
+            }`}
+          >
+            Chat
+          </span>
         </div>
         <Link target="blank" href={`/${User?.username}`}>
           <Button className="text-black bg-white px-6 py-2">Preview</Button>
@@ -300,6 +311,7 @@ const page = () => {
       </div>
 
       {activated == "Portfolio" && <Dashboard {...User} />}
+      {activated == "Chat" && <Chat />}
       {activated == "Edit" && (
         <div className="flex justify-center items-center ">
           <EditPage {...(User as UserDocument)} />
