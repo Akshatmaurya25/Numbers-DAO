@@ -32,7 +32,7 @@ export default function Footer() {
               <ul role="list" className="mt-4 space-y-4">
                 <li>
                   <Link
-                    href="#"
+                    href="https://bhopaldao.notion.site/"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Dev Docs
@@ -40,7 +40,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="https://github.com/Bhopal-DAO"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     GitHub
@@ -54,7 +54,7 @@ export default function Footer() {
               <ul role="list" className="mt-4 space-y-4">
                 <li>
                   <Link
-                    href="#"
+                    href="https://x.com/Bhopal_DAO"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     X (Twitter)
@@ -70,7 +70,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="https://lu.ma/bhopaldao"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Luma
@@ -131,11 +131,11 @@ export default function Footer() {
         <div className="w-full border border-zinc-800"></div>
         <div className="w-full md:px-[3rem] sm:px-[1.5rem] lg:px-[9.5rem] text-white flex justify-between lg:flex-row md:flex-row sm:flex-col">
           <div className="flex gap-2 items-center ml-5 lg:ml-0">
-            <Link href={""} className="text-black bg-white rounded-sm p-1">
+            <Link href={"https://t.me/BhopalDAO"} className="text-black bg-white rounded-sm p-1">
               <BiLogoTelegram />
             </Link>
             <Link
-              href={""}
+              href={"https://x.com/Bhopal_DAO"}
               className="text-black bg-white rounded-sm p-1 mr-3 "
             >
               <FaXTwitter />
