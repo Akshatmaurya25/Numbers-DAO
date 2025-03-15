@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import LinkedInProvider from "next-auth/providers/linkedin";
+import { parse } from "path";
 
 export const authOptions = {
   providers: [
@@ -18,14 +19,30 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account }: {
+        token: any,
+        user: any,
+        account: any,
+     
+    }) {
         console.log("jwt", { token, user, account });
-        
+    
         if (account && account.provider === "github") {  // Ensure 'account' is defined
             if (user) {
                 token.id = user.id;
                 token.provider = account.provider;
-    
+                if (account?.state) {
+                    console.log("Im in accountn here")
+                    try {
+                      const parsedState = JSON.parse(account.state);
+                      if (parsedState.mongoId) {
+                        console.log("this is mongo id",parsedState.mongoId)
+                        token.mongoId = parsedState.mongoId;
+                      }
+                    } catch (error) {
+                      console.error("Error parsing state:", error);
+                    }
+                  }
                 // Fetch GitHub additional data
                 const response = await fetch("https://api.github.com/user", {
                     headers: { Authorization: `token ${account.access_token}` },
@@ -103,7 +120,12 @@ export const authOptions = {
         return token;
     },
     
-    async session({ session, token }) {
+    async session({ session, token }:{
+        session:any,
+        token:any
+    }
+
+    ) {
         console.log("session", { session, token });
         if (token.provider === "github") {
             if (session.user) {

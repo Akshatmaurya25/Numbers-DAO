@@ -3,6 +3,7 @@ import React, { ReactElement, useState } from "react";
 import { FaMediumM } from "react-icons/fa";
 import {
   FaFacebook,
+  FaGithub,
   FaInstagram,
   FaLinkedin,
   FaTelegram,
@@ -15,6 +16,7 @@ interface SocialPlatform {
   id: string;
   name: string;
   icon: ReactElement;
+  connector?: string | (() => void);
 }
 
 interface SocialInputsState {
@@ -28,19 +30,29 @@ interface SocialsState {
 interface SocialGraphsProps {
   socials: SocialsState;
   setSocials: React.Dispatch<React.SetStateAction<SocialsState>>;
+  userId: string;
 }
 
-const SocialGraphs: React.FC<SocialGraphsProps> = ({ socials, setSocials }) => {
+const SocialGraphs: React.FC<SocialGraphsProps> = ({ socials, setSocials, userId } , ) => {
   const [socialInputs, setSocialInputs] = useState<SocialInputsState>({});
 
   const socialPlatforms: SocialPlatform[] = [
-    { id: "twitter", name: "Twitter", icon: <RxTwitterLogo /> },
-    { id: "facebook", name: "Facebook", icon: <FaFacebook /> },
+    {
+      id: "twitter",
+      name: "Twitter",
+      icon: <RxTwitterLogo />,
+      connector: "/api/twitter/auth",
+    },
+    {
+      id: "github",
+      name: "Github",
+      icon: <FaGithub />,
+      connector: "/api/twitter/auth",
+    },
+    { id: "linkedin", name: "LinkedIn", icon: <FaLinkedin /> },
     { id: "instagram", name: "Instagram", icon: <FaInstagram /> },
     { id: "youtube", name: "YouTube", icon: <FaYoutube /> },
-    { id: "threads", name: "Threads", icon: <SiThreads /> },
     { id: "lens", name: "Lens", icon: <SiLens /> },
-    { id: "linkedin", name: "LinkedIn", icon: <FaLinkedin /> },
     { id: "medium", name: "Medium", icon: <FaMediumM /> },
     { id: "telegram", name: "Telegram", icon: <FaTelegram /> },
     { id: "farcaster", name: "Farcaster", icon: <SiFarcaster /> },
@@ -53,15 +65,33 @@ const SocialGraphs: React.FC<SocialGraphsProps> = ({ socials, setSocials }) => {
     }));
   };
 
-  const handleConnect = (platformId: string, username: string): void => {
+  const handleConnect = (platformId: string, username?: string): void => {
+    console.log(platformId);
+    switch (platformId) {
+      case "twitter":
+        const authUrl = `/api/twitter/auth?userId=${encodeURIComponent(
+          userId ?? ""
+        )}`;
+        const newWindow = window.open(
+          authUrl,
+          "_blank",
+          "width=600,height=700"
+        );
+
+        if (newWindow) {
+          newWindow.focus();
+        }
+        break;
+
+      default:
+        break;
+    }
     if (username && username.trim()) {
-      // Update the socials state using the setSocials prop
       setSocials((prev) => ({
         ...prev,
         [platformId]: username.trim(),
       }));
-      
-      // Close the input field
+
       setSocialInputs((prev) => ({
         ...prev,
         [platformId]: false,
@@ -105,44 +135,14 @@ const SocialGraphs: React.FC<SocialGraphsProps> = ({ socials, setSocials }) => {
               </div>
             </div>
 
-            {socialInputs[platform.id] ? (
-              <div className="flex">
-                <div className="text-white mr-2 px-3 py-1 rounded border-white/30 border-1 border">
-                  <span>@</span>
-                  <input
-                    type="text"
-                    defaultValue={socials[platform.id] || ""}
-                    className="bg-[#ffffff00] outline-none text-white"
-                    onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                      if (e.key === "Enter") {
-                        handleConnect(
-                          platform.id,
-                          (e.target as HTMLInputElement).value
-                        );
-                      }
-                    }}
-                  />
-                </div>
-                <button
-                  className="bg-white text-black px-3 py-1 rounded"
-                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                    const inputContainer = (e.target as HTMLButtonElement)
-                      .previousSibling as HTMLDivElement;
-                    const input = inputContainer.querySelector('input') as HTMLInputElement;
-                    handleConnect(platform.id, input.value);
-                  }}
-                >
-                  Save
-                </button>
-              </div>
-            ) : (
+            {
               <button
-                onClick={() => toggleInput(platform.id)}
-                className="bg-transparent border border-gray-600 text-white px-4 py-1 rounded hover:bg-[#151515]"
+                onClick={() => handleConnect(platform.id, "Username")}
+                className="bg-[#121212] text-white border border-[#ffffff]/20 rounded px-4 py-2"
               >
-                {socials[platform.id] ? "Edit" : "Connect"}
+                Connect
               </button>
-            )}
+            }
           </div>
         ))}
       </div>

@@ -1,13 +1,23 @@
 "use client";
 import { usePrivy } from "@privy-io/react-auth";
+import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
 type Message = {
   id: string;
+  username?: string;
+  userImg?: string;
   text: string;
 };
 
-const Chat = () => {
+const Chat = ({
+  username,
+  userImg,
+}: {
+  username?: string;
+  userImg?: string;
+}) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const socketRef = useRef<WebSocket | null>(null);
@@ -59,6 +69,7 @@ const Chat = () => {
     if (input.trim() && socketRef.current?.readyState === WebSocket.OPEN) {
       const newMessage: Message = {
         id: userAddress,
+        username: username,
         text: input,
       };
 
@@ -69,26 +80,36 @@ const Chat = () => {
     }
   };
 
+  console.log(userImg);
   return (
     <div className="p-4">
-      <div className="border p-4 h-80 overflow-y-auto">
-        {messages.map((msg , index) => (
-          <div key={index} className="mb-2">
-            <strong>{msg.id}</strong> {msg.text}
+      <div className="border border-[#ffffff]/20 rounded p-4 h-80 overflow-y-auto">
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className="mb-2 flex gap-3 max-w-md h-fit rounded-lg text-white w-fit p-2 bg-[#282828]"
+          >
+            <img className="h-10 w-10" src={userImg} alt="User Image" />
+            <div>
+              <Link href={`/${msg.username}`} className="hover:underline">
+                <h5>{msg.username || msg.id}</h5>
+              </Link>
+              <p className="break-words max-w-[330px] h-fit">{msg.text}</p>
+            </div>
           </div>
         ))}
       </div>
 
-      <div className="mt-4 flex gap-2">
+      <div className="mt-4  flex gap-2 max-w-xl">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="border p-2 flex-1"
+          className="border border-[#ffffff]/20 p-2 bg-[#121212]  flex-1"
         />
         <button
           onClick={sendMessage}
-          className="bg-blue-500 text-white px-4 py-2"
+          className="text-black rounded bg-white px-4 py-2"
         >
           Send
         </button>

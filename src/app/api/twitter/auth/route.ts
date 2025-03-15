@@ -1,8 +1,12 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const { searchParams } = new URL(req.url);
+    const userId = searchParams.get("userId"); 
+    // /api/user/socail 
+console.log("Usernme", userId)
     const verifier = generateRandomString(64);
     const challenge = await generateChallenge(verifier);
 
@@ -17,7 +21,7 @@ export async function GET() {
         code_challenge_method: 'S256'
       })}`
     );
-
+    console.log("This is me",response)
     // Set the code verifier in a cookie
     response.cookies.set('code_verifier', verifier, {
       httpOnly: true,

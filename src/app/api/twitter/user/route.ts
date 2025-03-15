@@ -19,7 +19,7 @@ export async function GET(request: Request) {
     });
 
     const userData = await userResponse.json();
-    console.log('User Response:', userData); // Debug log
+    console.log('User Response:', userData.data.public_metrics); 
 
     if (!userResponse.ok) {
       throw new Error(`Failed to fetch user profile: ${JSON.stringify(userData)}`);

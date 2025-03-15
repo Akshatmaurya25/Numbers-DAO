@@ -14,7 +14,8 @@ import EditPage from "./edit/EditPage";
 import { AvatarGenerator } from "random-avatar-generator";
 import { Loader } from "@/components/ui/loader";
 import Image from "next/image";
-import Chat from "../test/page";
+import Chat from "@/components/dashboard/Chat";
+import LogoLoader from "@/components/ui/LogoLoader";
 const page = () => {
   const { user } = usePrivy();
   const [loading, setLoading] = useState(true);
@@ -264,10 +265,10 @@ const page = () => {
       </div>
     );
   };
-  if (loading) return <Loader />;
+  if (loading) return <LogoLoader black={false} />;
 
   return (
-    <div className="bg-black text-white  px-2 md:px-3 lg:px-0">
+    <div className="bg-black  text-white  px-2 md:px-3 lg:px-0">
       <Header
         source={User?.profileImage}
         walletAddress={user?.wallet?.address}
@@ -297,26 +298,29 @@ const page = () => {
           <span
             onClick={() => setActivated("Chat")}
             className={`px-2 cursor-pointer ${
-              activated == "Edit"
+              activated == "Chat"
                 ? "text-white border-b border-white"
                 : "text-[#363636]"
             }`}
           >
-            Chat
+            Chats
           </span>
         </div>
         <Link target="blank" href={`/${User?.username}`}>
           <Button className="text-black bg-white px-6 py-2">Preview</Button>
         </Link>
       </div>
-
-      {activated == "Portfolio" && <Dashboard {...User} />}
-      {activated == "Chat" && <Chat />}
-      {activated == "Edit" && (
-        <div className="flex justify-center items-center ">
-          <EditPage {...(User as UserDocument)} />
-        </div>
-      )}
+      <div className="max-w-7xl mx-auto bg-black min-h-[50vh]">
+        {activated == "Portfolio" && <Dashboard {...User} />}
+        {activated == "Chat" && (
+          <Chat username={User?.username} userImg={User?.profileImage} />
+        )}
+        {activated == "Edit" && (
+          <div className="flex justify-center items-center ">
+            <EditPage {...(User as UserDocument)} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

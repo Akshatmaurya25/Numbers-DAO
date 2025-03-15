@@ -88,7 +88,7 @@ const EditPage = (props: UserDocument) => {
     setIsModalOpen(false);
     document.body.classList.remove("overflow-hidden");
   };
-
+  console.log(userDetails);
   const generator = new AvatarGenerator();
   const generateRandomAvatar = () => {
     if (imgLoading) {
@@ -196,7 +196,7 @@ const EditPage = (props: UserDocument) => {
     }
   };
 
-  if (!user) {
+  if (!user && !userDetails._id) {
     return <Loader />;
   }
 
@@ -361,7 +361,11 @@ const EditPage = (props: UserDocument) => {
               setValue={setUserDetails}
             />
             {/* <SocialLinksInput setSocials={setSocials} socials={socials} /> */}
-            <SocialGraphs socials={socials} setSocials={setSocials} />
+            <SocialGraphs
+              userId={userDetails._id || ""}
+              socials={socials}
+              setSocials={setSocials}
+            />
           </div>
         </div>
         <div className="px-4 md:px-16 py-10 h-fit">
