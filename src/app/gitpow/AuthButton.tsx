@@ -27,14 +27,39 @@ export default function AuthButton() {
           </p>
         </div>
 
-        {/* {session.user.provider === "github" && (
-          <div className="space-y-2 text-center">
-            <p>Followers: {session.user.followers}</p>
-            <p>Public Repositories: {session.user.public_repos}</p>
-            <p>Most Used Language: {session.user.most_used_language}</p>
-            <p>Total Contributions: {session.user.contribution_count}</p>
+        {session.user.provider === "github" && (
+          <div className="space-y-2 text-center bg-white p-4 rounded-lg shadow-md max-w-sm mx-auto">
+            <div className="flex gap-2">
+              <div className="flex-1 bg-gray-50 p-2 rounded-lg">
+                <p className="font-semibold text-gray-700 text-sm">Followers</p>
+                <p className="text-base text-blue-600">{session.user.followers}</p>
+              </div>
+              <div className="flex-1 bg-gray-50 p-2 rounded-lg">
+                <p className="font-semibold text-gray-700 text-sm">Public Repos</p>
+                <p className="text-base text-blue-600">{session.user.public_repos}</p>
+              </div>
+            </div>
+            <div className="bg-gray-50 p-2 rounded-lg">
+              <p className="font-semibold text-gray-700 text-sm">Most Used Language</p>
+              <p className="text-base text-green-600">{session.user.most_used_language}</p>
+            </div>
+            <div className="bg-gray-50 p-2 rounded-lg">
+              <p className="font-semibold text-gray-700 text-sm">Total Contributions</p>
+              <p className="text-base text-purple-600">{session.user.contribution_count}</p>
+            </div>
+            <div className="mt-2 bg-gray-50 p-2 rounded-lg">
+              <p className="font-semibold text-gray-700 text-sm mb-2">Language Distribution</p>
+              {session.user.language_percentages && 
+                session.user.language_percentages.map(({ language, percentage }) => (
+                  <div key={language} className="flex justify-between items-center mb-1">
+                    <span className="text-gray-600 text-sm">{language}</span>
+                    <span className="text-blue-600 text-sm">{percentage}%</span>
+                  </div>
+                ))
+              }
+            </div>
           </div>
-        )} */}
+        )}
 
         {/* {session.user.provider === 'linkedin' && (
                 <div className="space-y-2 text-center">
