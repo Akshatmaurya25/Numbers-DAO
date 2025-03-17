@@ -71,6 +71,7 @@ const Chat = ({
         id: userAddress,
         username: username,
         text: input,
+        userImg: userImg,
       };
 
       socketRef.current.send(JSON.stringify(newMessage));
@@ -89,7 +90,7 @@ const Chat = ({
             key={index}
             className="mb-2 flex gap-3 max-w-md h-fit rounded-lg text-white w-fit p-2 bg-[#282828]"
           >
-            <img className="h-10 w-10" src={userImg} alt="User Image" />
+            <img className="h-10 w-10" src={msg.userImg} alt="User Image" />
             <div>
               <Link href={`/${msg.username}`} className="hover:underline">
                 <h5>{msg.username || msg.id}</h5>

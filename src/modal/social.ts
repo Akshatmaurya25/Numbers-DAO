@@ -4,6 +4,11 @@ export interface ISocialMedia extends Document {
   userId: mongoose.Types.ObjectId; // Reference to User model
   builderScore:number;
   socialScore: number;
+  github_contribution:number;
+  github_repos:number;
+  twitter_tweets:number;
+  twitter_follower:number;
+  twitter_following:number;
   instagram?: string;
   facebook?: string;
   twitter?: string;
