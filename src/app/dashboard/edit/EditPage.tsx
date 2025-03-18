@@ -22,6 +22,10 @@ import MilestoneCard from "./_components/MilestoneCard";
 import ProjectCard from "./_components/ProjectCard";
 import WorkExperienceCard from "./_components/WorkExperienceCard";
 import SocialGraphs from "@/components/dashboard/SocialConnecter";
+import { useWallets } from "@privy-io/react-auth";
+import WalletCard from "./_components/WalletCard";
+import WalletContainer from "./_components/WalletContainer";
+import ENS from "@/components/dashboard/ENS";
 
 const socialPlatforms = {
   github: ["github.com"],
@@ -60,6 +64,9 @@ const EditPage = (props: UserDocument) => {
   const [workExperience, setWorkExperience] = useState(
     userDetails.workExperience
   );
+
+  const wallet = useWallets();
+  console.log("Wallets", wallet);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -271,7 +278,6 @@ const EditPage = (props: UserDocument) => {
           </div>
         </div>
       )}
-
       <div className="bg-black w-full grid xl:grid-cols-2 md:grid-cols-1 min-h-fit pb-16">
         <div className="px-4 md:px-16 py-10">
           <div className="w-full h-full flex flex-col gap-4">
@@ -370,41 +376,46 @@ const EditPage = (props: UserDocument) => {
         </div>
         <div className="px-4 md:px-16 py-10 h-fit">
           <div className="w-full custom-scrollbar flex flex-col gap-5">
-            <AddField
-              label={"Projects"}
-              value={userDetails.projects}
-              setValue={setProjects}
-              openModal={openModal}
-            />
-            <AddField
-              label={"Milestones"}
-              value={userDetails.milestones}
-              setValue={setMilestones}
-              openModal={openModal}
-            />
-            <AddField
-              label={"Work Experience"}
-              value={userDetails.workExperience}
-              setValue={setWorkExperience}
-              openModal={openModal}
-            />
-            <AddField
-              label={"Domains"}
-              value={userDetails.domains}
-              setValue={setDomains}
-              openModal={openModal}
-            />
+            <WalletContainer />
           </div>
-        </div>
-        <div></div>
-        <button
-          onClick={handleSubmit}
-          className="bg-white ml-auto md:mr-16 mr-10 flex w-fit items-center gap-1 h-fit rounded px-4 py-2 text-black"
-        >
-          Update
-          <Replace size={14} />
-        </button>
-      </div>
+          <div className="w-full custom-scrollbar flex flex-col gap-5 my-3">
+            <ENS />
+          </div>
+          <AddField
+            label={"Projects"}
+            value={userDetails.projects}
+            setValue={setProjects}
+            openModal={openModal}
+          />
+          <AddField
+            label={"Milestones"}
+            value={userDetails.milestones}
+            setValue={setMilestones}
+            openModal={openModal}
+          />
+          <AddField
+            label={"Work Experience"}
+            value={userDetails.workExperience}
+            setValue={setWorkExperience}
+            openModal={openModal}
+          />
+          <AddField
+            label={"Domains"}
+            value={userDetails.domains}
+            setValue={setDomains}
+            openModal={openModal}
+          />
+          <div>
+            <button
+              onClick={handleSubmit}
+              className="bg-white ml-auto md:mr-16 mr-10 flex w-fit items-center gap-1 h-fit rounded px-4 py-2 text-black"
+            >
+              Update
+              <Replace size={14} />
+            </button>
+          </div>
+        </div>{" "}
+      </div>{" "}
     </>
   );
 };

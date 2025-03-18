@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
+import NextAuth, { Account, Session, User } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import GitHubProvider from "next-auth/providers/github";
 import LinkedInProvider from "next-auth/providers/linkedin";
-import { parse } from "path";
 
 export const authOptions = {
   providers: [
@@ -20,9 +20,9 @@ export const authOptions = {
   ],
   callbacks: {
     async jwt({ token, user, account }: {
-        token: any,
-        user: any,
-        account: any,
+        token: JWT,
+        user?: User | undefined;
+        account: Account | null;
      
     }) {
         console.log("jwt", { token, user, account });
@@ -31,18 +31,18 @@ export const authOptions = {
             if (user) {
                 token.id = user.id;
                 token.provider = account.provider;
-                if (account?.state) {
-                    console.log("Im in accountn here")
-                    try {
-                      const parsedState = JSON.parse(account.state);
-                      if (parsedState.mongoId) {
-                        console.log("this is mongo id",parsedState.mongoId)
-                        token.mongoId = parsedState.mongoId;
-                      }
-                    } catch (error) {
-                      console.error("Error parsing state:", error);
-                    }
-                  }
+                // if (account?.state) {
+                //     console.log("Im in accountn here")
+                //     try {
+                //       const parsedState = JSON.parse(account.state);
+                //       if (parsedState.mongoId) {
+                //         console.log("this is mongo id",parsedState.mongoId)
+                //         token.mongoId = parsedState.mongoId;
+                //       }
+                //     } catch (error) {
+                //       console.error("Error parsing state:", error);
+                //     }
+                //   }
                 // Fetch GitHub additional data
                 const response = await fetch("https://api.github.com/user", {
                     headers: { Authorization: `token ${account.access_token}` },
@@ -55,20 +55,29 @@ export const authOptions = {
                 });
                 const repos = await reposResponse.json();
     
-                // Count occurrences of each language
+                // Count occurrences of each language and calculate total repos
                 const languageCount: Record<string, number> = {};
+                let totalReposWithLanguage = 0;
                 repos.forEach((repo: any) => {
                     if (repo.language) {
                         languageCount[repo.language] = (languageCount[repo.language] || 0) + 1;
+                        totalReposWithLanguage++;
                     }
                 });
     
+                // Calculate percentages for each language
+                const languagePercentages = Object.entries(languageCount).map(([language, count]) => ({
+                    language,
+                    percentage: ((count / totalReposWithLanguage) * 100).toFixed(1)
+                }));
+
+                // Sort languages by percentage in descending order
+                languagePercentages.sort((a, b) => parseFloat(b.percentage) - parseFloat(a.percentage));
+
                 // Find the most used language
-                const mostUsedLanguage = Object.keys(languageCount).reduce(
-                    (a, b) => (languageCount[a] > languageCount[b] ? a : b),
-                    "Unknown"
-                );
-    
+                const mostUsedLanguage = languagePercentages.length > 0 ? languagePercentages[0].language : "Unknown";
+
+                
                 // Fetch Contribution Count via GraphQL API
                 const graphqlResponse = await fetch("https://api.github.com/graphql", {
                     method: "POST",
@@ -78,17 +87,17 @@ export const authOptions = {
                     },
                     body: JSON.stringify({
                         query: `
-                            {
-                                user(login: "${data.login}") {
-                                    contributionsCollection {
-                                        contributionCalendar {
-                                            totalContributions
+                        {
+                            user(login: "${data.login}") {
+                                contributionsCollection {
+                                    contributionCalendar {
+                                        totalContributions
                                         }
-                                    }
-                                }
-                            }
-                        `,
-                    }),
+                                        }
+                                        }
+                                        }
+                                        `,
+                                    }),
                 });
     
                 const graphqlData = await graphqlResponse.json();
@@ -99,6 +108,7 @@ export const authOptions = {
                 token.public_repos = data.public_repos;
                 token.most_used_language = mostUsedLanguage;
                 token.contribution_count = contributionCount;
+                token.language_percentages = languagePercentages;
             }
         } 
         else if (account && account.provider === "linkedin") { // Ensure 'account' is defined
@@ -121,8 +131,8 @@ export const authOptions = {
     },
     
     async session({ session, token }:{
-        session:any,
-        token:any
+        session:Session,
+        token:JWT
     }
 
     ) {
@@ -135,6 +145,7 @@ export const authOptions = {
                 session.user.public_repos = token.public_repos;
                 session.user.most_used_language = token.most_used_language;
                 session.user.contribution_count = token.contribution_count;
+                session.user.language_percentages = token.language_percentages;
             }
         }
         else if (token?.provider === "linkedin") {
