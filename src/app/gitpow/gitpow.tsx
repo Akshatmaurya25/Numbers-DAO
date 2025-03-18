@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { config } from "dotenv";
@@ -27,12 +28,62 @@ interface GraphData {
 }
 
 export default function FetchGitHubData() {
+  const { data: session } = useSession();
   const [username, setUsername] = useState<string>("");
   const [user, setUser] = useState<GitHubUser | null>(null);
   const [languages, setLanguages] = useState<GraphData[]>([]);
   const [contributions, setContributions] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string>("");
+
+  useEffect(() => {
+    if (session?.user?.id) {
+      setUserId(session.user.id);
+      fetchExistingSocialData(session.user.id);
+    }
+  }, [session]);
+
+  const fetchExistingSocialData = async (id: string) => {
+    try {
+      const response = await axios.get(`/api/user/social?userId=${id}`);
+      console.log('Existing social data:', response.data);
+    } catch (error) {
+      console.error('Error fetching social data:', error);
+    }
+  };
+
+  const storeSocialData = async (githubData: any) => {
+    try {
+      if (!session?.user?.id) {
+        setError('Please sign in first');
+        return;
+      }
+
+      const socialScore = Math.floor(
+        (githubData.followers * 2) + 
+        (githubData.public_repos * 3) + 
+        (githubData.contributions * 0.5)
+      );
+
+      const response = await axios.post('/api/user/social', {
+        userId: session.user.id,
+        socialScore,
+        github: {
+          username: githubData.login,
+          repos: githubData.public_repos,
+          followers: githubData.followers,
+          contributions: githubData.contributions,
+          languages: githubData.languages
+        }
+      });
+
+      console.log('Social data stored:', response.data);
+    } catch (error) {
+      console.error('Error storing social data:', error);
+      setError('Error storing social data');
+    }
+  };
 
   const fetchGitHubData = async () => {
     if (!username) return;
@@ -88,6 +139,21 @@ export default function FetchGitHubData() {
       setUser(userRes.data);
       setContributions(totalContributions);
       setLanguages(Object.entries(languageCount).map(([lang, count]) => ({ name: lang, value: count })));
+
+      // After setting the state, store the data
+      const githubData = {
+        login: userRes.data.login,
+        followers: userRes.data.followers,
+        public_repos: userRes.data.public_repos,
+        contributions: totalContributions,
+        languages: Object.entries(languageCount).map(([lang, count]) => ({ 
+          name: lang, 
+          value: count 
+        }))
+      };
+
+      await storeSocialData(githubData);
+
     } catch (err) {
       setError("Error fetching data");
       console.error(err);
@@ -98,6 +164,14 @@ export default function FetchGitHubData() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      {!session?.user ? (
+        <div className="text-red-500 mb-4">Please sign in to save your GitHub data</div>
+      ) : (
+        <div className="mb-4 text-sm">
+          <p>Signed in as: {session.user.name}</p>
+          <p>User ID: {userId}</p>
+        </div>
+      )}
       <h1 className="text-2xl font-bold mb-4">GitHub Proof of Work</h1>
       <input
         type="text"

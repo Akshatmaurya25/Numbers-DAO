@@ -1,10 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import TwitterLoginButton from '@/components/ui/TwitterLoginButton';
 
 export default function TwitterProfile() {
+  const { data: session } = useSession();
   const [profile, setProfile] = useState<any>(null);
   const [tweets, setTweets] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -13,31 +15,74 @@ export default function TwitterProfile() {
   const accessToken = searchParams.get('access_token');
 
   useEffect(() => {
-    if (!accessToken) {
+    if (!accessToken || !session?.user?.id) {
+      console.log('Missing token or session:', { accessToken: !!accessToken, userId: session?.user?.id });
       setLoading(false);
       return;
     }
 
-    const fetchTwitterData = async () => {
+    const fetchAndStoreTwitterData = async () => {
       try {
+        console.log('Fetching Twitter data with token:', accessToken);
         const response = await fetch(`/api/twitter/user?access_token=${accessToken}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch Twitter data');
-        }
         const data = await response.json();
-        console.log('Twitter API response:', data); // Debug log
+
+        if (!response.ok) {
+          throw new Error(`Twitter API Error: ${data.error || 'Failed to fetch data'}`);
+        }
+
+        console.log('Twitter API Response:', data);
+        
+        if (data.profile) {
+          const twitterScore = Math.floor(
+            (data.profile.public_metrics.followers_count * 2) + 
+            (data.profile.public_metrics.tweet_count)
+          );
+
+          // Get existing social data first
+          const socialResponse = await fetch(`/api/user/social?userId=${session.user.id}`);
+          const existingSocialData = await socialResponse.json();
+          
+          // Calculate combined score if existing data found
+          const combinedScore = existingSocialData.socialScore || 0 + twitterScore;
+
+          console.log('Storing Twitter data for user:', session.user.id);
+          const storeResponse = await fetch('/api/user/social', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userId: session.user.id, // This should be the MongoDB _id from NextAuth session
+              socialScore: combinedScore,
+              twitter: {
+                username: data.profile.username,
+                followers: data.profile.public_metrics.followers_count,
+                tweets: data.profile.public_metrics.tweet_count
+              }
+            })
+          });
+
+          const storeData = await storeResponse.json();
+          console.log('Store Response:', storeData);
+
+          if (!storeResponse.ok) {
+            throw new Error(`Storage Error: ${storeData.error || 'Failed to store data'}`);
+          }
+        }
+
         setProfile(data.profile);
         setTweets(data.tweets || []);
-      } catch (err) {
-        console.error('Error fetching Twitter data:', err);
-        setError('Failed to load Twitter profile');
+      } catch (err: any) {
+        console.error('Full Error Details:', err);
+        setError(err.message || 'Failed to process Twitter data');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTwitterData();
-  }, [accessToken]);
+    fetchAndStoreTwitterData();
+  }, [accessToken, session]);
 
   if (loading) return <div className="text-center p-4">Loading...</div>;
   if (error) return <div className="text-red-500 text-center p-4">{error}</div>;
