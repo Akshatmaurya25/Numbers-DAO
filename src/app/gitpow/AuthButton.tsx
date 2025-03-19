@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function AuthButton() {
