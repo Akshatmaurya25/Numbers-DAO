@@ -5,6 +5,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function AuthButton() {
   const { data: session } = useSession();
+  console.log('Total contributions:', session?.user);
 
   const handleSignIn = async (provider: string) => {
     switch (provider) {
@@ -28,15 +29,28 @@ export default function AuthButton() {
         </div>
 
         {session.user.provider === "github" && (
-          <div className="space-y-2 text-center bg-white p-4 rounded-lg shadow-md max-w-sm mx-auto">
+            <div className="space-y-2 text-center bg-white p-4 rounded-lg shadow-md max-w-sm mx-auto w-80">
+            <div className="flex items-center justify-center mb-4">
+              {session.user.image && (
+              <img 
+                src={session.user.image} 
+                alt="Profile" 
+                className="w-20 h-20 rounded-full"
+              />
+              )}
+            </div>
+            <div className="mb-2">
+              <p className="font-semibold text-gray-700">Email</p>
+              <p className="text-gray-600">{session.user.email}</p>
+            </div>
             <div className="flex gap-2">
               <div className="flex-1 bg-gray-50 p-2 rounded-lg">
-                <p className="font-semibold text-gray-700 text-sm">Followers</p>
-                <p className="text-base text-blue-600">{session.user.followers}</p>
+              <p className="font-semibold text-gray-700 text-sm">Followers</p>
+              <p className="text-base text-blue-600">{session.user.followers}</p>
               </div>
               <div className="flex-1 bg-gray-50 p-2 rounded-lg">
-                <p className="font-semibold text-gray-700 text-sm">Public Repos</p>
-                <p className="text-base text-blue-600">{session.user.public_repos}</p>
+              <p className="font-semibold text-gray-700 text-sm">Public Repos</p>
+              <p className="text-base text-blue-600">{session.user.public_repos}</p>
               </div>
             </div>
             <div className="bg-gray-50 p-2 rounded-lg">
@@ -45,20 +59,20 @@ export default function AuthButton() {
             </div>
             <div className="bg-gray-50 p-2 rounded-lg">
               <p className="font-semibold text-gray-700 text-sm">Total Contributions</p>
-              <p className="text-base text-purple-600">{session.user.contribution_count}</p>
+              <p className="text-base text-purple-600">{session.user.total_contributions}</p>
             </div>
             <div className="mt-2 bg-gray-50 p-2 rounded-lg">
               <p className="font-semibold text-gray-700 text-sm mb-2">Language Distribution</p>
               {session.user.language_percentages && 
-                session.user.language_percentages.map(({ language, percentage }) => (
-                  <div key={language} className="flex justify-between items-center mb-1">
-                    <span className="text-gray-600 text-sm">{language}</span>
-                    <span className="text-blue-600 text-sm">{percentage}%</span>
-                  </div>
-                ))
+              session.user.language_percentages.map(({ language, percentage }) => (
+                <div key={language} className="flex justify-between items-center mb-1">
+                <span className="text-gray-600 text-sm">{language}</span>
+                <span className="text-blue-600 text-sm">{percentage}%</span>
+                </div>
+              ))
               }
             </div>
-          </div>
+            </div>
         )}
 
         {/* {session.user.provider === 'linkedin' && (
