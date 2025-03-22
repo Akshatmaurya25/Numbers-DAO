@@ -12,7 +12,8 @@ const nextConfig: NextConfig = {
       'hebbkx1anhila5yf.public.blob.vercel-storage.com',
       'cartesi.io',
       'cdn.sanity.io',
-      'pbs.twimg.com'
+      'pbs.twimg.com',
+      "media.tenor.com"
     ]
   },
   eslint: {
