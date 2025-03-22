@@ -88,20 +88,12 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-<<<<<<< HEAD
-                    href="https://www.linkedin.com/company/bhopal-dao/?viewAsMember=true"
-=======
                     href="https://www.linkedin.com/company/bhopal-dao"
->>>>>>> f91aaed91eab7111db87905dd8502a70a70d3f4a
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-<<<<<<< HEAD
-                    Linkedin
-=======
                     LinkedIn
->>>>>>> f91aaed91eab7111db87905dd8502a70a70d3f4a
                   </Link>
                 </li>
               </ul>
