@@ -40,20 +40,20 @@ export default function TwitterProfile() {
           );
 
           // Get existing social data first
-          const socialResponse = await fetch(`/api/user/social?userId=${session.user.id}`);
+          const socialResponse = await fetch(`/api/user/social?userId=${session?.user?.id}`);
           const existingSocialData = await socialResponse.json();
           
           // Calculate combined score if existing data found
           const combinedScore = existingSocialData.socialScore || 0 + twitterScore;
 
-          console.log('Storing Twitter data for user:', session.user.id);
+          console.log('Storing Twitter data for user:', session?.user?.id);
           const storeResponse = await fetch('/api/user/social', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              userId: session.user.id, // This should be the MongoDB _id from NextAuth session
+              userId: session?.user?.id, // This should be the MongoDB _id from NextAuth session
               socialScore: combinedScore,
               twitter: {
                 username: data.profile.username,
