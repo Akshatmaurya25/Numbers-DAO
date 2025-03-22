@@ -2,8 +2,8 @@ import React from "react";
 import TrustCards from "../ui/TrustCards";
 
 const trustData1 = [
-  { logo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330", des: "Numbers DAO's support has been phenomenal. Their expertise allows us to scale effortlessly while focusing on core development.", name: "Alice Johnson", role: "CTO, TechWave" },
-  { logo: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg", des: "We've saved countless hours of development by leveraging Numbers DAO's infrastructure. A truly game-changing partnership.", name: "David Lee", role: "Founder, BlockGen" },
+  { logo: "/team/sumit.jpg", des: "Numbers DAO's support has been phenomenal. Their expertise allows us to scale effortlessly while focusing on core development.", name: "Sumit Choudhary", role: "Founder, WizzHQ" },
+  { logo: "/team/shivam.jpg", des: "We've saved countless hours of development by leveraging Numbers DAO's infrastructure. A truly game-changing partnership.", name: "Shivam Singh", role: "Founder, GrowthSquare" },
   { logo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e", des: "Partnering with Numbers DAO gave us the confidence to scale globally. Their team understands blockchain like no other.", name: "Sophia Martinez", role: "CEO, ChainBridge" },
 ];
 

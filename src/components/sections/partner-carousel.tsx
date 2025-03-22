@@ -95,102 +95,15 @@ const partners = [
 ];
 
 export default function PartnersGrid() {
-  const [shineTransform, setShineTransform] = React.useState("");
-
   return (
-    <section className="min-h-screen bg-[#000000] flex flex-col items-center justify-center px-4 py-20">
-      <div className="mb-12 hidden md:block h-[70vh] pt-16 mx-auto w-full max-w-5xl px-6 md:max-w-7xl">
-        <div
-          className="flex w-full items-center justify-center bg-black relative"
-          onMouseMove={(e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const x2 = e.clientX - rect.right;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const isLeft = x < centerX - rect.width / 4;
-            const newShineCode = isLeft
-              ? "translateX(calc(var(--pointer-x) - 180px))  translateY(calc(var(--pointer-y) - 150px))"
-              : " translateX(calc(var(--pointer-x2) + 150px)) translateY(calc(var(--pointer-y) - 150px))";
-            setShineTransform(newShineCode);
-
-            const shine = e.currentTarget.querySelector(
-              ".shine-effect"
-            ) as HTMLElement;
-            if (shine) {
-              shine.style.setProperty("--pointer-x", `${x}px`);
-              shine.style.setProperty("--pointer-x2", `${x2}px`);
-              shine.style.setProperty("--pointer-y", `${y}px`);
-            }
-
-            const bg = e.currentTarget.querySelector(".dots-bg") as HTMLElement;
-            if (bg) {
-              const centerX = rect.width / 2;
-              const centerY = rect.height / 2;
-              const shiftX = (centerX - x) * 0.12;
-              const shiftY = (centerY - y) * 0.12;
-              bg.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
-            }
-          }}
-        >
-          <div className="pointer-events-none h-[450px] w-full">
-            <div
-              className="dots-bg absolute h-full w-full transition-transform duration-300 ease-out"
-              style={{
-                backgroundSize: "40px 40px",
-                backgroundImage:
-                  "radial-gradient(circle at 1px 1px, rgb(103, 103, 103) 1px, transparent 0px)",
-                backgroundPosition: "center center",
-              }}
-            ></div>
-
-            <div className="relative z-10 h-full w-full flex items-center justify-center">
-              <div
-                className="group relative overflow-hidden"
-                style={{ filter: "grayscale(1)" }}
-              >
-                <div className="relative">
-                  <Image
-                    alt="Resend"
-                    width={270}
-                    height={270}
-                    className="mx-auto bg-black transition-transform duration-300 ease-out hover:scale-105"
-                    src={Rlogo}
-                    style={{ color: "transparent" }}
-                    quality={75}
-                  />
-
-                  <div
-                    className="shine-effect pointer-events-none absolute inset-0 opacity-100 transition-transform duration-300 ease-out will-change-transform group-hover:opacity-100"
-                    style={{
-                      transform: shineTransform,
-                      mixBlendMode: "soft-light",
-                      backgroundImage:
-                        "radial-gradient(100px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0))",
-                    }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="absolute top-[80px] h-screen w-full"></div>
-        </div>
-        {/* Hero text section */}
-        {/* <h1 className="font-display mt-28 effect-font-styling text-[4rem] md:text-7xl leading-[4.35rem] md:leading-[5rem] tracking-tight effect-font-gradient effect-font-hero relative -mt-16 text-center text-white">
-          Building the modern <br />
-          email sending platform
-        </h1> */}
-        {/* <p className="text-base md:text-[1.125rem] md:leading-[1.5] text-slate-11 font-normal text-balance relative text-center text-white">
-          The web has come a long way in the last ten years, but why is email
-          stuck in the past?
-          <br />
-          It doesn&apos;t have to be that way. We want to change that. We want
-          to reimagine email.
-        </p> */}
-      </div>
-      <div className="max-w-7xl mx-auto mt-24 w-full text-center mb-16">
-        <h2 className="text-white pb-6 font-semibold text-4xl md:text-4xl lg:text-[4rem] font-space-grotesk mb-2">
+    <section className="bg-[#000000] flex flex-col items-center justify-center px-4 pt-32 pb-12">
+      <div className="max-w-7xl mx-auto w-full text-center mb-20">
+        <h2 className="pb-6 font-semibold text-4xl md:text-4xl lg:text-[4rem] font-space-grotesk 
+          bg-gradient-to-r from-white via-purple-500 to-blue-500 bg-clip-text text-transparent 
+          hover:from-pink-500 hover:via-yellow-500 hover:to-cyan-500
+          transition-all duration-500 ease-in-out
+          hover:scale-105 transform cursor-default
+          animate-gradient bg-300% hover:animate-shine">
           Meet the Hands Behind
         </h2>
       </div>

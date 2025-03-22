@@ -78,10 +78,10 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="https://www.linkedin.com/company/bhopal-dao/?viewAsMember=true"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
-                    YouTube
+                    Linkedin
                   </Link>
                 </li>
               </ul>

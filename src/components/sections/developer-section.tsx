@@ -97,7 +97,7 @@ export default function DeveloperSection() {
 
             <div className="pt-8">
               <Link
-                href="#"
+                href="https://t.me/BhopalDAO"
                 className="inline-flex items-center gap-2 rounded-full border border-slate-900 px-8 py-4 text-sm font-medium text-slate-900 transition-all duration-300 hover:bg-slate-900 hover:text-white hover:border-slate-900 hover:scale-105"
               >
                 Join Now
