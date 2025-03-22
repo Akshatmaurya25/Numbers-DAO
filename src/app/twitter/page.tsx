@@ -1,11 +1,11 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import TwitterLoginButton from '@/components/ui/TwitterLoginButton';
 
-export default function TwitterProfile() {
+function TwitterProfileContent() {
   const { data: session } = useSession();
   const [profile, setProfile] = useState<any>(null);
   const [tweets, setTweets] = useState<any[]>([]);
@@ -137,5 +137,13 @@ export default function TwitterProfile() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function TwitterProfile(){
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TwitterProfileContent />
+    </Suspense>
   );
 }
