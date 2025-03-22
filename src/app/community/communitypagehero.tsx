@@ -24,11 +24,13 @@ export default function CommunityPageHero() {
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://discord.gg/yourlink"
+                  href="https://t.me/BhopalDAO"
                   className="group inline-flex font-heading tracking-wide uppercase no-underline items-center justify-center rounded text-sm sm:text-base lg:text-lg font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:text-secondary py-3 sm:py-4 px-6 sm:px-8"
                 >
+                  <span className="flex items-center">
                   Join Our Tg
                   <FaTelegram className="ml-2 text-[22px]" />
+                  </span>
                 </a>
               </div>
             </div>
