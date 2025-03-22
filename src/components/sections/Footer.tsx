@@ -34,6 +34,8 @@ export default function Footer() {
                   <Link
                     href="https://bhopaldao.notion.site/"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Dev Docs
                   </Link>
@@ -42,6 +44,8 @@ export default function Footer() {
                   <Link
                     href="https://github.com/Bhopal-DAO"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     GitHub
                   </Link>
@@ -56,32 +60,48 @@ export default function Footer() {
                   <Link
                     href="https://x.com/Bhopal_DAO"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     X (Twitter)
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="#"
+                    <Link
+                    href="https://github.com/Bhopal-DAO"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
-                  >
-                    Discord
-                  </Link>
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >
+                    GitHub
+                    </Link>
                 </li>
                 <li>
                   <Link
                     href="https://lu.ma/bhopaldao"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Luma
                   </Link>
                 </li>
                 <li>
                   <Link
+<<<<<<< HEAD
                     href="https://www.linkedin.com/company/bhopal-dao/?viewAsMember=true"
+=======
+                    href="https://www.linkedin.com/company/bhopal-dao"
+>>>>>>> f91aaed91eab7111db87905dd8502a70a70d3f4a
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
+<<<<<<< HEAD
                     Linkedin
+=======
+                    LinkedIn
+>>>>>>> f91aaed91eab7111db87905dd8502a70a70d3f4a
                   </Link>
                 </li>
               </ul>
@@ -94,6 +114,7 @@ export default function Footer() {
                   <Link
                     href="#"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
+
                   >
                     Service Status
                   </Link>
@@ -146,10 +167,10 @@ export default function Footer() {
           </div>
           <div className="flex gap-12 lg:w-fit w-auto pr-5 lg:pr-0 justify-between">
             <p>
-              <Link href="/privacy-policy">Privacy Policy</Link>
+              <Link href="#">Privacy Policy</Link>
             </p>
             <p>
-              <Link href="/terms-of-service">Terms of Service</Link>
+              <Link href="#">Terms of Service</Link>
             </p>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import DynamicLogoCard from "./_components/dynamic-logo-card";
+import Orbit from "@/assests/OrbitX.png"
 
 import Image from "next/image";
 import Link from "next/link";
@@ -123,6 +124,10 @@ const BrandLogos: {
   {
     link: "https://cubane.space/",
     src: "https://drive.google.com/uc?export=view&id=1rppTuqe3X_E6aTSIYeQrOp7YOFQHElYU",
+  },
+  {
+    link: "https://cubane.space/",
+    src: Orbit,
   },
 ];
 

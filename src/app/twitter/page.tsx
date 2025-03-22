@@ -1,11 +1,11 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import TwitterLoginButton from '@/components/ui/TwitterLoginButton';
 
-export default function TwitterProfile() {
+function TwitterProfileContent() {
   const { data: session } = useSession();
   const [profile, setProfile] = useState<any>(null);
   const [tweets, setTweets] = useState<any[]>([]);
@@ -40,20 +40,20 @@ export default function TwitterProfile() {
           );
 
           // Get existing social data first
-          const socialResponse = await fetch(`/api/user/social?userId=${session.user.id}`);
+          const socialResponse = await fetch(`/api/user/social?userId=${session?.user?.id}`);
           const existingSocialData = await socialResponse.json();
           
           // Calculate combined score if existing data found
           const combinedScore = existingSocialData.socialScore || 0 + twitterScore;
 
-          console.log('Storing Twitter data for user:', session.user.id);
+          console.log('Storing Twitter data for user:', session?.user?.id);
           const storeResponse = await fetch('/api/user/social', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              userId: session.user.id, // This should be the MongoDB _id from NextAuth session
+              userId: session?.user?.id, // This should be the MongoDB _id from NextAuth session
               socialScore: combinedScore,
               twitter: {
                 username: data.profile.username,
@@ -137,5 +137,13 @@ export default function TwitterProfile() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function TwitterProfile(){
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TwitterProfileContent />
+    </Suspense>
   );
 }

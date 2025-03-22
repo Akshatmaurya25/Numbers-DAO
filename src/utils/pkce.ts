@@ -1,7 +1,7 @@
 export function generateCodeVerifier() {
   const array = new Uint32Array(56);
   crypto.getRandomValues(array);
-  return Buffer.from(array).toString('base64url');
+  return Buffer.from(array.buffer).toString('base64url');
 }
 
 export async function generateCodeChallenge(verifier: string) {

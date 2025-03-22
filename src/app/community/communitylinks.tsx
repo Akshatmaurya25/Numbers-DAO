@@ -6,7 +6,7 @@ import {
   FaTelegram,
   FaGithub,
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 export default function CommunityLinks() {
   return (
@@ -29,7 +29,7 @@ export default function CommunityLinks() {
           <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-16 lg:grid-cols-4">
             {/* Twitter Card */}
             <CommunityCard
-              href="https://twitter.com/NumbersDAO"
+              href="https://x.com/Bhopal_DAO"
               icon={<FaXTwitter size={37} />}
               label="News & Updates"
               title="X (Twitter)"
@@ -37,40 +37,40 @@ export default function CommunityLinks() {
               members="1K+ Members"
             />
 
-            {/* Discord Card */}
+            {/* Linkedin Card */}
             <CommunityCard
-              href="https://discord.gg/numbers"
-              icon={<FaGithub size={37} />}
+              href="https://www.linkedin.com/company/bhopal-dao"
+              icon={<FaLinkedin size={37} />}
               label="Open Source"
-              title="Github"
+              title="LinkedIn"
               description="Get answers to your questions and connect with the global community."
               members="500+ Builders"
             />
 
             {/* Telegram Card */}
             <CommunityCard
-              href="https://t.me/NumbersDAO"
+              href="https://t.me/BhopalDAO"
               icon={<FaTelegram size={37} />}
               label="Discussion"
               title="Telegram"
               description="Stay in touch with the global Numbers DAO community."
-              members="700+ Participants"
+              members="750+ Participants"
             />
 
             {/* Instagram Card */}
             <CommunityCard
-              href="https://reddit.com/r/NumbersDAO"
+              href="https://www.instagram.com/bhopal_dao/"
               icon={<FaInstagram size={37} />}
               label="Creation"
               title="Instagram"
               description="Join the discussion on the latest Numbers DAO happenings."
-              members="1K+ Creators"
+              members="650+ Creators"
             />
           </div>
 
           <div className="mb-8 mt-12 text-center">
             <a
-              href="https://linktr.ee/numbersdao"
+              href="https://linktr.ee/Bhopal_DAO"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex font-heading tracking-wide uppercase no-underline items-center justify-center rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-background text-foreground hover:text-tertiary border border-primary py-3 px-16 sm:px-8"
