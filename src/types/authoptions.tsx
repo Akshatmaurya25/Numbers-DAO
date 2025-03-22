@@ -1,10 +1,10 @@
-import NextAuth, { Account, Session, User } from "next-auth";
+import NextAuth, { Account, Session, User , NextAuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import GitHubProvider from "next-auth/providers/github";
 import LinkedInProvider from "next-auth/providers/linkedin";
 
 
-export const authOptions = {
+export const authOptions : NextAuthOptions = {
     providers: [
       GitHubProvider({
         clientId: process.env.GITHUB_CLIENT_ID!,
@@ -162,6 +162,3 @@ export const authOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET,
   };
-
-
-  export default NextAuth(authOptions);
