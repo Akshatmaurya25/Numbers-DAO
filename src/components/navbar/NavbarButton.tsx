@@ -59,7 +59,7 @@ const AuthButton: React.FC<AuthButtonProps> = ({
         <Button
           onClick={handleLogin}
           disabled={isLoading} // Disable button while loading
-          className="rounded-full items-center justify-center bg-black px-6 py-2 text-white hover:bg-black/90 md:inline-flex"
+          className="rounded-full items-center justify-center bg-black lg:px-6 lg:py-2 px-4 py-1.5 text-white hover:bg-black/90 md:inline-flex"
         >
           {isLoading ? (
             <>
@@ -67,10 +67,10 @@ const AuthButton: React.FC<AuthButtonProps> = ({
               Logging in...
             </>
           ) : (
-            <>
+            <div className="flex gap-1 items-center justify-center">
               Start Building
               <ArrowRight className="ml-2 h-4 w-4" />
-            </>
+            </div>
           )}
         </Button>
       ) : (

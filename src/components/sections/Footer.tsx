@@ -11,7 +11,7 @@ export default function Footer() {
         style={{
           zIndex: 40,
         }}
-        className="  mx-auto max-w-7xl z-30 text-white px-6 py-12 md:flex md:items-start md:justify-between"
+        className="  mx-auto border-t border-zinc-800 max-w-7xl z-30 text-white px-6 py-12 md:flex md:items-start md:justify-between"
       >
         <div className="md:flex-shrink-0">
           <Link href="/">
@@ -67,14 +67,14 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                    <Link
+                  <Link
                     href="https://github.com/Bhopal-DAO"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >
+                  >
                     GitHub
-                    </Link>
+                  </Link>
                 </li>
                 <li>
                   <Link
@@ -104,16 +104,15 @@ export default function Footer() {
               <ul role="list" className="mt-4 space-y-4">
                 <li>
                   <Link
-                    href="#"
+                    href="/in-progress"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
-
                   >
                     Service Status
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/in-progress"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     FAQ
@@ -121,7 +120,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/in-progress"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Terms of Service
@@ -129,7 +128,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/in-progress"
                     className="hover:underline  text-sm text-slate-400 hover:text-white"
                   >
                     Privacy Policy
@@ -144,7 +143,10 @@ export default function Footer() {
         <div className="w-full border border-zinc-800"></div>
         <div className="w-full md:px-[3rem] sm:px-[1.5rem] lg:px-[9.5rem] text-white flex justify-between lg:flex-row md:flex-row sm:flex-col">
           <div className="flex gap-2 items-center ml-5 lg:ml-0">
-            <Link href={"https://t.me/BhopalDAO"} className="text-black bg-white rounded-sm p-1">
+            <Link
+              href={"https://t.me/BhopalDAO"}
+              className="text-black bg-white rounded-sm p-1"
+            >
               <BiLogoTelegram />
             </Link>
             <Link
@@ -159,10 +161,10 @@ export default function Footer() {
           </div>
           <div className="flex gap-12 lg:w-fit w-auto pr-5 lg:pr-0 justify-between">
             <p>
-              <Link href="#">Privacy Policy</Link>
+              <Link href="/in-progress">Privacy Policy</Link>
             </p>
             <p>
-              <Link href="#">Terms of Service</Link>
+              <Link href="/in-progress">Terms of Service</Link>
             </p>
           </div>
         </div>

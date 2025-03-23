@@ -10,7 +10,7 @@ export default function CommunityPageHero() {
       >
         <div className="container xl:max-w-screen-xl flex justify-center items-center relative z-10 grow text-3xl font-bold text-white -mt-36 md:-mt-48">
           <div className="mx-auto max-w-xl xl:max-w-[45vw]">
-            <div className="prose max-w-none items-center flex flex-col prose-headings:font-heading text-center text-h4 prose-headings:mb-4 prose-p:mx-auto prose-p:max-w-2xl prose-p:leading-relaxed prose-p:text-black">
+            <div className="prose max-w-none items-center flex flex-col prose-headings:font-heading text-center text-h4 prose-headings:mb-4 prose-p:mx-auto prose-p:max-w-2xl prose-p:leading-relaxed prose-p:text-black relative top-[114px]">
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4 sm:mb-6 font-bold tracking-wide">
                 Join the Numbers DAO Community
               </h1>

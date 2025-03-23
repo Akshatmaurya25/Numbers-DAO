@@ -18,7 +18,7 @@ import PartnerCarousel from "@/components/sections/partner-carousel";
 
 export default function Home() {
   return (
-    <>
+    <div className="">
       {" "}
       <Navbar />
       <Hero />
@@ -30,6 +30,6 @@ export default function Home() {
       <DeveloperSection />
       <TrustSection />
       <Footer />
-    </>
+    </div>
   );
 }

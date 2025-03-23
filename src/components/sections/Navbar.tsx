@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -9,9 +9,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/util";
 import AuthButton from "../navbar/NavbarButton";
 
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,10 +26,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   const { ready, authenticated, login, user, logout } = usePrivy();
-  useEffect(() => {}, []);
+
   return (
-    <header className="fixed top-0 z-50 w-full ">
+    <header className="fixed top-0 z-50 w-full">
       <div
         style={{
           backdropFilter: "blur(15px)",
@@ -41,80 +49,121 @@ export default function Navbar() {
           top: 0,
         }}
         className={cn(
-          " flex h-16 max-w-full items-center justify-between transition-all duration-300",
-          scrolled ? " h-14  bg-[#ddd] px-6 shadow-sm" : "px-6"
+          "flex h-16 max-w-full items-center justify-between transition-all duration-300",
+          scrolled ? "h-14 bg-[#ddd] px-3 lg:px-6 shadow-sm" : "px-6"
         )}
       >
         <Link href="/" className="flex items-center gap-2">
-          {/* <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-BEh44qGFbH2uORg300ycKObk4zhHbk.png"
-            alt="Payman Logo"
-            width={120}
-            height={32}
-            priority
-          /> */}
-          <Image src={"/logo.png"} alt="logo" height={1000} width={1000} className="w-64"></Image>
+          <Image
+            src={"/logo.png"}
+            alt="logo"
+            height={1000}
+            width={1000}
+            className="w-52 lg:w-64"
+          ></Image>
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className="hidden items-center gap-8 md:flex">
           <Link
             href="/"
-            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+            className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70 hover:underline"
           >
             Home
           </Link>
-          {/* <Link
-            href="/developers"
-            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
-          >
-            Developers
-          </Link> */}
           <Link
             href="/team"
-            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+            className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70 hover:underline"
           >
             Team
           </Link>
           <Link
             href="/community"
-            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+            className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70 hover:underline"
           >
             Community
           </Link>
           <Link
             href="/partners"
-            className="text-sm hover:underline  font-medium text-slate-900 transition-colors hover:text-slate-900/70"
+            className="text-sm font-medium text-slate-900 transition-colors hover:text-slate-900/70 hover:underline"
           >
             Partners
           </Link>
         </nav>
 
-        <AuthButton
-          authenticated={authenticated}
-          login={login}
-          logout={logout}
-          user={user}
-        />
-        {/* <Button variant="outline" size="icon" className="md:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-6 w-6"
+        <div className="flex items-center gap-4">
+          {
+           <div className="md:flex hidden">
+
+            <AuthButton
+            authenticated={authenticated}
+            login={login}
+            logout={logout}
+            user={user}
+            />
+            </div>
+          }
+
+          {/* Hamburger Menu Button (Mobile Only) */}
+          <button
+            className="md:hidden flex items-center"
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            <line x1="4" x2="20" y1="12" y2="12" />
-            <line x1="4" x2="20" y1="6" y2="6" />
-            <line x1="4" x2="20" y1="18" y2="18" />
-          </svg>
-          <span className="sr-only">Toggle menu</span>
-        </Button> */}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Navigation Menu */}
+      {isMenuOpen && (
+        <div
+          className="md:hidden bg-white fixed top-12 left-0 right-0  shadow-lg z-40 overflow-hidden transition-all duration-300"
+          style={{
+            maxHeight: isMenuOpen ? "100vh" : "0",
+            opacity: isMenuOpen ? 1 : 0,
+          }}
+        >
+          <nav className="flex flex-col p-4">
+            <Link
+              href="/"
+              className="py-3 px-2 text-base font-medium text-slate-900 hover:bg-slate-100 rounded"
+              onClick={closeMenu}
+            >
+              Home
+            </Link>
+            <Link
+              href="/team"
+              className="py-3 px-2 text-base font-medium text-slate-900 hover:bg-slate-100 rounded"
+              onClick={closeMenu}
+            >
+              Team
+            </Link>
+            <Link
+              href="/community"
+              className="py-3 px-2 text-base font-medium text-slate-900 hover:bg-slate-100 rounded"
+              onClick={closeMenu}
+            >
+              Community
+            </Link>
+            <Link
+              href="/partners"
+              className="py-3 px-2 text-base font-medium text-slate-900 hover:bg-slate-100 rounded"
+              onClick={closeMenu}
+            >
+              Partners
+            </Link>
+            <div className="flex items-center gap-4 lg:mt-0 mt-2">
+              <AuthButton
+                authenticated={authenticated}
+                login={login}
+                logout={logout}
+                user={user}
+              />
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

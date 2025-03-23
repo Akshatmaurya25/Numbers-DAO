@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import LogoLoader from "@/components/ui/LogoLoader";
 import Image from "next/image";
 import Link from "next/link";
+import NotFound from "@/components/pages/NotFound";
 
 const Page = () => {
   const [loading, setLoading] = useState(true);
@@ -52,12 +53,7 @@ const Page = () => {
   return (
     <div>
       {notFound ? (
-        <div className="h-screen flex  flex-col items-center justify-center bg-black text-white">
-          <Link href={"/"}>
-            <Image height={400} width={400} src={"/logo-2.png"} alt="Logo" />
-          </Link>
-          <h3>Not found</h3>
-        </div>
+        <NotFound/>
       ) : (
         <Dashboard {...userData} />
       )}

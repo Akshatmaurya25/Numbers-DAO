@@ -139,7 +139,7 @@ const PartnersPage = () => {
 
       <div className=" md:mx-16 space-y-24  ">
         {/* Partners Section */}
-        <div className="flex gap-8 items-center justify-center ">
+        <div className="flex flex-col lg:flex-row gap-8 items-center justify-center ">
           {partners.map((partner, index) => (
             <DynamicLogoCard key={`partner-${index}`} {...partner} />
           ))}
@@ -148,7 +148,7 @@ const PartnersPage = () => {
         {/* Team Profiles Section */}
 
         {/* Third Section */}
-        <div className="grid md:grid-cols-4 grid-cols-2 gap-10 md:gap-28 place-items-center md:px-24">
+        <div className="grid md:grid-cols-4 grid-cols-2 gap-20 md:gap-28 place-items-center md:px-24">
           {BrandLogos.map((val, index) => (
             <Link href={val.link}>
               <div key={index} className="flex justify-center items-center">
