@@ -139,18 +139,20 @@ const PartnersPage = () => {
 
       <div className="w-full px-4 sm:px-8 md:px-16 space-y-12 sm:space-y-24">
         {/* Partners Section */}
-        <div className="flex flex-col lg:flex-row gap-8 items-center justify-center ">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-center justify-center">
           {partners.map((partner, index) => (
             <DynamicLogoCard key={`partner-${index}`} {...partner} />
           ))}
         </div>
 
-        {/* Team Profiles Section */}
-
-        {/* Third Section */}
-        <div className="grid md:grid-cols-4 grid-cols-2 gap-20 md:gap-28 place-items-center md:px-24">
+        {/* Brand Logos Section */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-10 md:gap-16 place-items-center px-4 sm:px-8 md:px-16">
           {BrandLogos.map((val, index) => (
-            <Link key={index} href={val.link} className="w-full flex justify-center items-center hover:opacity-80 transition-opacity">
+            <Link
+              key={index}
+              href={val.link}
+              className="w-full flex justify-center items-center hover:opacity-80 transition-opacity"
+            >
               <div className="w-full flex justify-center items-center p-2">
                 <Image
                   src={val.src}
