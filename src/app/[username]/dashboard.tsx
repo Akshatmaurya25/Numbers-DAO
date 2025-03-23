@@ -343,8 +343,8 @@ export default function zDashboard(props: any) {
 
             <div className="md:w-[50%] text-center">
               {/* Personal Milestone */}
-              <Card className="bg-zinc-900/50 w-full border-zinc-800  h-full">
-                <div className="w-full flex items-center justify-center h-full">
+              <Card className="bg-zinc-900/50  w-full border-zinc-800  h-full">
+                <div className="w-full overflow-x-hidden flex items-center justify-center h-full">
                   <MilestoneCard
                     milestones={[
                       {
@@ -360,9 +360,9 @@ export default function zDashboard(props: any) {
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="md:w-2/3">
+            <div className="md:w-2/3 overflow-y-hidden">
               {/* DAO Achievements */}
-              <Card className="bg-zinc-900/50 md:overflow-y-hidden hover:overflow-y-auto hover:custom-scrollbar border-zinc-800 p-4 row-span-2 h-full">
+              <Card className="bg-zinc-900/50  overflow-y-auto custom-scrollbar border-zinc-800 p-4 row-span-2 h-full">
                 <ProjectsCard
                   projects={[
                     {
@@ -451,9 +451,9 @@ export default function zDashboard(props: any) {
         </div>
 
         {/* right */}
-        <div className="flex flex-col gap-4 md:w-[45%]">
-          <div>
-            <Card className="bg-zinc-900/50 border-zinc-800 p-4 col-span-2 h-[350px]  md:overflow-y-hidden hover:overflow-y-auto hover:custom-scrollbar">
+        <div className="flex flex-col gap-4 md:w-[45%]  ">
+          <div className="overflow-y-hidden">
+            <Card className="bg-zinc-900/50 border-zinc-800 p-4 col-span-2 h-[350px]  overflow-y-auto custom-scrollbar">
               <h2 className="text-2xl text-center font-semibold text-[#1385F9] mb-2">
                 Work Experience
               </h2>

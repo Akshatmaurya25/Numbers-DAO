@@ -75,7 +75,7 @@ export default function MilestoneCard({ milestones }: MilestoneCardProps) {
           <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-indigo-500 text-2xl font-bold mb-1">
             Personal Milestones
           </h2>
-          <p className="text-gray-400 text-sm">
+          <p className="text-gray-400 text-sm text-wrap">
             Celebrating growth and achievements: A look back at moments that
             defined my 2024
           </p>

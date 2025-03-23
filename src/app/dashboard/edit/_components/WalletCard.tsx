@@ -154,7 +154,10 @@ export default function WalletCard(props: any) {
           </button>
           <button
             className="w-full p-2 border border-white text-gray-300 rounded-lg "
-            onClick={wallet.switchChain}
+            onClick={async () => {
+              let x = await wallet.switchChain();
+              console.log(x);
+            }}
           >
             Switch Chain
           </button>

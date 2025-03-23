@@ -230,9 +230,7 @@ p { font-size: 1rem; }
     height: 0;
   }
   
-  .bg-300% {
-    background-size: 300% 300%;
-  }
+ 
   
   .animate-shine {
     animation: shine 2s linear infinite;

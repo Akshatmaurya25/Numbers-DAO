@@ -16,7 +16,12 @@ import { Loader } from "@/components/ui/loader";
 import Image from "next/image";
 import Chat from "@/components/dashboard/Chat";
 import LogoLoader from "@/components/ui/LogoLoader";
+import Waitlist from "./_components/Waitlist";
 const page = () => {
+  const [wailitst, setWaitlist] = useState(true);
+  if (wailitst) {
+    return <Waitlist />;
+  }
   const { user } = usePrivy();
   const [loading, setLoading] = useState(true);
   const [User, setUser] = useState<UserDocument>();
