@@ -11,21 +11,21 @@ const partners = [
     backgroundLogo: "/Aarambh.png",
     text: "Aarambh Labs",
     hoverText: "Learn more about our partnership",
-    href: "#",
+    href: "https://x.com/AarambhLabs",
   },
   {
     logo: "/wizz.png",
     backgroundLogo: "/wizz.png",
     text: "WizzHQ",
     hoverText: "Learn more about our opportunities",
-    href: "#",
+    href: "https://x.com/WizzHQ",
   },
   {
     logo: "/gsq.png",
     backgroundLogo: "/gsq.png",
     text: "GrowthSquare",
     hoverText: "Learn more about our opportunities",
-    href: "#",
+    href: "https://x.com/thegrowthsquare",
   },
   // Add more partners here as needed
 ];
