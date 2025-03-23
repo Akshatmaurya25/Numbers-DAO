@@ -111,7 +111,7 @@ const AnimatedNumberText = () => {
 
   return (
     <div className="">
-      <div className=" text-[58px] lg:text-[120px] grotesk leading-none  font-bold text-whi font-mono">
+      <div className=" text-[58px] lg:text-[120px] grotesk leading-none  text-center font-bold text-whi font-mono">
         {displayText || (isAnimating ? "0".repeat(finalText.length) : "")}
       </div>
     </div>

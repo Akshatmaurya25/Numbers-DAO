@@ -153,7 +153,7 @@ const PartnersPage = () => {
             <Link href={val.link}>
               <div key={index} className="flex justify-center items-center">
                 <Image
-                  src={val.src}
+                  src={val.src} 
                   width={val?.width || 150}
                   height={val?.height || 50}
                   draggable={false}

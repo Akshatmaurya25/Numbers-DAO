@@ -49,7 +49,7 @@ export default function Navbar() {
           top: 0,
         }}
         className={cn(
-          "flex h-16 max-w-full items-center justify-between transition-all duration-300",
+          "flex  h-16 max-w-full items-center justify-between transition-all duration-300",
           scrolled ? "h-14 bg-[#ddd] px-3 lg:px-6 shadow-sm" : "px-6"
         )}
       >
@@ -93,14 +93,13 @@ export default function Navbar() {
 
         <div className="flex items-center gap-4">
           {
-           <div className="md:flex hidden">
-
-            <AuthButton
-            authenticated={authenticated}
-            login={login}
-            logout={logout}
-            user={user}
-            />
+            <div className="md:flex hidden">
+              <AuthButton
+                authenticated={authenticated}
+                login={login}
+                logout={logout}
+                user={user}
+              />
             </div>
           }
 
@@ -118,7 +117,7 @@ export default function Navbar() {
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
         <div
-          className="md:hidden bg-white fixed top-12 left-0 right-0  shadow-lg z-40 overflow-hidden transition-all duration-300"
+          className="md:hidden bg-white overflow-visible fixed min-h-fit top-12 left-0 right-0  shadow-lg z-40  transition-all duration-300"
           style={{
             maxHeight: isMenuOpen ? "100vh" : "0",
             opacity: isMenuOpen ? 1 : 0,
