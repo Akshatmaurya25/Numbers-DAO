@@ -274,14 +274,18 @@ function page() {
     <div className="grotesk">
       <PartnerCarousel />
       <div className="bg-black">
-        <h2 className="text-white text-center py-16 font-semibold text-4xl md:text-4xl lg:text-[4rem]  mb-2">
+        <h2 className="text-white text-center py-8 sm:py-16 font-semibold text-3xl md:text-4xl lg:text-[4rem] mb-2">
           Our Contributors
         </h2>
 
-        <div className="md:px-[8rem] px-[2.5rem] grid grid-cols-4 gap-8 ">
+        <div className="px-4 md:px-[8rem] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 pb-16">
           {data &&
             data.length &&
-            data.map((data, i) => <ProfileCard key={i} {...data} />)}
+            data.map((data, i) => (
+              <div key={i} className="mx-auto w-full max-w-[300px] sm:max-w-none">
+                <ProfileCard {...data} />
+              </div>
+            ))}
         </div>
       </div>
     </div>

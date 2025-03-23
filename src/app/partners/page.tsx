@@ -132,33 +132,31 @@ const BrandLogos: {
 
 const PartnersPage = () => {
   return (
-    <div className="min-h-screen pt-28 bg-black flex flex-col items-center justify-center py-20">
-      <h2 className="text-white text-center py-16 font-semibold text-4xl md:text-4xl lg:text-[4rem] font-space-grotesk mb-2">
+    <div className="min-h-screen pt-16 sm:pt-28 bg-black flex flex-col items-center justify-center py-10 sm:py-20">
+      <h2 className="text-white text-center py-8 sm:py-16 font-semibold text-3xl sm:text-4xl lg:text-[4rem] font-space-grotesk mb-2">
         Meet Our Partners
       </h2>
 
-      <div className=" md:mx-16 space-y-24  ">
+      <div className="w-full px-4 sm:px-8 md:px-16 space-y-12 sm:space-y-24">
         {/* Partners Section */}
-        <div className="flex gap-8 items-center justify-center ">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-center justify-center">
           {partners.map((partner, index) => (
             <DynamicLogoCard key={`partner-${index}`} {...partner} />
           ))}
         </div>
 
-        {/* Team Profiles Section */}
-
-        {/* Third Section */}
-        <div className="grid md:grid-cols-4 grid-cols-2 gap-10 md:gap-28 place-items-center md:px-24">
+        {/* Brand Logos Section */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-10 md:gap-16 place-items-center px-4 sm:px-8 md:px-16">
           {BrandLogos.map((val, index) => (
-            <Link href={val.link}>
-              <div key={index} className="flex justify-center items-center">
+            <Link key={index} href={val.link} className="w-full flex justify-center items-center hover:opacity-80 transition-opacity">
+              <div className="w-full flex justify-center items-center p-2">
                 <Image
                   src={val.src}
                   width={val?.width || 150}
                   height={val?.height || 50}
                   draggable={false}
                   alt={val.name || "Brand Logo"}
-                  className="grayscale  object-contain"
+                  className="grayscale object-contain w-auto h-auto max-h-[50px] sm:max-h-[60px]"
                 />
               </div>
             </Link>
