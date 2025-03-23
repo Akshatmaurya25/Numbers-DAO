@@ -25,13 +25,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata : Metadata  = {
   title: "Numbers DAO",
   description: "DAO that brings Numbers",
   icons: {
-    icon: "/logo-fav.png", // Default favicon
-    shortcut: "/logo-fav.png", // Optional shortcut icon
-    apple: "/logo-fav.png", // Apple Touch Icon
+    icon: "/favicon.png", // Default favicon
+    shortcut: "/favicon.png", // Optional shortcut icon
+    apple: "/favicon.png", // Apple Touch Icon
   },
 };
 
@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/logo-fav.png" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-whi`}
