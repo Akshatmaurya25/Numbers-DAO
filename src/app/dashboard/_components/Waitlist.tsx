@@ -36,7 +36,7 @@ const Waitlist = () => {
           </p>
           <Link href={"https://bhopaldao.notion.site/"}>
             <button className="text-white flex gap-2 items-center justify-center duration-200 transition-all hover:bg-white hover:text-black cursor-pointer rounded-md border lg:px-5 px-3 py-1.5 text-[14px] lg:text-[16px] lg:py-2 mt-3">
-              Know More <ArrowRight size={15} />
+              Know More <ArrowRight size={15} /> 
             </button>
           </Link>
         </div>
